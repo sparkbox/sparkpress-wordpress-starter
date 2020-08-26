@@ -1,0 +1,39 @@
+// For re-ordering items in grid or flexbox layouts
+
+.util-order {
+  @for $i from 1 to 5 {
+    &-#{$i} {
+      @include loop-mq {
+        order: $i;
+      }
+    }
+
+    &-#{$i}-reverse {
+      @include loop-mq {
+        order: #{-$i};
+      }
+    }
+  }
+}
+
+.util-order-inherit {
+  @include loop-mq {
+    order: inherit;
+  }
+}
+
+.util-order-initial {
+  @include loop-mq {
+    order: initial;
+  }
+}
+
+.util-order-unset {
+  @include loop-mq {
+    order: unset;
+  }
+}
+
+.util-flex-direction-column {
+  flex-direction: column;
+}

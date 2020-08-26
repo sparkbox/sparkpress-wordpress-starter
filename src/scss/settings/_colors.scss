@@ -1,0 +1,54 @@
+// Named Colors
+$color-blue-dianne: #1C4C55;
+$color-lochinvar: #2D818F;
+$color-alabaster: #F9F9F9;
+$color-powder-blue: #AED8E1;
+$color-valencia: #C6354E;
+$color-mustard: #ECC156;
+$color-emerald: #65CF87;
+
+// Base
+$color-primary: $color-blue-dianne;
+$color-secondary: $color-lochinvar;
+$color-tertiary: $color-alabaster;
+$color-web-accent: $color-powder-blue;
+
+// Base Darkened
+$color-primary-dark: darken($color-primary, 15%);
+$color-secondary-dark: darken($color-secondary, 15%);
+$color-tertiary-dark: darken($color-tertiary, 15%);
+$color-web-accent-dark: darken($color-web-accent, 15%);
+
+// Status
+$color-positive: $color-emerald;
+$color-warning: $color-mustard;
+$color-negative: $color-valencia;
+
+// Grayscale
+$color-white: #FFF;
+$color-black: #000;
+
+// Per Use Case
+$color-default-link: $color-primary;
+$color-default-text: $color-black;
+$color-safe-focus: $color-primary;
+
+// Shadows
+$color-box-shadow: rgba(lighten($color-black, 10%), 0.4);
+
+// Map for ease of use
+$colors: (
+  'primary': $color-primary,
+  'secondary': $color-secondary,
+  'tertiary': $color-tertiary,
+  'web-accent': $color-web-accent,
+  'primary-dark': $color-primary-dark,
+  'secondary-dark': $color-secondary-dark,
+  'tertiary-dark': $color-tertiary-dark,
+  'web-accent-dark': $color-web-accent-dark,
+  'positive': $color-positive,
+  'warning': $color-warning,
+  'negative': $color-negative,
+  'white': $color-white,
+  'black': $color-black,
+);

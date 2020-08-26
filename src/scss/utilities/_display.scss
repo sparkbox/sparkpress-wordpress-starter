@@ -1,0 +1,39 @@
+$util-display-values: (
+  none,
+  block,
+  inline,
+  inline-block,
+  flex,
+  inline-flex
+);
+
+@each $value in $util-display-values {
+  .util-display-#{$value} {
+    @include loop-mq {
+      display: $value;
+    }
+  }
+}
+
+.util-visually-hidden,
+.util-display-visually-hidden {
+  @include loop-mq {
+    @include visually-hidden();
+  }
+}
+
+$util-position-values: (
+  fixed,
+  relative,
+  absolute,
+  static,
+  sticky
+);
+
+@each $value in $util-position-values {
+  .util-position-#{$value} {
+    @include loop-mq {
+      position: $value;
+    }
+  }
+}

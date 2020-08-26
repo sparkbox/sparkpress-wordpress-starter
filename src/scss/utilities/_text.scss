@@ -1,0 +1,100 @@
+$util-text-values: (
+  left,
+  right,
+  center
+);
+
+@each $value in $util-text-values {
+  .util-text-#{$value} {
+    @include loop-mq {
+      text-align: $value;
+    }
+  }
+}
+
+.util-heading-1 {
+  @include loop-mq {
+    @include heading-1;
+  }
+}
+
+.util-heading-2 {
+  @include loop-mq {
+    @include heading-2;
+  }
+}
+
+.util-heading-3 {
+  @include loop-mq {
+    @include heading-3;
+  }
+}
+
+.util-heading-4 {
+  @include loop-mq {
+    @include heading-4;
+  }
+}
+
+.util-heading-5 {
+  @include loop-mq {
+    @include heading-5;
+  }
+}
+
+.util-heading-6 {
+  @include loop-mq {
+    @include heading-6;
+  }
+}
+
+.util-heading-7 {
+  @include loop-mq {
+    @include heading-7;
+  }
+}
+
+.util-text-regular {
+  @include default-paragraph;
+}
+
+.util-text-large {
+  @include large-paragraph;
+}
+
+.util-unordered-list {
+  @include default-ol-ul;
+  @include default-ul;
+}
+
+.util-ordered-list {
+  @include default-ol-ul;
+  @include default-ol;
+}
+
+.util-text-shadow {
+  @include text-shadow;
+}
+
+.util-delist {
+  @include delist;
+}
+
+.util-debutton {
+  @include debutton;
+}
+
+.util-pointer-events-none {
+  pointer-events: none;
+}
+
+.util-delink {
+  @include delink;
+}
+
+.util-underline,
+.util-underline\:hover:hover,
+.util-underline\:active:active,
+.util-underline\:focus:focus, {
+  @include underline;
+}

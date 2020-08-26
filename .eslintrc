@@ -1,0 +1,18 @@
+{
+  "rules": {
+    "jsx-a11y/href-no-hash": 0,
+    "no-param-reassign": 0,
+    "object-curly-newline": 0
+  },
+  "env": {
+    "es6": true,
+    "node": true,
+    "mocha": true
+  },
+  "extends": ["@sparkbox/eslint-config-sparkbox"],
+  "globals": {
+    "Rollbar": true,
+    "locations": true
+  },
+  "ignorePatterns": ["src/js/vendor/**/*.js"]
+}

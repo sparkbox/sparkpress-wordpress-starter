@@ -1,0 +1,182 @@
+@mixin font($family:inherit, $size:inherit, $weight:inherit) {
+  font-family: family($family);
+  font-size: size($size);
+
+  @if $family == 'secondary' {
+    $weight: 'bold';
+    text-transform: uppercase;
+
+    @if $size != inherit {
+      $spacing: strip-units(size($size));
+      @if $spacing <= 14 {
+        // Adds 2% letter spacing
+        letter-spacing: ($spacing * 0.02) * 1em;
+      }
+    }
+  }
+  @else {
+    font-weight: weight($weight);
+  }
+  @if $family == 'primary' and $weight == 'heavy' {
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+@mixin heading-1 {
+  @include font(primary, x2, heavy);
+  margin: space(sm) 0;
+  line-height: 1.1;
+
+  @media (min-width: $bp-md) {
+    @include font(primary, x3, heavy);
+    line-height: 1;
+  }
+}
+
+@mixin heading-2 {
+  @include font(primary, x1, heavy);
+  margin: space(sm) 0;
+  line-height: 1.2;
+
+  @media (min-width: $bp-md) {
+    @include font(primary, x2, heavy);
+    line-height: 1.1;
+  }
+}
+
+@mixin heading-3 {
+  @include font(primary, lg, heavy);
+  margin: space(sm) 0;
+  line-height: 1.3;
+
+  @media (min-width: $bp-md) {
+    @include font(primary, x1, heavy);
+    line-height: 1.2;
+  }
+}
+
+@mixin heading-4 {
+  @include font(primary, md, demi);
+  margin: space(sm) 0;
+  line-height: 1.4;
+
+  @media (min-width: $bp-md) {
+    @include font(primary, lg, demi);
+    line-height: 1.3;
+  }
+}
+
+@mixin heading-5 {
+  @include font(primary, sm, heavy);
+  margin: space(sm) 0;
+  line-height: 1.5;
+
+  @media (min-width: $bp-md) {
+    @include font(primary, md, heavy);
+    line-height: 1.4;
+  }
+}
+
+@mixin heading-6 {
+  @include font(primary, xs, heavy);
+  margin: space(sm) 0;
+  line-height: $line-height-tight;
+
+  @media (min-width: $bp-md) {
+    @include font(primary, sm, heavy);
+    line-height: 1.5;
+  }
+}
+
+@mixin heading-7 {
+  @include font(secondary, xs, bold);
+  line-height: $line-height-tight;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin: 0 0 space(xs);
+}
+
+@mixin default-paragraph {
+  @include font(primary, sm, book);
+  margin: 0 0 space(sm);
+
+  &:only-child,
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+@mixin large-paragraph {
+  @include font(primary, md, book);
+  margin: 0 0 space(sm);
+
+  &:only-child,
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+@mixin default-link {
+  color: color(primary);
+  text-decoration: underline;
+
+  &:visited {
+    color: color('primary-dark');
+  }
+
+  &:hover,
+  &:hover:visited {
+    color: color('secondary');
+  }
+}
+
+@mixin default-ol-ul {
+  @include font(primary, xxs, book);
+  margin: space(sm) 0;
+  padding: 0 0 0 space(sm);
+
+  list-style-type: none;
+
+  counter-reset: generic-ol-counter;
+
+  > li {
+    position: relative;
+
+    &:not(:last-child) {
+      margin-bottom: space(xxxs);
+    }
+
+    &::before {
+      position: absolute;
+      right: calc(100% + #{space(xxxs)});
+    }
+  }
+}
+
+@mixin default-ol {
+  > li {
+    &::before {
+      @include font(secondary, inherit, bold);
+      color: color(primary);
+      counter-increment: generic-ol-counter;
+      content: counter(generic-ol-counter) ". ";
+    }
+  }
+}
+
+@mixin default-ul {
+  > li {
+    &::before {
+      @include font(secondary, inherit, bold);
+      color: color(primary);
+      content: '•';
+    }
+  }
+}
+
+@mixin default-figcaption {
+  @include font('primary', 'xs');
+  color: color('gray-4');
+  text-align: right;
+  margin: space(xxs) 0;
+}

@@ -1,0 +1,47 @@
+# Users' setting files
+.DS_Store
+*.code-workspace
+.vscode
+.nova
+.gitallowed
+
+# ignore node dependency directories
+node_modules/
+vendor/
+
+!src/js/vendor
+
+# Allow local uploads to persist, but don't commit
+uploads/
+
+# Plugins get added via Composer
+wp-content/*
+plugins/*
+
+# protect generated directories from the copy task
+src/php/css/*
+src/php/js/*
+
+# ignore generated code
+theme/
+
+# commit plugins' vendor
+!plugins/*/vendor
+
+# ignore log files and databases
+*.env
+*.log
+*.orig
+db-dumps/
+
+# circleCI cli
+process.yml
+
+# Audit Reports
+reports/
+.nyc_output/
+
+# LightHouse Audit Results
+.lighthouseci/
+
+plugins/rollbar/

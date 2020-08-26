@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<ruleset name="SparkPress">
+    <rule ref="WordPress">
+        <exclude name="Generic.WhiteSpace.DisallowSpaceIndent.SpacesUsed" />
+        <exclude name="Squiz.Commenting.FileComment.MissingPackageTag" />
+        <exclude name="Generic.Formatting.MultipleStatementAlignment.NotSameWarning" />
+        <exclude name="WordPress.Arrays.MultipleStatementAlignment.DoubleArrowNotAligned" />
+        <exclude name="Generic.Arrays.DisallowShortArraySyntax.Found" />
+        <!-- exclude other stuff as you wish -->
+    </rule>
+</ruleset>

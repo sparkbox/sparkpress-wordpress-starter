@@ -1,0 +1,37 @@
+// Strip Unites
+@function strip-units($number) {
+  @return $number / ($number * 0 + 1);
+}
+
+@function space($key) {
+  @return map-get($spacers, $key);
+}
+
+@function color($name) {
+  @return map-get($colors, $name);
+}
+
+@function family($stack) {
+  @return map-get($fonts, $stack);
+}
+
+@function size($size) {
+  @return map-get($font-sizes, $size);
+}
+
+@function weight($name) {
+  @return map-get($weights, $name);
+}
+
+@function negative($value) {
+  @return 0 - $value;
+}
+
+@function ratio($height,$width) {
+  @return ($height / $width) * 100%;
+}
+
+@function remify($value) {
+  $value: strip-units($value);
+  @return ($value / 16) * 1rem;
+}

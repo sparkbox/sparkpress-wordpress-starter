@@ -1,0 +1,9 @@
+# Database Environments
+MYSQL_USER=example_user
+MYSQL_PASSWORD=
+MYSQL_DATABASE=example_database
+MYSQL_HOST=db
+MYSQL_ROOT_PASSWORD=
+
+# Set `WP_ENV` to `yourLastName-local` (ex. `smith-local`).
+WP_ENV=sparkuser-local

@@ -1,0 +1,64 @@
+//
+// FONTS
+//
+$font-stack-primary: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+//
+// BREAKPOINTS
+//
+$bp-sm: 30rem;
+$bp-md: 50rem;
+$bp-lg: 60rem;
+$bp-xl: 80rem;
+
+$grid-breakpoints: (
+  sm: $bp-sm,
+  md: $bp-md,
+  lg: $bp-lg,
+  xl: $bp-xl
+);
+
+//
+// LENGTHS
+//
+$default-page-width: 90%;
+$default-page-margin: auto;
+$max-page-width: 87.5rem; // 1400px
+$max-content-width: 52rem; // 832px
+
+// BORDERS
+$default-border: 0.125rem; //2px
+
+//
+// SPACING
+//
+$spacer: 1rem;
+$spacers: () !default;
+$spacers: map-merge(
+  (
+    none: 0,
+    xxxs: $spacer * 0.25, // 4px
+    xxs:  $spacer * 0.5,  // 8px
+    xs:   $spacer,        // 16px
+    sm:   $spacer * 1.5,  // 24px
+    md:   $spacer * 2,    // 32px
+    lg:   $spacer * 2.5,  // 40px
+    xl:   $spacer * 4,    // 64px
+    xxl:  $spacer * 6,    // 96px
+    xxxl: $spacer * 8,    // 128px
+  ),
+    $spacers
+  );
+
+//
+// TRANSITIONS
+//
+$default-duration: 500ms;
+$ease-out-expo: cubic-bezier(0.190, 1.000, 0.220, 1.000);
+$default-transition: $default-duration $ease-out-expo;
+
+//
+// TRANSFORM SKEW VALUES
+//
+$skew-value-right: skewX(20deg);
+$skew-value-left: skewX(-20deg);

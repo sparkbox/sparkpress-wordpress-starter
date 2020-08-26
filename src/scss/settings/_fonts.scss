@@ -1,0 +1,38 @@
+$font-franklin: franklin-gothic-urw, sans-serif;
+$font-neuzeit: neuzeit-grotesk, sans-serif;
+
+$font-primary: $font-franklin;
+$font-secondary: $font-neuzeit;
+
+$fonts: (
+  'primary': $font-primary,
+  'secondary': $font-secondary
+);
+
+$weights: (
+  'book': 400,
+  'demi': 700,
+  'bold': 800,
+  'heavy': 900
+);
+
+$font-size: 1rem;
+$font-sizes: () !default;
+$font-sizes: map-merge(
+  (
+    xs: $font-size * 0.875,   // 14px
+    sm: $font-size,           // 16px
+    md: $font-size * 1.25,    // 20px
+    lg: $font-size * 1.5,     // 24px
+    x1: $font-size * 2,       // 32px
+    x2: $font-size * 3,       // 48px
+    x3: $font-size * 3.625,   // 58px
+  ),
+    $font-sizes
+  );
+
+//
+// LINE HEIGHTS
+//
+$line-height-normal: 1.5;
+$line-height-tight: 1.25;

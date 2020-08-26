@@ -1,0 +1,22 @@
+version: 2
+exclude_patterns:
+  - \.*
+  - Dockerfile
+  - Dockerfile.deploy
+  - README.md
+  - apache.conf
+  - composer.json
+  - composer.lock
+  - config
+  - docker-compose.yml
+  - docs
+  - env-sample
+  - package-lock.json
+  - package.json
+  - php.ini
+  - plugins
+  - ports.conf
+  - vendor
+  - wp-content
+  - src/js/vendor/*
+  - "**/*spec.js"

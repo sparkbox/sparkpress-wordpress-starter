@@ -1,0 +1,26 @@
+{
+  "name": "sparkbox/sparkpress",
+  "type": "library",
+  "description": "Starter Docker installation for WordPress Websites",
+  "require": {
+    "php": ">=5.6",
+    "vlucas/phpdotenv": "4.1.1",
+    "wpackagist-plugin/wordpress-seo": "^14.7",
+    "wpackagist-plugin/meta-box": "^5.3"
+  },
+  "repositories":[
+    {
+        "type":"composer",
+        "url":"https://wpackagist.org"
+    }
+  ],
+  "require-dev": {
+    "squizlabs/php_codesniffer": "*",
+    "wp-coding-standards/wpcs": "^2.2"
+  },
+  "scripts": {
+    "post-install-cmd": "vendor/squizlabs/php_codesniffer/bin/phpcs --config-set installed_paths vendor/wp-coding-standards/wpcs",
+    "post-update-cmd" : "vendor/squizlabs/php_codesniffer/bin/phpcs --config-set installed_paths vendor/wp-coding-standards/wpcs",
+    "lint:wpcs": "vendor/squizlabs/php_codesniffer/bin/phpcs --standard=sparkpress-standard.xml --extensions=php ./src/php"
+  }
+}

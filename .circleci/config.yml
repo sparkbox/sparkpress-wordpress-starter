@@ -1,0 +1,74 @@
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: circleci/php:7.1-node-browsers
+    environment:
+      # When changing, also change in Dockerfile
+      WP_VERSION: 5.5
+      CC_TEST_REPORTER_ID: e0f9cea32e63c566325e5e215707327897269674b0ab91f57e4326612ef5dcc8
+    steps:
+      - run:
+          name: Install system packages
+          command: sudo apt-get update && sudo apt-get install -y git npm
+      - run:
+          name: Install PHP extensions
+          command: sudo docker-php-ext-install pdo
+      - checkout
+      - run:
+          name: Install Composer
+          command: |
+            php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+            php -r "if (hash_file('SHA384', 'composer-setup.php') === trim(file_get_contents('https://composer.github.io/installer.sig'))) { echo 'Installer verified'; } else { echo 'Installer invalid'; unlink('composer-setup.php'); } echo PHP_EOL;"
+            php composer-setup.php
+            php -r "unlink('composer-setup.php');"
+      - run:
+          name: Install project dependencies
+          command: |
+            php composer.phar install
+      - run:
+          name: Run PHP Codesniffer
+          command: php composer.phar lint:wpcs
+      - run:
+          name: Install WordPress files
+          command: |
+            mkdir tmp && cd tmp \
+            && sudo apt-get update -y \
+            && sudo apt-get install wget -y \
+            && sudo apt-get install zip -y \
+            && wget http://wordpress.org/wordpress-${WP_VERSION}.zip \
+            && unzip wordpress-${WP_VERSION}.zip \
+            && rm -rf wordpress/wp-content/themes/* \
+            && rm -rf wordpress/wp-content/plugins/* \
+            && rm wordpress-${WP_VERSION}.zip \
+            && cd ../ \
+            && cp -R vendor tmp/wordpress/vendor
+
+      - run:
+          name: Install theme, and any plugins
+          command: |
+            npm install \
+            && npm run lint \
+            && npm run build:prod \
+            && cp env-configs/* tmp/wordpress/ \
+            && cp Dockerfile tmp/wordpress \
+            && cp composer.json tmp/wordpress \
+            && cp php.ini tmp/wordpress \
+            && cp -R ./theme tmp/wordpress/wp-content/themes/sparkpress-theme \
+            && cp -R ./wp-content/plugins tmp/wordpress/wp-content \
+            && cp wp-config.php tmp/wordpress/wp-config.php \
+            && cp .htaccess* tmp/wordpress \
+
+      - run:
+          name: Create artifact
+          command: |
+            cd tmp/wordpress/ && tar -czvf ~/sparkpress-dist.tar.gz . \
+            && mv ~/sparkpress-dist.tar.gz /tmp/circleci-artifacts
+
+      - run:
+          name: Run Tests
+          command: npm test
+
+      - store_artifacts:
+          path: /tmp/circleci-artifacts

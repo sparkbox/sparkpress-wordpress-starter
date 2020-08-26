@@ -1,0 +1,34 @@
+@mixin width-limiter($max-width:$max-page-width) {
+  width: $default-page-width;
+  max-width: $max-width;
+  margin-left: $default-page-margin;
+  margin-right: $default-page-margin;
+}
+
+.obj-width-limiter {
+  @include width-limiter($max-page-width);
+
+  @each $key, $val in $grid-breakpoints {
+    @if $key != print {
+      @media (min-width: #{$val}) {
+        &\@#{$key} {
+          @include width-limiter($default-page-width);
+        }
+      }
+    }
+  }
+} // e.g. .obj-width-limiter@lg
+
+.obj-content-width {
+  @include width-limiter($max-content-width);
+
+  @each $key, $val in $grid-breakpoints {
+    @if $key != print {
+      @media (min-width: #{$val}) {
+        &\@#{$key} {
+          @include width-limiter($max-content-width);
+        }
+      }
+    }
+  }
+} // e.g. .obj-content-width@lg
