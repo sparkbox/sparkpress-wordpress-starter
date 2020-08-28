@@ -25,7 +25,8 @@
     "eslint": "eslint src/js",
     "phplint": "vendor/squizlabs/php_codesniffer/bin/phpcs --standard=sparkpress-standard.xml --extensions=php ./src/php",
     "node-version": "check-node-version --package",
-    "lint": "run-p phplint stylelint eslint"
+    "twiglint": "twigcs src/php/views",
+    "lint": "run-p phplint stylelint eslint twiglint"
   },
   "engines": {
     "node": "^12.18.0",

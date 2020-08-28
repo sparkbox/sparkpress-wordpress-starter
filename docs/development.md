@@ -44,6 +44,15 @@ For the local environment we are using a `.env` to define the username, password
 - `MYSQL_DATABASE` is the name of the database for the WordPress installation
 - `MYSQL_ROOT_PASSWORD` can be anything, it needs to be specified for your build to run
 
+Linting
+-------
+
+This theme uses the following files for linting:
+
+- PHP_Codesniffer for PHP Files with rules from `sparkpress-standard.xml` which extends the WordPress Coding Standards.
+- ESLint for JS files with rules that extend the `@sparkbox/eslint-config-sparkbox` coding standard
+- Twig_Codesniffer with default rules
+
 Syncing Environments
 --------------------
 **TBD**
@@ -68,7 +77,16 @@ If you use Microsoft VS Code, create a `settings.json` inside a `.vscode` direct
 }
 ```
 
+Helpful VS Code Extensions:
+
+- [phpcs][phpcs_vscode]
+- [Twig][twigcs]
+- [Twigcs Linter][twig_vscode]
+
 <!-- Links: -->
 [docker]:https://www.docker.com
 [composer]:https://getcomposer.org/download/
 [node]:https://nodejs.org/en/
+[twigcs]:https://marketplace.visualstudio.com/items?itemName=cerzat43.twigcs
+[twig_vscode]:https://marketplace.visualstudio.com/items?itemName=whatwedo.twig
+[phpcs_vscode]:https://marketplace.visualstudio.com/items?itemName=ikappas.phpcs

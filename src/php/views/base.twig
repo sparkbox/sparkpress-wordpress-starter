@@ -1,0 +1,26 @@
+{% include 'header.twig' %}
+
+		<article id="post-{{ post.id }}" role="main" class="post-type-{{ post.post_type }} {{ function('post_class') }}">
+
+			{% if post.title %}
+        <div class="obj-width-limiter">
+          {# equivelant to the_title() #}
+          <h1>{{ post.title }}</h1>
+        </div>
+      {% endif %}
+
+      {# content block from child templates #}
+      {% block content %}
+        <div class="obj-width-limiter">
+          Sorry, no content
+        </div>
+      {% endblock %}
+
+      {% if sidebar %}
+				<aside>
+					{{ sidebar }}
+				</aside>
+			{% endif %}
+		</article>
+
+{% include 'footer.twig' %}

@@ -1,6 +1,28 @@
 <?php
 /**
- * Custom Walker, "bootstrapped" off the WP-Bootstrap Walker.
+ * A custom walker, "bootstrapped" off the WP-Bootstrap Walker.
+ *
+ * This is kept as a reference and can be used, in lieu of Timber Templating.
+ *
+ * How To Use:
+ *
+ * if ( has_nav_menu( 'primary' ) ) :
+ * wp_nav_menu(
+ *    array(
+ *        'container'       => 'nav',
+ *        'container_class' => 'cmp-menu__nav',
+ *        'container_id'    => '',
+ *        'menu'            => 'primary',
+ *        'menu_id'         => 'main-nav-menu',
+ *        'menu_class'      => 'cmp-menu__list cmp-menu__list--main',
+ *        'before'          => '',
+ *        'after'           => '',
+ *        'link_before'     => '<span class="cmp-menu__link-text">',
+ *        'link_after'      => '</span>',
+ *        'walker'          => new SparkPress_Walker(),
+ *    )
+ *  );
+ * endif;
  */
 
 /**

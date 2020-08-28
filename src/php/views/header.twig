@@ -1,0 +1,36 @@
+<!doctype html>
+<html {{ site.language_attributes }} class="no-js safe-focus">
+<head>
+  <meta charset="{{ site.charset }}" />
+  <meta name="description" content="{{ site.description }}">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="profile" href="https://gmpg.org/xfn/11">
+  {{ function('wp_head') }}
+</head>
+<body {{ body_class }}>
+  {{ function('wp_body_open') }}
+  <div class="obj-page">
+
+    <div class="obj-width-limiter">
+      <a class="cmp-skip-to-content" href="#main">Skip to content</a>
+      <a class="cmp-skip-to-content" href="#nav">Skip to navigation</a>
+    </div>
+
+    <header class="cmp-header">
+      <div id="nav" class="obj-width-limiter">
+
+        {% block header %}
+          <div class="wrapper cmp-header">
+            <h1 class="cmp-header__logo" role="banner">
+              <a class="cmp-header__link" href="{{ site.url }}" rel="home">{{ site.name }}</a>
+            </h1>
+            <nav id="nav-main" class="nav-main" role="navigation">
+              {# replaces wp_nav_menu() #}
+              {% include "menu.twig" with {'items': menu.get_items} %}
+            </nav><!-- #nav -->
+          </div>
+        {% endblock %}
+      </div>
+    </header><!-- .cmp-header -->
+
+    <main id="main">

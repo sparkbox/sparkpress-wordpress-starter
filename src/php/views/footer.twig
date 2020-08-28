@@ -1,0 +1,23 @@
+      </main> <!-- #main -->
+
+      <footer>
+        <div class="obj-width-limiter">
+          <p>
+            &copy; {{ 'now'|date('Y') }}
+
+            <span aria-hidden="true">&nbsp;|&nbsp;</span>
+
+            <a href="{{ function('get_privacy_policy_url') }}">
+              Privacy Policy
+            </a>
+          </p>
+          {{ footer_sidebar }}
+        </div>
+      </footer>
+
+    </div> <!-- .obj-page -->
+
+    {{ function('wp_footer') }}
+
+  </body>
+</html>

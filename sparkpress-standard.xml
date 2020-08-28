@@ -6,6 +6,7 @@
         <exclude name="Generic.Formatting.MultipleStatementAlignment.NotSameWarning" />
         <exclude name="WordPress.Arrays.MultipleStatementAlignment.DoubleArrowNotAligned" />
         <exclude name="Generic.Arrays.DisallowShortArraySyntax.Found" />
+        <exclude name="Squiz.Commenting.InlineComment.InvalidEndChar" />
         <!-- exclude other stuff as you wish -->
     </rule>
 </ruleset>

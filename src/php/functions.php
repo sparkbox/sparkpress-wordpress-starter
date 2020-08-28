@@ -6,6 +6,11 @@
  */
 
 /**
+ * Twig / Timber templating.
+ */
+$timber = new Timber\Timber();
+
+/**
  * Add Code Helpers
  */
 // We want generic helpers first, in case other helpers rely on them.
@@ -80,3 +85,16 @@ require get_template_directory() . '/inc/theme-scripts.php';
  * Custom Nav Walker
  */
 require get_template_directory() . '/inc/class-sparkpress-walker.php';
+
+/**
+ * Add global context for Twig View Files.
+ *
+ * @param array $context - This is what is passed into our template files and views.
+ * @return array
+ */
+function add_to_context( $context ) {
+	$context['menu'] = new \Timber\Menu( 'primary-menu' );
+	$context['footer_sidebar'] = Timber\Timber::get_widgets( 'footer-area' );
+    return $context;
+}
+add_filter( 'timber/context', 'add_to_context' );
