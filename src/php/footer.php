@@ -1,6 +1,6 @@
 <?php
 /**
- * The template for displaying the footer
+ * This is not used if your template is utilizing twig views!
  *
  * No need to escape, it's the year:
  * phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped

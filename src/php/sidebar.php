@@ -1,6 +1,7 @@
 <?php
 /**
  * The sidebar containing the main widget area
+ * This is not used if your template is utilizing twig views!
  *
  * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
  */

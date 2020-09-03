@@ -1,6 +1,6 @@
 <?php
 /**
- * Theme Header
+ * This is not used if your template is utilizing twig views!
  */
 
 ?>

@@ -1,0 +1,40 @@
+{% extends "base.twig" %}
+
+{% block content %}
+
+  <div class="obj-width-limiter">
+
+    {# Conditional Metabox.io Field #}
+    {% if wysiwyg %}
+      <h4>WYSIWYG Metabox:</h4>
+      <hr />
+      {{ wysiwyg }}
+    {% endif %}
+
+    {# Conditional Metabox.io Field #}
+    {% if texts %}
+      <h4>Textboxes Metabox:</h4>
+      <hr />
+      <ul>
+        {% for text in texts %}
+          <li>{{ text }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+
+    {# Conditional Metabox.io Field #}
+    {% if image %}
+      <h4>Image Metabox:</h4>
+      <hr />
+      <img src="{{ image }}" alt="Example Image" />
+    {% endif %}
+
+    {# Conditional Metabox.io Field #}
+    <h4>Checkbox Selection:</h4>
+    <hr />
+    <p>{{ checked ? 'Checked' : 'Not Checked' }}</p>
+
+    {{ post.content }}
+  </div>
+
+{% endblock %}

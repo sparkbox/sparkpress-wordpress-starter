@@ -14,7 +14,7 @@ if ( $show ) : ?>
 			href="<?php echo esc_url( $first_link ); ?>"
 			aria-hidden="<?php echo esc_attr( $prev_aria ); ?>"
 		>
-			<?php get_icon( 'pagination-first', '', true ); ?>
+			First
 		</a>
 
 		<a
@@ -22,11 +22,11 @@ if ( $show ) : ?>
 			href="<?php echo esc_url( $prev_link ); ?>"
 			aria-hidden="<?php echo esc_attr( $prev_aria ); ?>"
 		>
-			<?php get_icon( 'pagination-prev', '', true ); ?>
+			Previous
 		</a>
 
 		<div class="cmp-pagination__info">
-			Page <?php echo esc_html( $current_page ); ?> of 		<?php echo esc_html( $last_page ); ?>
+			Page <?php echo esc_html( $current_page ); ?> of <?php echo esc_html( $last_page ); ?>
 		</div>
 
 		<ol class="cmp-pagination__list">
@@ -64,7 +64,7 @@ if ( $show ) : ?>
 			href="<?php echo esc_url( $next_link ); ?>"
 			aria-hidden="<?php echo esc_attr( $next_aria ); ?>"
 		>
-			<?php get_icon( 'pagination-next', '', true ); ?>
+			Next
 		</a>
 
 		<a
@@ -72,7 +72,7 @@ if ( $show ) : ?>
 			href="<?php echo esc_url( $last_link ); ?>"
 			aria-hidden="<?php echo esc_attr( $next_aria ); ?>"
 		>
-			<?php get_icon( 'pagination-last', '', true ); ?>
+			Last
 		</a>
 	</div>
 	<?php

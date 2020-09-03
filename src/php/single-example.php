@@ -3,9 +3,8 @@
  * The template for displaying an example custom post type.
  */
 
-get_header();
-
-while ( have_posts() ) :
-	the_post();
-	get_template_part( 'template-parts/content', 'page' );
-endwhile; // End of the loop.
+// https://timber.github.io/docs/reference/timber/#context
+$context           = Timber\Timber::context();
+$timber_post       = new Timber\Post();
+$context['post']   = $timber_post;
+Timber\Timber::render( array( 'page-' . $timber_post->post_name . '.twig', 'page.twig' ), $context );
