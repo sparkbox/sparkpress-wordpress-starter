@@ -20,8 +20,5 @@ function sparkpress_theme_widgets_init() {
 			'after_title'   => '</h3>',
 		)
 	);
-
-	// Register Custom Widgets.
-	register_widget( 'Sparkpress_Example_Widget' );
 }
 add_action( 'widgets_init', 'sparkpress_theme_widgets_init' );

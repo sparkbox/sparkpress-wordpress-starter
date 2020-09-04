@@ -12,8 +12,8 @@
 function button_shortcode( $atts, $content = null ) {
 	$defaults             = array( 'onclick' => '' );
 	$variables            = wp_parse_args( $atts, $defaults );
-	$variables['content'] = $content;
+	$variables['btn_content'] = $content;
 
-	return get_custom_shortcode_template( 'template-parts/button.php', $variables );
+	return Timber\Timber::compile( 'shortcodes/button.twig', $variables );
 }
 add_shortcode( 'button', 'button_shortcode' );

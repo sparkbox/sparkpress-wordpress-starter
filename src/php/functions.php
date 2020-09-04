@@ -35,9 +35,6 @@ require get_template_directory() . '/inc/setup-queries.php';
 /**
  * Theme widgets
  */
-foreach ( glob( get_template_directory() . '/inc/widgets/*.php' ) as $filename ) {
-	require_once $filename;
-}
 require get_template_directory() . '/inc/theme-widgets.php';
 
 /**
