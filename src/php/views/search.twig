@@ -1,14 +1,10 @@
-{% extends "base.twig" %}
+{% extends "index.twig" %}
 
-{% block content %}
-  <div class="obj-width-limiter util-padding-y-md">
-    {% if posts.found_posts %}
-      <h1>{{ title }}</h1>
-      {% for post in posts %}
-        {% include 'partials/content-search.twig' with { post: post} %}
-      {% endfor %}
-    {% else %}
-      {% include 'partials/content-none.twig' %}
-    {% endif %}
-  </div>
+{% block posts_found %}
+  <h1>{{ title }}</h1>
+  {% for post in posts %}
+    {% include 'partials/content-search.twig' with { post: post} %}
+  {% endfor %}
+
+  {% include 'partials/pagination.twig' with { pagination: posts.pagination({show_all: false, mid_size: 3, end_size: 2}) } %}
 {% endblock %}

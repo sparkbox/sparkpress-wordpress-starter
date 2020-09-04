@@ -46,24 +46,6 @@ function get_attribute_string( $atts, $exclude = array() ) {
 }
 
 /**
- * Get Template Part for PHP, with the added benefit that you can pass in $variables into scope
- *
- * Docs for locate_template: https://developer.wordpress.org/reference/functions/locate_template/
- *
- * @param string $slug - location of template part, e.g. "template-parts/content-none.php".
- * @param array  $variables - Array of variables so that they are within scope of locate_template.
- * @return void
- */
-function get_custom_template( $slug, $variables = array() ) {
-	// Loop over variables so that the template file can use them.
-	foreach ( $variables as $key => $val ) {
-		$$key = $val;
-	}
-
-	include locate_template( $slug );
-}
-
-/**
  * Get array of file names in a given directory.
  *
  * @param string $path - relative location of directory.

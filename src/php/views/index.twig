@@ -1,0 +1,26 @@
+{% extends "base.twig" %}
+
+{% block content %}
+  <div class="obj-width-limiter util-padding-y-md">
+    {% if posts.found_posts %}
+
+      {# new block that can be overwritten #}
+      {% block posts_found %}
+        <h1>{{ title }}</h1>
+        {% for post in posts %}
+          {% include 'partials/content-single.twig' with { post: post } %}
+        {% endfor %}
+
+        {% include 'partials/pagination.twig' with { pagination: posts.pagination({ show_all: false, mid_size: 3, end_size: 2 }) } %}
+      {% endblock %}
+
+    {% else %}
+
+      {# new block that can be overwritten #}
+      {% block no_posts_found %}
+        {% include 'partials/content-none.twig' %}
+      {% endblock %}
+
+    {% endif %}
+  </div>
+{% endblock %}

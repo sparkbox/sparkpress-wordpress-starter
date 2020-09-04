@@ -1,8 +1,8 @@
-<article id="post-{{ post.id }}">
-	<header>
-		{{ post.title }}
-	</header>
+<article id="post-{{ post.id }}" class="util-padding-bottom-md">
+	<h4>
+		<a href="{{ post.link }}">{{ post.title }}</a>
+	</h4>
 	<div>
-    {{ post.excerpt }}
+    {{ post.preview ? post.preview : post.content }}
 	</div>
 </article>

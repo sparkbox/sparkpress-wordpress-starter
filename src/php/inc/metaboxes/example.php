@@ -56,7 +56,7 @@ function example_register_meta_boxes( $meta_boxes ) {
 	return $meta_boxes;
 }
 
-// Only apply metabox to this template.
+// Only apply metabox to these templates.
 if ( should_show_meta_box_for( 'example-page-template.php' ) ) {
 	add_filter( 'rwmb_meta_boxes', 'example_register_meta_boxes' );
 }

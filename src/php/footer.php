@@ -1,29 +1,17 @@
 <?php
 /**
- * This is not used if your template is utilizing twig views!
+ * Third party plugins that hijack the theme will call wp_footer() to get the footer template.
+ * We use this to end our output buffer (started in header.php) and render into the view/page-plugin.twig template.
  *
- * No need to escape, it's the year:
- * phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
+ * If you're not using a plugin that requires this behavior (ones that do include Events Calendar Pro and
+ * WooCommerce) you can delete this file and header.php
  */
 
-$privacy_url = get_privacy_policy_url();
-?>
-	</main>
-
-	<footer>
-		<div class="obj-width-limiter">
-			<p>
-				&copy; <?php echo gmdate( 'Y' ); ?>
-				<span aria-hidden="true">&nbsp;|&nbsp;</span>
-				<a href="<?php echo esc_url( $privacy_url ); ?>">
-					Privacy Policy
-				</a>
-			</p>
-			<?php dynamic_sidebar( 'footer-area' ); ?>
-		</div>
-	</footer>
-</div> <!-- .obj-page -->
-<?php wp_footer(); ?>
-
-</body>
-</html>
+$timberContext = $GLOBALS['timberContext']; // @codingStandardsIgnoreFile
+if ( ! isset( $timberContext ) ) {
+	throw new \Exception( 'Timber context not set in footer.' );
+}
+$timberContext['content'] = ob_get_contents();
+ob_end_clean();
+$templates = array( 'page.twig' );
+Timber\Timber::render( $templates, $timberContext );
