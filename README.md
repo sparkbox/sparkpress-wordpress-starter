@@ -14,8 +14,10 @@ This is a starter to fast-track WordPress websites. It provides a way to skip ma
 | [CSS Class Reference](docs/css.md)              |
 | [Page Templates](docs/page-templates.md)        |
 | [Deployment](docs/deployment.md)                |
+| [How to Contribute](docs/contributing.md)       |
 
 ## SparkPress Team
+- **[Kasey Bonifacio](https://github.com/kaseybon)**
 - **[Ricardo Fearing](https://github.com/rfearing)**
 - **[Rob Tarr](https://github.com/robtarr)**
 - **[Philip Zastrow](https://github.com/zastrow/)**
