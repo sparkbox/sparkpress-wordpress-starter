@@ -13,7 +13,6 @@ Docker and WordPress Setup
 --------------------------
 
 1. Install [Docker][docker]
-1. Install [Composer][composer]
 1. Clone and pull down the repo
 1. Open the repo directory in your terminal
 1. Duplicate `env-sample` and rename it `.env`
@@ -85,7 +84,6 @@ Helpful VS Code Extensions:
 
 <!-- Links: -->
 [docker]:https://www.docker.com
-[composer]:https://getcomposer.org/download/
 [node]:https://nodejs.org/en/
 [twigcs]:https://marketplace.visualstudio.com/items?itemName=cerzat43.twigcs
 [twig_vscode]:https://marketplace.visualstudio.com/items?itemName=whatwedo.twig

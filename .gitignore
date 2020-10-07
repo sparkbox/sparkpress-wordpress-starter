@@ -7,7 +7,12 @@
 
 # ignore node dependency directories
 node_modules/
-vendor/
+vendor/*
+!vendor/wp-coding-standards/
+!vendor/squizlabs/
+!vendor/composer/
+!vendor/symfony/
+!vendor/autoload.php
 
 !src/js/vendor
 
