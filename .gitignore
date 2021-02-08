@@ -45,3 +45,7 @@ reports/
 .lighthouseci/
 
 plugins/rollbar/
+
+# Ignore terraform stuff
+.terraform
+terraform.tfstate
