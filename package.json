@@ -29,8 +29,8 @@
     "lint": "run-p phplint stylelint eslint twiglint"
   },
   "engines": {
-    "node": "^12.18.0",
-    "npm": "^6.14.5"
+    "node": ">=12.18.0",
+    "npm": ">=6.14.0"
   },
   "author": "SparkBox",
   "license": "ISC",
