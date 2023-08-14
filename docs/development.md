@@ -19,7 +19,10 @@ Docker and WordPress Setup
 1. Duplicate `env-sample` and rename it `.env`
 1. Update the values in the `.env` to whatever you choose. **Note:** Leave `MYSQL_HOST=db` unchanged. The remaining values can be whatever you would like. Further information about those values below.
 1. Run `npm install` to install node modules.
-1. Run `npm start` to build your project with Docker.
+1. Start the project:
+   1. Run `npm run build:dev` to build and watch theme files.
+   1. Run `npm run serve:dev` to start the WordPress server with Docker.
+      - Note: both of these commands can be run together with `npm start` if desired.
 1. Visit `https://localhost:8000/wp-admin` and run through the WordPress setup.
 1. Head to `localhost:8000` to ensure the page loads.
 
