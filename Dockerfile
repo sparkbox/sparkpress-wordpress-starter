@@ -33,3 +33,7 @@ RUN cd /tmp \
 RUN chown -R www-data:www-data /var/www
 RUN find /var/www/ -type d -exec chmod 0755 {} \;
 RUN find /var/www/ -type f -exec chmod 644 {} \;
+
+# make the linters executable so we can run them from containers
+RUN chmod +x vendor/bin/phpcs
+RUN chmod +x vendor/bin/twigcs
