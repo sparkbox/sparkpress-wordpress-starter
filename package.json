@@ -21,12 +21,13 @@
     "watch": "node tasks/watch.js",
     "test": "mocha src/**/*spec.js",
     "test:ci": "nyc --reporter=lcov mocha",
-    "stylelint": "stylelint src/scss/**/*.scss src/scss/*.scss --color --formatter verbose",
-    "eslint": "eslint src/js",
-    "phplint": "vendor/squizlabs/php_codesniffer/bin/phpcs --standard=sparkpress-standard.xml --extensions=php ./src/php",
-    "node-version": "check-node-version --package",
-    "twiglint": "twigcs src/php/views",
-    "lint": "run-p phplint stylelint eslint twiglint"
+    "lint:js": "eslint src/js",
+    "lint:php": "./scripts/run.sh vendor/bin/phpcs --standard=sparkpress-standard.xml --extensions=php src/php",
+    "lint:scss": "stylelint src/scss/**/*.scss src/scss/*.scss --color --formatter verbose",
+    "lint:twig": "./scripts/run.sh vendor/bin/twigcs src/php/views",
+    "lint": "run-s lint:*",
+    "php:run": "./scripts/run.sh",
+    "node-version": "check-node-version --package"
   },
   "engines": {
     "node": ">=12.18.0",
