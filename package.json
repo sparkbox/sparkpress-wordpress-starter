@@ -30,8 +30,8 @@
     "node-version": "check-node-version --package"
   },
   "engines": {
-    "node": ">=12.18.0",
-    "npm": ">=6.14.0"
+    "node": ">=18",
+    "npm": ">=9"
   },
   "author": "SparkBox",
   "license": "ISC",
