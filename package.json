@@ -17,7 +17,7 @@
     "sass": "sass src/scss/base.scss theme/css/base.css",
     "postsass": "postcss theme/css/base.css --use autoprefixer -r",
     "js:watch": "webpack --progress --config=webpack.dev.js --mode development -w",
-    "js:prod": "webpack -p --progress --config=webpack.prod.js --mode production",
+    "js:prod": "webpack --progress --config=webpack.prod.js --mode production",
     "watch": "node tasks/watch.js",
     "test": "mocha src/**/*spec.js",
     "test:ci": "nyc --reporter=lcov mocha",
