@@ -1,15 +1,13 @@
-FROM php:7.3-apache-buster
+FROM php:8.1-apache-buster
 
 # When changings, also change in .circleci/config.yml
-ENV WP_VERSION=5.5
+ENV WP_VERSION=6.3.1
 
 RUN apt-get update \
       && apt-get install -y libpng-dev libjpeg62-turbo-dev libzip-dev
 
-RUN docker-php-ext-configure gd --with-jpeg-dir=/usr/include/
+RUN docker-php-ext-configure gd --with-jpeg
 RUN docker-php-ext-install gd mysqli pdo_mysql zip
-
-RUN docker-php-ext-configure zip --with-libzip
 
 # These apache modules are required and not enabled by default in this image
 RUN a2enmod rewrite headers xml2enc proxy proxy_fcgi
