@@ -25,6 +25,5 @@ function register_custom_taxonomy() {
 		'show_tagcloud'     => true,
 	);
 	register_taxonomy( 'example_custom_tax', array( 'example' ), $args );
-
 }
 add_action( 'init', 'register_custom_taxonomy', 0 );

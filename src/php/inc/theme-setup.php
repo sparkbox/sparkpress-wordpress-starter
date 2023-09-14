@@ -111,6 +111,5 @@ function custom_hide_editor() {
 		add_filter( 'use_block_editor_for_post', '__return_false' );
 		remove_post_type_support( 'page', 'editor' );
 	}
-
 }
 add_action( 'admin_init', 'custom_hide_editor' );

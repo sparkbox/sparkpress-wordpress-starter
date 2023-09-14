@@ -137,4 +137,3 @@ function get_featured_image_url( $size = 'full' ) {
 	$thumb_url = $thumb_url_array[0];
 	return $thumb_url;
 }
-

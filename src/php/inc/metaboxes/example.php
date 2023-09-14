@@ -15,20 +15,20 @@
 function example_register_meta_boxes( $meta_boxes ) {
 	$prefix = 'spark_example_';
 
-	$meta_boxes[] = [
+	$meta_boxes = array(
 		'title'      => 'Example',
 		'id'         => $prefix . 'metaboxes',
-		'post_types' => [ 'page' ], // What types of post types e.g. posts, pages, custom_post_type.
+		'post_types' => array( 'page' ), // What types of post types e.g. posts, pages, custom_post_type.
 		'context'    => 'side', // Where to display on admin page. https://docs.metabox.io/creating-meta-boxes/#contexts .
 		'priority'   => 'high',
-		'fields'     => [
-			[
+		'fields'     => array(
+			array(
 				'type' => 'checkbox',
 				'id'   => $prefix . 'checkbox_example',
 				'name' => 'Checkbox',
 				'desc' => 'Click Yes or No!',
-			],
-			[
+			),
+			array(
 				'type'        => 'text',
 				'id'          => $prefix . 'text_example',
 				'name'        => 'Text',
@@ -36,22 +36,22 @@ function example_register_meta_boxes( $meta_boxes ) {
 				'std'         => 'Default Value',
 				'placeholder' => 'Try me out',
 				'clone'       => true,
-			],
-			[
+			),
+			array(
 				'type'             => 'image_advanced',
 				'id'               => $prefix . 'image_example',
 				'name'             => 'Image Advanced',
 				'desc'             => 'Upload an Image.',
 				'max_file_uploads' => 1,
 				'max_status'       => true,
-			],
-			[
+			),
+			array(
 				'type' => 'wysiwyg',
 				'id'   => $prefix . 'wysiwyg_example',
 				'name' => 'WYSIWYG',
-			],
-		],
-	];
+			),
+		),
+	);
 
 	return $meta_boxes;
 }

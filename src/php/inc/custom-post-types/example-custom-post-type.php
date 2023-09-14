@@ -58,6 +58,5 @@ function custom_post_type() {
 		'capability_type'       => 'page',
 	);
 	register_post_type( 'example', $args );
-
 }
 add_action( 'init', 'custom_post_type', 0 );
