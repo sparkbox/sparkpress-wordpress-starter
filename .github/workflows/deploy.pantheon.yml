@@ -1,0 +1,70 @@
+name: Deploy to Pantheon
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    if: ${{ vars.DEPLOY_TO_PANTHEON }}
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install npm dependencies
+        run: npm ci
+
+      - name: Install PHP dependencies with Composer
+        uses: php-actions/composer@v6
+        with:
+          php_version: '8.1'
+          version: 2.x
+
+      - name: Build theme
+        run: npm run build:prod
+
+      - name: Install SSH key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.PANTHEON_ID_RSA }}
+          known_hosts: ${{ secrets.KNOWN_HOSTS }}
+
+      - name: Add SSH Key
+        run: |
+          eval `ssh-agent`
+          ssh-add ~/.ssh/id_rsa
+
+      - name: Checkout Pantheon remote
+        run: |
+          git config --global user.email "${{ secrets.PRODUCTION_USER_EMAIL }}"
+          git config --global user.name "${{ secrets.PRODUCTION_USER_NAME }}"
+          git remote add pantheon ${{ secrets.PRODUCTION_REPO }}
+          git fetch pantheon master
+          git worktree add --track -b prod prod pantheon/master
+
+      - name: Copy build artifacts
+        run: |
+          rm -rf prod/vendor prod/wp-content/plugins prod/wp-content/themes/sparkpress
+          cp -r vendor prod
+          cp -r theme prod/wp-content/themes/sparkpress
+          cp -r wp-content/plugins prod/wp-content/plugins
+
+      - name: Deploy to Pantheon
+        run: |
+          cd prod
+          git status
+          git add .
+          git commit -m "Prod release"
+          git push pantheon HEAD:master
