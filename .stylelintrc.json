@@ -1,3 +1,7 @@
 {
-  "extends": "@sparkbox/stylelint-config-sparkbox"
+  "extends": "stylelint-config-standard-scss",
+  "rules": {
+    "selector-class-pattern": null,
+    "media-feature-range-notation": "prefix"
+  }
 }
