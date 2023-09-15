@@ -1,3 +1,5 @@
+@use "sass:color";
+
 // Named Colors
 $color-blue-dianne: #1C4C55;
 $color-lochinvar: #2D818F;
@@ -14,10 +16,10 @@ $color-tertiary: $color-alabaster;
 $color-web-accent: $color-powder-blue;
 
 // Base Darkened
-$color-primary-dark: darken($color-primary, 15%);
-$color-secondary-dark: darken($color-secondary, 15%);
-$color-tertiary-dark: darken($color-tertiary, 15%);
-$color-web-accent-dark: darken($color-web-accent, 15%);
+$color-primary-dark: color.adjust($color-primary, $lightness: -15%);
+$color-secondary-dark: color.adjust($color-secondary, $lightness: -15%);
+$color-tertiary-dark: color.adjust($color-tertiary, $lightness: -15%);
+$color-web-accent-dark: color.adjust($color-web-accent, $lightness: -15%);
 
 // Status
 $color-positive: $color-emerald;
@@ -34,7 +36,7 @@ $color-default-text: $color-black;
 $color-safe-focus: $color-primary;
 
 // Shadows
-$color-box-shadow: rgba(lighten($color-black, 10%), 0.4);
+$color-box-shadow: rgba(color.adjust($color-black, $lightness: 10%), 0.4);
 
 // Map for ease of use
 $colors: (

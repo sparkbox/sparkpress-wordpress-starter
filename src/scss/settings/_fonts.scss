@@ -1,24 +1,22 @@
+@use "sass:map";
+
 $font-franklin: franklin-gothic-urw, sans-serif;
 $font-neuzeit: neuzeit-grotesk, sans-serif;
-
 $font-primary: $font-franklin;
 $font-secondary: $font-neuzeit;
-
 $fonts: (
   'primary': $font-primary,
   'secondary': $font-secondary
 );
-
 $weights: (
   'book': 400,
   'demi': 700,
   'bold': 800,
   'heavy': 900
 );
-
 $font-size: 1rem;
 $font-sizes: () !default;
-$font-sizes: map-merge(
+$font-sizes: map.merge(
   (
     xs: $font-size * 0.875,   // 14px
     sm: $font-size,           // 16px
@@ -31,8 +29,6 @@ $font-sizes: map-merge(
     $font-sizes
   );
 
-//
 // LINE HEIGHTS
-//
 $line-height-normal: 1.5;
 $line-height-tight: 1.25;

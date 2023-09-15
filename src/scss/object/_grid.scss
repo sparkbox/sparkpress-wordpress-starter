@@ -56,6 +56,7 @@ $grid-count: 12;
 
 .obj-grid {
   @include clearfix;
+
   display: flex;
   flex-wrap: wrap;
 
@@ -77,8 +78,7 @@ $grid-count: 12;
       @media (min-width: #{$val}) {
         @include grid-maker(\@#{$key});
       }
-    }
-    @else {
+    } @else {
       @media print {
         @include grid-maker(\@#{$key});
       }

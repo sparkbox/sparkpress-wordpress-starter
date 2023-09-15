@@ -41,6 +41,7 @@
 // Auto-generates media queries for looping content
 @mixin loop-mq {
   @content;
+
   @each $key, $val in $grid-breakpoints {
     @media (min-width: #{$val}) {
       &\@#{$key} {
@@ -84,41 +85,35 @@
   }
 }
 
-@mixin margin-spacing ($side, $spacer-key) {
+@mixin margin-spacing($side, $spacer-key) {
   @if $side == "all" {
     margin: space($spacer-key);
-  }
-  @else if $side == "y" {
+  } @else if $side == "y" {
     margin-top: space($spacer-key);
     margin-bottom: space($spacer-key);
-  }
-  @else if $side == "x " {
+  } @else if $side == "x " {
     margin-right: space($spacer-key);
     margin-left: space($spacer-key);
-  }
-  @else {
+  } @else {
     margin-#{$side}: space($spacer-key);
   }
 }
 
-@mixin padding-spacing ($side, $spacer-key) {
+@mixin padding-spacing($side, $spacer-key) {
   @if $side == "all" {
     padding: space($spacer-key);
-  }
-  @else if $side == "y" {
+  } @else if $side == "y" {
     padding-top: space($spacer-key);
     padding-bottom: space($spacer-key);
-  }
-  @else if $side == "x" {
+  } @else if $side == "x" {
     padding-right: space($spacer-key);
     padding-left: space($spacer-key);
-  }
-  @else {
+  } @else {
     padding-#{$side}: space($spacer-key);
   }
 }
 
-@mixin text-shadow ($size: remify(1), $distance: 1.25em, $color: color('black')) {
+@mixin text-shadow($size: remify(1), $distance: 1.25em, $color: color('black')) {
   text-shadow: $size $size $distance $color;
 }
 
@@ -135,6 +130,7 @@
 
 @mixin background-card-image {
   @include default-box-shadow;
+
   position: absolute;
   object-fit: cover;
   top: 0;

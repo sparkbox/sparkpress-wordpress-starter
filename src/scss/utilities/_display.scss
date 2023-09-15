@@ -18,7 +18,7 @@ $util-display-values: (
 .util-visually-hidden,
 .util-display-visually-hidden {
   @include loop-mq {
-    @include visually-hidden();
+    @include visually-hidden;
   }
 }
 
