@@ -1,6 +1,8 @@
 // Strip Unites
+@use "sass:math";
+
 @function strip-units($number) {
-  @return $number / ($number * 0 + 1);
+  @return math.div($number, $number * 0 + 1);
 }
 
 @function space($key) {
@@ -28,10 +30,10 @@
 }
 
 @function ratio($height,$width) {
-  @return ($height / $width) * 100%;
+  @return math.div($height, $width) * 100%;
 }
 
 @function remify($value) {
   $value: strip-units($value);
-  @return ($value / 16) * 1rem;
+  @return math.div($value, 16) * 1rem;
 }
