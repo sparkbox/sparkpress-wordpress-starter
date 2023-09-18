@@ -1,4 +1,6 @@
-FROM php:8.1-apache-buster
+FROM php:8.1-apache-buster as dev
+
+LABEL org.opencontainers.image.source=https://github.com/sparkbox/sparkpress-wordpress-starter
 
 # When changings, also change in .circleci/config.yml
 ENV WP_VERSION=6.3.1
@@ -36,3 +38,11 @@ RUN find /var/www/ -type f -exec chmod 644 {} \;
 # make the linters executable so we can run them from containers
 RUN chmod +x vendor/bin/phpcs
 RUN chmod +x vendor/bin/twigcs
+
+FROM dev as prod
+
+COPY theme /var/www/html/wp-content/themes/sparkpress-theme
+COPY plugins /var/www/html/wp-content/plugins
+COPY wp-configs/wp-config.php /var/www/html/wp-config.php
+COPY wp-configs/php.ini /var/www/html/php.ini
+COPY wp-configs/.htaccess /var/www/html/.htaccess
