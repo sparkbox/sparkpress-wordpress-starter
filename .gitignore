@@ -40,6 +40,7 @@ process.yml
 # Audit Reports
 reports/
 .nyc_output/
+coverage/
 
 # LightHouse Audit Results
 .lighthouseci/

@@ -19,8 +19,8 @@
     "js:watch": "NODE_ENV=development node esbuild.mjs",
     "js:prod": "node esbuild.mjs",
     "watch": "node tasks/watch.js",
-    "test": "mocha src/**/*spec.js",
-    "test:ci": "nyc --reporter=lcov mocha",
+    "test": "vitest --run",
+    "test:ci": "vitest --run --coverage",
     "lint:js": "eslint src/js",
     "lint:php": "./scripts/run.sh vendor/bin/phpcs --standard=sparkpress-standard.xml --extensions=php src/php -s -n",
     "lint:scss": "stylelint src/scss/**/*.scss src/scss/*.scss --color --formatter verbose",
@@ -36,6 +36,7 @@
   "author": "SparkBox",
   "license": "ISC",
   "devDependencies": {
+    "@vitest/coverage-istanbul": "^0.34.4",
     "autoprefixer": "^10.4.15",
     "chai": "^4.3.8",
     "check-node-version": "^4.2.1",
@@ -57,6 +58,7 @@
     "sinon": "^16.0.0",
     "sinon-chai": "^3.7.0",
     "stylelint": "^15.10.3",
-    "stylelint-config-standard-scss": "^11.0.0"
+    "stylelint-config-standard-scss": "^11.0.0",
+    "vitest": "^0.34.4"
   }
 }
