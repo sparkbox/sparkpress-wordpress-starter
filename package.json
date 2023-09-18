@@ -20,6 +20,7 @@
     "js:prod": "node esbuild.mjs",
     "watch": "node tasks/watch.js",
     "test": "vitest --run",
+    "test:watch": "vitest",
     "test:ci": "vitest --run --coverage",
     "lint:js": "eslint src/js",
     "lint:php": "./scripts/run.sh vendor/bin/phpcs --standard=sparkpress-standard.xml --extensions=php src/php -s -n",
@@ -36,6 +37,8 @@
   "author": "SparkBox",
   "license": "ISC",
   "devDependencies": {
+    "@testing-library/dom": "^9.3.3",
+    "@testing-library/jest-dom": "^6.1.3",
     "@vitest/coverage-istanbul": "^0.34.4",
     "autoprefixer": "^10.4.15",
     "check-node-version": "^4.2.1",
