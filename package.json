@@ -7,7 +7,7 @@
     "prestart": "run-p clean node-version",
     "start": "run-p build:dev serve:dev",
     "postserve:dev": "docker-compose down",
-    "clean": "rimraf theme/",
+    "clean": "rm -rf theme/",
     "copy": "node tasks/copy.js",
     "prebuild:dev": "npm run clean",
     "prebuild:prod": "npm run clean",
