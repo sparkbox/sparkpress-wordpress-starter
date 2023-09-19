@@ -14,10 +14,6 @@
     "plugin:react-hooks/recommended",
     "prettier"
   ],
-  "globals": {
-    "Rollbar": true,
-    "locations": true
-  },
   "settings": {
     "react": {
       "version": "^18.2.0"

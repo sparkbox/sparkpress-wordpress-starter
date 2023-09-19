@@ -8,7 +8,7 @@
     "start": "run-p build:dev serve:dev",
     "postserve:dev": "docker-compose down",
     "clean": "rm -rf theme/",
-    "copy": "node tasks/copy.js",
+    "copy": "mkdir -p ./theme && cp -r ./src/php/* ./theme",
     "prebuild:dev": "npm run clean",
     "prebuild:prod": "npm run clean",
     "build:dev": "run-p copy sass watch js:watch",
@@ -18,12 +18,14 @@
     "postsass": "postcss theme/css/base.css --use autoprefixer -r",
     "js:watch": "NODE_ENV=development node esbuild.mjs",
     "js:prod": "node esbuild.mjs",
-    "watch": "node tasks/watch.js",
+    "watch": "run-p watch:*",
+    "watch:php": "chokidar \"src/php/**/*\" -c \"npm run copy\"",
+    "watch:scss": "chokidar \"src/scss/**/*\" -c \"npm run sass\"",
     "test": "vitest --run",
     "test:watch": "vitest",
     "test:ci": "vitest --run --coverage",
     "lint:js": "eslint src/js",
-    "lint:php": "./scripts/run.sh vendor/bin/phpcs --standard=sparkpress-standard.xml --extensions=php src/php -s -n",
+    "lint:php": "./scripts/run.sh vendor/bin/phpcs --standard=wp-configs/sparkpress-standard.xml --extensions=php src/php -s -n",
     "lint:scss": "stylelint src/scss/**/*.scss src/scss/*.scss --color --formatter verbose",
     "lint:twig": "./scripts/run.sh vendor/bin/twigcs src/php/views",
     "lint": "run-s lint:*",
@@ -42,8 +44,7 @@
     "@vitest/coverage-istanbul": "^0.34.4",
     "autoprefixer": "^10.4.15",
     "check-node-version": "^4.2.1",
-    "chokidar": "^3.5.3",
-    "colors": "^1.4.0",
+    "chokidar-cli": "^3.0.0",
     "dotenv": "^16.3.1",
     "esbuild": "^0.19.3",
     "eslint": "^8.49.0",
@@ -54,9 +55,13 @@
     "npm-run-all": "^4.1.5",
     "postcss-cli": "^10.1.0",
     "sass": "^1.67.0",
-    "shelljs": "^0.8.5",
     "stylelint": "^15.10.3",
     "stylelint-config-standard-scss": "^11.0.0",
     "vitest": "^0.34.4"
-  }
+  },
+  "browserslist": [
+    ">0.5%",
+    "last 10 versions",
+    "Firefox ESR"
+  ]
 }

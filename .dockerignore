@@ -1,6 +1,7 @@
 .browserslistrc
 .circleci
 .env
+.env.example
 .eslintrc
 .git
 .github
@@ -10,7 +11,6 @@
 .stylelintrc.json
 README.md
 docs
-env-sample
 node_modules
 package-lock.json
 package.json

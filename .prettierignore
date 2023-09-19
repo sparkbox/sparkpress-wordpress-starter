@@ -1,0 +1,38 @@
+# Configs
+package.json
+package-lock.json
+tsconfig.json
+
+# composer
+composer.json
+composer.lock
+
+# npm
+node_modules
+npm-debug.log
+
+# Build
+/out
+/build
+/dist
+
+# IDEs
+.vscode
+.idea
+
+# Swap
+*~
+*.swp
+*.swo
+
+# Next.js
+.next
+next.config.json
+next-env.d.ts
+
+# WordPress
+wp-content
+theme
+uploads
+vendor
+plugins
