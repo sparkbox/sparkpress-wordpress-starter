@@ -22,6 +22,9 @@ require __DIR__ . '/vendor/autoload.php';
 $dotenv = Dotenv\Dotenv::createImmutable( __DIR__ );
 $dotenv->load();
 
+/** Set default theme to SparkPress  */
+define('WP_DEFAULT_THEME', 'sparkpress-theme');
+
 // ** MySQL settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
 define( 'DB_NAME', getenv( 'MYSQL_DATABASE' ) );
