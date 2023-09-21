@@ -47,5 +47,7 @@ coverage/
 
 plugins/rollbar/
 
+src/plugins/**/build/
+
 # DB imports/exports
 sql

@@ -12,6 +12,7 @@ services:
     volumes:
       - ./uploads:/var/www/html/wp-content/uploads
       - ./theme:/var/www/html/wp-content/themes/sparkpress-theme
+      - ./src/plugins/example-blocks:/var/www/html/wp-content/plugins/example-blocks
       - ./wp-configs/wp-config.php:/var/www/html/wp-config.php
       - ./wp-configs/php.ini:/var/www/html/php.ini
       - ./.env:/var/www/html/.env
