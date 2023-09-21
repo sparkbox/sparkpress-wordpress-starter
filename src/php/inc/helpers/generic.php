@@ -7,7 +7,8 @@
  * Define Globals for within Theme.
  */
 function define_theme_globals() {
-	define( 'GOOGLE_API_KEY', getenv( 'GOOGLE_API_KEY' ) );
+	// phpcs:ignore
+	define( 'GOOGLE_API_KEY', $_SERVER['GOOGLE_API_KEY'] ?? '' );
 }
 add_filter( 'init', 'define_theme_globals' );
 

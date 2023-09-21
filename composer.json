@@ -4,21 +4,21 @@
   "description": "Starter Docker installation for WordPress Websites",
   "require": {
     "php": "^8.1",
-    "vlucas/phpdotenv": "4.3",
-    "wpackagist-plugin/wordpress-seo": "^18.0",
-    "wpackagist-plugin/meta-box": "^5.3",
-    "timber/timber": "^1.18",
-    "friendsoftwig/twigcs": "^5.2"
+    "vlucas/phpdotenv": "^5.5",
+    "timber/timber": "^1.22",
+    "twig/string-extra": "^3.7",
+    "twig/html-extra": "^3.7"
   },
-  "repositories":[
+  "repositories": [
     {
-        "type":"composer",
-        "url":"https://wpackagist.org"
+      "type": "composer",
+      "url": "https://wpackagist.org"
     }
   ],
   "require-dev": {
-    "squizlabs/php_codesniffer": "*",
-    "wp-coding-standards/wpcs": "^3.0.0"
+    "squizlabs/php_codesniffer": "^3.7",
+    "wp-coding-standards/wpcs": "^3.0.0",
+    "friendsoftwig/twigcs": "^6.2"
   },
   "config": {
     "allow-plugins": {

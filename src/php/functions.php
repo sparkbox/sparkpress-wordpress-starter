@@ -59,20 +59,6 @@ foreach ( glob( get_template_directory() . '/inc/taxonomies/*.php' ) as $filenam
 }
 
 /**
- * Metaboxes
- */
-foreach ( glob( get_template_directory() . '/inc/metaboxes/*.php' ) as $filename ) {
-	require_once $filename;
-}
-
-/**
- * Metaboxes
- */
-foreach ( glob( get_template_directory() . '/inc/metaboxes/*.php' ) as $filename ) {
-	require_once $filename;
-}
-
-/**
  * Enqueue scripts and styles.
  */
 require get_template_directory() . '/inc/theme-styles.php';

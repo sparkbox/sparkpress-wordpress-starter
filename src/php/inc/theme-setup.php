@@ -57,29 +57,6 @@ if ( ! function_exists( 'sparkpress_theme_setup' ) ) :
 endif;
 add_action( 'after_setup_theme', 'sparkpress_theme_setup' );
 
-if ( ! function_exists( 'rwmb_meta' ) ) {
-	/**
-	 * This theme utilizes metabox.io. If the plugin isn't installed, this prevents any Fatal Errors.
-	 *
-	 * @return void
-	 */
-	function rwmb_meta() {}
-	add_action( 'admin_notices', 'metabox_notice' );
-}
-
-/**
- * Alert admin that metabox.io isn't activated.
- *
- * @return void
- */
-function metabox_notice() {
-	?>
-	<div class="error notice">
-		<p>SparkPress Theme Requirement: Remember to activate metabox.io</p>
-	</div>
-	<?php
-}
-
 /**
  * Hide the main editor on defined page templates
  *

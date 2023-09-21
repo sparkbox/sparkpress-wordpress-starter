@@ -27,16 +27,16 @@ define('WP_DEFAULT_THEME', 'sparkpress-theme');
 
 // ** MySQL settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
-define( 'DB_NAME', getenv( 'MYSQL_DATABASE' ) );
+define( 'DB_NAME', $_SERVER['MYSQL_DATABASE'] );
 
 /** MySQL database username */
-define( 'DB_USER', getenv( 'MYSQL_USER' ) );
+define( 'DB_USER', $_SERVER['MYSQL_USER'] );
 
 /** MySQL database password */
-define( 'DB_PASSWORD', getenv( 'MYSQL_PASSWORD' ) );
+define( 'DB_PASSWORD', $_SERVER['MYSQL_PASSWORD'] );
 
 /** MySQL hostname */
-define( 'DB_HOST', getenv( 'MYSQL_HOST' ) );
+define( 'DB_HOST', $_SERVER['MYSQL_HOST'] );
 
 /** Database Charset to use in creating database tables. */
 define( 'DB_CHARSET', 'utf8' );
@@ -48,7 +48,7 @@ define( 'DB_COLLATE', '' );
 define( 'FS_METHOD', 'direct' );
 
 /** Current environment */
-define( 'WP_ENV', getenv( 'WP_ENV' ) );
+define( 'WP_ENV', $_SERVER['WP_ENV'] );
 
 /**#@+
  * Authentication Unique Keys and Salts.
