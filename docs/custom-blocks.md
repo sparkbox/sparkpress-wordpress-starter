@@ -20,7 +20,6 @@ Follow these steps to create a new custom block and wire it up with the normal d
     - `src/save.js`: the component rendered on the site
     - `src/editor.scss`: custom styles for the editor view
     - `src/style.scss`: custom styles for the block when rendered on the site
-1. Update `src/plugins/example-block/example-block.php`, adding a new `register_block_type` function call pointing to the new block's location
 1. Update `src/plugins/example-blocks/package.json` with these new scripts:
     - `build:<block-name>`
     - `start:<block-name>`
