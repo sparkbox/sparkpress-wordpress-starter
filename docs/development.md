@@ -32,6 +32,7 @@
 1. Install [Node][node]
 1. In your terminal, navigate to the repo directory
 1. Run `npm install`, wait for installation of modules
+1. Run `npm run plugins:install` to install dependencies for custom plugins (you will need to activate the plugin from WordPress)
 1. Run `npm start` to build the theme and have a watch task to automatically rerun the build when changes are made.
 
 ## Setting Local Environment Variables
