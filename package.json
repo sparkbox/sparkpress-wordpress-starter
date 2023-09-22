@@ -30,6 +30,10 @@
     "lint:twig": "./scripts/run.sh vendor/bin/twigcs src/php/views",
     "lint": "run-s lint:*",
     "php:run": "./scripts/run.sh",
+    "export-db": "./scripts/export-db.sh",
+    "backup-db": "BACKUP=true ./scripts/export-db.sh",
+    "import-db": "./scripts/import-db.sh",
+    "preimport-db": "npm run backup-db",
     "node-version": "check-node-version --package"
   },
   "engines": {

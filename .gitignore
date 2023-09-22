@@ -46,3 +46,6 @@ coverage/
 .lighthouseci/
 
 plugins/rollbar/
+
+# DB imports/exports
+sql
