@@ -7,7 +7,9 @@
  */
 
 $context          = Timber\Timber::context();
-$context['title'] = 'Search results for ' . get_search_query();
+
+$search_term = get_search_query();
+$context['title'] = 'Search results for ' . $search_term;
 $context['posts'] = new Timber\PostQuery();
 
 Timber\Timber::render( 'search.twig', $context );

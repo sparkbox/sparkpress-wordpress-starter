@@ -85,9 +85,9 @@ add_filter( 'timber/context', 'add_to_context' );
 /**
  * Render page content with password protection.
  *
- * @param object $post - The current post.
+ * @param object       $post - The current post.
  * @param string|array $templates - The template(s) to render.
- * @param object $context - The Timber context used to render.
+ * @param object       $context - The Timber context used to render.
  */
 function render_with_password_protection( $post, $templates, $context ) {
 	if ( post_password_required( $post->ID ) ) {
@@ -96,3 +96,18 @@ function render_with_password_protection( $post, $templates, $context ) {
 		Timber::render( $templates, $context );
 	}
 }
+
+/**
+ * Filter password protected posts out of listing page queries.
+ *
+ * @param object $query - The incoming query.
+ * @return object
+ */
+function filter_password_protected_posts( $query ) {
+	if ( ! $query->is_admin && ! $query->is_single ) {
+		$query->set( 'has_password', false );
+	}
+
+	return $query;
+}
+add_filter( 'pre_get_posts', 'filter_password_protected_posts' );

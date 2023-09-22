@@ -3,11 +3,6 @@
  * The template for displaying archive pages
  */
 
-$page_num = get_query_var( 'paged' );
-$page_num = empty( $page_num ) ? 1 : $page_num;
-$posts_per_page = 12;
-$count = $GLOBALS['wp_query']->post_count;
-
 $templates = array( 'archive.twig', 'index.twig' );
 
 $context = Timber\Timber::context();
