@@ -6,20 +6,17 @@
 	"license": "GPL-2.0-or-later",
 	"main": "build/index.js",
 	"scripts": {
-		"build": "run-p build:*",
-		"build:hello-world": "wp-scripts build blocks/hello-world/src/index.js --output-path=blocks/hello-world/build/",
-		"build:reverse-string": "wp-scripts build blocks/reverse-string/src/index.js --output-path=blocks/reverse-string/build/",
+		"build": "./scripts/build-blocks.sh",
+		"build:block": "wp-scripts build blocks/$npm_config_block/src/index.js --output-path=blocks/$npm_config_block/build/",
 		"format": "wp-scripts format",
 		"lint:css": "wp-scripts lint-style",
 		"lint:js": "wp-scripts lint-js",
 		"packages-update": "wp-scripts packages-update",
 		"plugin-zip": "wp-scripts plugin-zip",
-		"start": "run-p start:*",
-		"start:hello-world": "wp-scripts start blocks/hello-world/src/index.js --output-path=blocks/hello-world/build/",
-		"start:reverse-string": "wp-scripts start blocks/reverse-string/src/index.js --output-path=blocks/reverse-string/build/"
+		"start": "./scripts/start-blocks.sh",
+		"start:block": "wp-scripts start blocks/$npm_config_block/src/index.js --output-path=blocks/$npm_config_block/build/"
 	},
 	"devDependencies": {
-		"@wordpress/scripts": "^26.13.0",
-		"npm-run-all": "^4.1.5"
+		"@wordpress/scripts": "^26.13.0"
 	}
 }

@@ -20,9 +20,6 @@ Follow these steps to create a new custom block and wire it up with the normal d
     - `src/save.js`: the component rendered on the site
     - `src/editor.scss`: custom styles for the editor view
     - `src/style.scss`: custom styles for the block when rendered on the site
-1. Update `src/plugins/example-blocks/package.json` with these new scripts:
-    - `build:<block-name>`
-    - `start:<block-name>`
 1. Configure the custom block by updating `block.json`, namely the `name`, `title`, `icon`, and `description` fields
 1. Implement the edit function, which will usually be form controls corresponding to attributes that you define in `index.js`
 1. Implement the save function, which will consume the attributes defined in `index.js` and render the block's desired markup
