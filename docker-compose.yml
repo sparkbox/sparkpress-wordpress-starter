@@ -17,7 +17,7 @@ services:
       - ./.env:/var/www/html/.env
       - ./wp-configs/.htaccess:/var/www/html/.htaccess
   db:
-    image: mysql:5.7
+    image: mysql:8.1
     container_name: sparkpress_db
     restart: always
     ports:
