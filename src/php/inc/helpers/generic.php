@@ -7,8 +7,9 @@
  * Define Globals for within Theme.
  */
 function define_theme_globals() {
+	// Define your own site-specific environment variables here.
 	// phpcs:ignore
-	define( 'GOOGLE_API_KEY', $_SERVER['GOOGLE_API_KEY'] ?? '' );
+	define( 'CUSTOM_ENVIRONMENT_VARIABLE', $_SERVER['CUSTOM_ENVIRONMENT_VARIABLE'] ?? '' );
 }
 add_filter( 'init', 'define_theme_globals' );
 
