@@ -31,3 +31,26 @@ function create_block_example_blocks_block_init() {
     }
 }
 add_action( 'init', 'create_block_example_blocks_block_init' );
+
+/**
+ * Add a custom block category to the WordPress block editor (Gutenberg).
+ *
+ * This function is hooked to the 'block_categories_all' filter and adds a new
+ * block category named 'Example Custom Blocks' with the slug 'example-custom-blocks'
+ * to the block editor.
+ *
+ * @param array   $categories An array of existing block categories.
+ * @param WP_Post $post       The current post or page object.
+ *
+ * @return array Modified array of block categories.
+ */
+function create_category_example_custom_blocks( $categories, $post ) {
+
+	array_unshift( $categories, array(
+		'slug'	=> 'example-custom-blocks',
+		'title' => 'Example Custom Blocks'
+	) );
+
+	return $categories;
+}
+add_filter( 'block_categories_all', 'create_category_example_custom_blocks', 10, 2);

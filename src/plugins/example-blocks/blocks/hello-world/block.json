@@ -4,7 +4,7 @@
 	"name": "example-blocks/hello-world",
 	"version": "0.1.0",
 	"title": "Hello World",
-	"category": "widgets",
+	"category": "example-custom-blocks",
 	"icon": "nametag",
 	"description": "Prints Hello World!",
 	"supports": {

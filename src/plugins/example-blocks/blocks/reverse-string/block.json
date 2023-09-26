@@ -4,7 +4,7 @@
 	"name": "example-blocks/reverse-string",
 	"version": "0.1.0",
 	"title": "Reverse String",
-	"category": "widgets",
+	"category": "example-custom-blocks",
 	"icon": "smiley",
 	"description": "Prints a user-entered string in reverse order.",
 	"supports": {
