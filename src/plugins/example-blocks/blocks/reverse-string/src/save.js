@@ -11,6 +11,8 @@ import { useBlockProps } from '@wordpress/block-editor';
  * be combined into the final markup, which is then serialized by the block
  * editor into `post_content`.
  *
+ * @param {Object} props
+ * @param {Object} props.attributes
  * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-edit-save/#save
  *
  * @return {WPElement} Element to render.
@@ -19,9 +21,5 @@ export default function save({ attributes }) {
 	const { textToReverse } = attributes;
 	const reversedText = textToReverse.split('').reverse().join('');
 
-	return (
-		<p {...useBlockProps.save()}>
-			{reversedText}
-		</p>
-	);
+	return <p {...useBlockProps.save()}>{reversedText}</p>;
 }

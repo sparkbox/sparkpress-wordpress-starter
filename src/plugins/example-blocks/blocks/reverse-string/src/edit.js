@@ -20,21 +20,20 @@ import './editor.scss';
  * The edit function describes the structure of your block in the context of the
  * editor. This represents what the editor will render when the block is used.
  *
+ * @param {Object}   props
+ * @param {Object}   props.attributes
+ * @param {Function} props.setAttributes
  * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-edit-save/#edit
  *
  * @return {WPElement} Element to render.
  */
 export default function Edit({ attributes, setAttributes }) {
 	const { textToReverse } = attributes;
-	const updateTextToReverse = textToReverse => setAttributes({ textToReverse });
+	const updateTextToReverse = (newText) => setAttributes({ textToReverse: newText });
 
 	return (
 		<div {...useBlockProps()}>
-			<TextControl
-				label="Text to Reverse"
-				value={textToReverse}
-				onChange={updateTextToReverse}
-			/>
+			<TextControl label="Text to Reverse" value={textToReverse} onChange={updateTextToReverse} />
 		</div>
 	);
 }

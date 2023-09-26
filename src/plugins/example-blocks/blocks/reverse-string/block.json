@@ -1,17 +1,17 @@
 {
-  "$schema": "https://schemas.wp.org/trunk/block.json",
-  "apiVersion": 3,
-  "name": "example-blocks/reverse-string",
-  "version": "0.1.0",
-  "title": "Reverse String",
-  "category": "widgets",
-  "icon": "smiley",
-  "description": "Prints a user-entered string in reverse order.",
-  "supports": {
-    "html": false
-  },
-  "textdomain": "example-blocks",
-  "editorScript": "file:./build/index.js",
-  "editorStyle": "file:./build/index.css",
-  "style": "file:./build/style-index.css"
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "example-blocks/reverse-string",
+	"version": "0.1.0",
+	"title": "Reverse String",
+	"category": "widgets",
+	"icon": "smiley",
+	"description": "Prints a user-entered string in reverse order.",
+	"supports": {
+		"html": false
+	},
+	"textdomain": "example-blocks",
+	"editorScript": "file:./build/index.js",
+	"editorStyle": "file:./build/index.css",
+	"style": "file:./build/style-index.css"
 }

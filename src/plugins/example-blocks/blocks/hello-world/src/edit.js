@@ -30,9 +30,5 @@ import './editor.scss';
  * @return {WPElement} Element to render.
  */
 export default function Edit() {
-	return (
-		<p {...useBlockProps()}>
-			{ __( 'Hello World!', 'example-blocks' ) }
-		</p>
-	);
+	return <p {...useBlockProps()}>{__('Hello World!', 'example-blocks')}</p>;
 }
