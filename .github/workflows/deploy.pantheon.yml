@@ -59,6 +59,8 @@ jobs:
           rm -rf prod/vendor prod/wp-content/plugins prod/wp-content/themes/sparkpress
           cp -r vendor prod
           cp -r theme prod/wp-content/themes/sparkpress
+          # create plugins directory if it doesn't exist
+          mkdir -p wp-content/plugins
           cp -r wp-content/plugins prod/wp-content/plugins
 
       - name: Deploy to Pantheon
