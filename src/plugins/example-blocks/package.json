@@ -7,14 +7,12 @@
 	"main": "build/index.js",
 	"scripts": {
 		"build": "./scripts/build-blocks.sh",
-		"build:block": "wp-scripts build blocks/$npm_config_block/src/index.js --output-path=blocks/$npm_config_block/build/",
 		"format": "wp-scripts format",
 		"lint:css": "wp-scripts lint-style",
 		"lint:js": "wp-scripts lint-js",
 		"packages-update": "wp-scripts packages-update",
 		"plugin-zip": "wp-scripts plugin-zip",
-		"start": "./scripts/start-blocks.sh",
-		"start:block": "wp-scripts start blocks/$npm_config_block/src/index.js --output-path=blocks/$npm_config_block/build/"
+		"start": "./scripts/start-blocks.sh"
 	},
 	"devDependencies": {
 		"@wordpress/scripts": "^26.13.0"
