@@ -34,7 +34,7 @@
     "lint:php": "./scripts/run.sh vendor/bin/phpcs --standard=wp-configs/sparkpress-standard.xml --extensions=php src/php -s -n",
     "lint:scss": "stylelint src/scss/**/*.scss src/scss/*.scss --color --formatter verbose",
     "lint:twig": "./scripts/run.sh vendor/bin/twigcs src/php/views",
-    "lint": "run-s lint:*",
+    "lint": "run-s lint:* lint:plugins:*",
     "php:run": "./scripts/run.sh",
     "export-db": "./scripts/export-db.sh",
     "backup-db": "BACKUP=true ./scripts/export-db.sh",
