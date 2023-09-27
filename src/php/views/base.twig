@@ -1,10 +1,10 @@
 {% include 'header.twig' %}
 
-		<article id="post-{{ post.id }}" role="main" class="post-type-{{ post.post_type }} {{ function('post_class') }}">
+		<article id="post-{{ post.id }}" role="main" class="post-type-{{ post.post_type }} {{ function('get_post_class')|join(' ') }}">
 
 			{% if post.title %}
         <div class="obj-width-limiter">
-          {# equivelant to the_title() #}
+          {# equivalent to the_title() #}
           <h1>{{ post.title }}</h1>
         </div>
       {% endif %}
