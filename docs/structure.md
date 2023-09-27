@@ -23,7 +23,7 @@ The `php/` directory holds the PHP template files for the WordPress theme. Other
 	- `shortcodes/*.php` - Add shortcodes for the content editor to use
 	- `helpers/*.php` - Add helper functions here, separated by purpose
 	- `theme-scripts.php` - Add CSS and JavaScript files here.
-- `template-parts/` - WordPress provides "Template Parts" which can be thought of as "Components". To use the template part you should utilize the `get_template_part` function provided by WordPress ([docs][template]).
+- `views/` - [Twig][twig] is used to separate presentation from logic, and all `.twig` components can be found here. Some Twig extensions, notably [HTML Extension][html-extension] and [String Extension][string-extension] have been added to enhance templates with data URIs, class management, text manipulation, and ASCII-safe string transformations.
 
 [babel]:https://babeljs.io
 [node]:https://nodejs.org/en/
@@ -31,5 +31,7 @@ The `php/` directory holds the PHP template files for the WordPress theme. Other
 [sb-stylelint]:https://github.com/sparkbox/stylelint-config-sparkbox
 [wpcs]:https://github.com/WordPress/WordPress-Coding-Standards
 [bemit]:https://csswizardry.com/2015/08/bemit-taking-the-bem-naming-convention-a-step-further/
-[template]:https://developer.wordpress.org/reference/functions/get_template_part/
+[twig]:https://twig.symfony.com/
+[html-extension]:https://github.com/twigphp/html-extra
+[string-extension]:https://github.com/twigphp/string-extra
 [underscores]:https://underscores.me/

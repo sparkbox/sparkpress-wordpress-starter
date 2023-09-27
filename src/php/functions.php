@@ -8,6 +8,8 @@
 /**
  * Twig / Timber templating.
  */
+use Twig\Extra\String\StringExtension;
+use Twig\Extra\Html\HtmlExtension;
 $timber = new Timber\Timber();
 
 /**
@@ -81,6 +83,22 @@ function add_to_context( $context ) {
 	return $context;
 }
 add_filter( 'timber/context', 'add_to_context' );
+
+/**
+ * Adds Twig extensions to the Twig environment to enhance functionality:
+ * Adds StringExtension (string-extra).
+ * Adds HtmlExtension (html-extra).
+ *
+ * @param \Twig\Environment $twig - The Twig environment to which extensions are added.
+ * @return \Twig\Environment The Twig environment with added extensions.
+ */
+function add_to_twig( $twig ) {
+	$twig->addExtension( new StringExtension() );
+	$twig->addExtension( new HtmlExtension() );
+    return $twig;
+}
+
+add_filter( 'timber/twig', 'add_to_twig' );
 
 /**
  * Render page content with password protection.
