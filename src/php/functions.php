@@ -67,11 +67,6 @@ require get_template_directory() . '/inc/theme-styles.php';
 require get_template_directory() . '/inc/theme-scripts.php';
 
 /**
- * Custom Nav Walker
- */
-require get_template_directory() . '/inc/class-sparkpress-walker.php';
-
-/**
  * Add global context for Twig View Files.
  *
  * @param array $context - This is what is passed into our template files and views.

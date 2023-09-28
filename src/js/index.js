@@ -1,3 +1,3 @@
-import './init';
-import './safe-focus';
-import './navigation';
+import { toggleNoJS } from './helpers/toggle-no-js';
+
+toggleNoJS();
