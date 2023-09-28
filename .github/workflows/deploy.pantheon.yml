@@ -26,6 +26,9 @@ jobs:
       - name: Install npm dependencies
         run: npm ci
 
+      - name: Install custom plugin npm dependencies
+        run: npm run plugins:install
+
       - name: Install PHP dependencies with Composer
         uses: php-actions/composer@v6
         with:
