@@ -34,7 +34,6 @@ if ( ! function_exists( 'sparkpress_theme_setup' ) ) :
 		 */
 		add_theme_support( 'post-thumbnails' );
 
-		// This theme uses wp_nav_menu() in one location.
 		register_nav_menus( array( 'primary' => 'Primary' ) );
 
 		/*
@@ -68,7 +67,8 @@ add_action( 'after_setup_theme', 'sparkpress_theme_setup' );
 function custom_hide_editor() {
 	global $pagenow;
 	$hidden_pages = array(
-		'example-page.php',
+		// specify page templates where main editor should be hidden
+		// 'example-page-template.php',
 	);
 
 	// Only on editor page.

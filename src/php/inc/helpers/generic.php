@@ -15,14 +15,15 @@ add_filter( 'init', 'define_theme_globals' );
 
 /**
  * Given an array of attributes, return a string of key="value" pairs separated by spaces.
- * Also handles escaping the attributes.
+ * Also handles escaping the attributes. Can be helpful when creating a template with optional
+ * parameters.
  *
  * Explaining the ('href' === $key) conditional:
  * - It's best practice to escape strings that will be echoed to the page, for security reasons.
  * - In order to correctly escape the $val string, we want to use esc_url or esc_attr respectively.
  *
  * @param array $atts - html attributes.
- * @param array $exclude - attributes to exclude from the output string.
+ * @param array $exclude - attributes to exclude from the output string. Defaults to `[]`.
  * @return string
  */
 function get_attribute_string( $atts, $exclude = array() ) {
