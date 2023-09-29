@@ -24,6 +24,7 @@ RUN cd /tmp \
   && wget http://wordpress.org/wordpress-${WP_VERSION}.zip \
   && unzip wordpress-${WP_VERSION}.zip \
       && rm -rf /tmp/wordpress/wp-content/themes/* \
+      && rm -rf /tmp/wordpress/wp-content/plugins/* \
   && cp -avr /tmp/wordpress/* /var/www/html/. \
   && rm -rf /tmp/wordpress /tmp/wordpress-${WP_VERSION}.zip
 
