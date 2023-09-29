@@ -12,9 +12,10 @@
 
 $context          = Timber\Timber::context();
 $context['posts'] = new Timber\PostQuery();
-$context['foo']   = 'bar';
 $templates        = array( 'index.twig' );
 if ( is_home() && ! is_front_page() ) {
 	$context['title'] = single_post_title();
+} else {
+	$context['title'] = 'Recent Posts';
 }
 Timber\Timber::render( $templates, $context );

@@ -1,26 +1,26 @@
 {% include 'header.twig' %}
 
-		<article id="post-{{ post.id }}" role="main" class="post-type-{{ post.post_type }} {{ function('get_post_class')|join(' ') }}">
+<article id="post-{{ post.id }}" class="post-type-{{ post.post_type }} {{ function('get_post_class')|join(' ') }}">
 
-			{% if post.title %}
-        <div class="obj-width-limiter">
-          {# equivalent to the_title() #}
-          <h1>{{ post.title }}</h1>
-        </div>
-      {% endif %}
+	{% if post.title %}
+		<div class="obj-width-limiter">
+			{# equivalent to the_title() #}
+			<h1>{{ post.title }}</h1>
+		</div>
+	{% endif %}
 
-      {# content block from child templates #}
-      {% block content %}
-        <div class="obj-width-limiter">
-          Sorry, no content
-        </div>
-      {% endblock %}
+	{# content block from child templates #}
+	{% block content %}
+		<div class="obj-width-limiter">
+			Sorry, no content
+		</div>
+	{% endblock %}
 
-      {% if sidebar %}
-				<aside>
-					{{ sidebar }}
-				</aside>
-			{% endif %}
-		</article>
+	{% if sidebar %}
+		<aside>
+			{{ sidebar }}
+		</aside>
+	{% endif %}
+</article>
 
 {% include 'footer.twig' %}
