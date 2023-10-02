@@ -9,31 +9,24 @@
 	</head>
 	<body {{ body_class }}>
 		{{ function('wp_body_open') }}
-		<div class="obj-page">
+		<div class="obj-width-limiter">
+			<a class="cmp-skip-to-content" href="#main">Skip to content</a>
+			<a class="cmp-skip-to-content" href="#nav">Skip to navigation</a>
+		</div>
 
-			<div class="obj-width-limiter">
-				<a class="cmp-skip-to-content" href="#main">Skip to content</a>
-				<a class="cmp-skip-to-content" href="#nav">Skip to navigation</a>
-			</div>
-
-			<header class="cmp-header">
-				<div id="nav" class="obj-width-limiter">
-
-					{% block header %}
-						<div class="wrapper cmp-header">
-							<div class="cmp-header__logo">
-								<a class="cmp-header__link" href="{{ site.url }}" rel="home">{{ site.name }}</a>
-							</div>
-							<nav
-								id="nav-main" class="nav-main" aria-label="Main">
-								{# replaces wp_nav_menu() #}
-								{% include "menu.twig" with {'items': menu.get_items} %}
-							</nav>
-							<!-- #nav -->
+		<header>
+			<div id="nav" class="obj-width-limiter">
+				{% block header %}
+					<div class="cmp-main-nav">
+						<div>
+							<a href="{{ site.url }}" class="cmp-main-nav__home-link" rel=" home">{{ site.name }}</a>
 						</div>
-					{% endblock %}
-				</div>
-			</header>
-			<!-- .cmp-header -->
+						<nav class="cmp-main-nav__menu" aria-label="Main">
+							{% include "menu.twig" with {'items': menu.get_items} %}
+						</nav>
+					</div>
+				{% endblock %}
+			</div>
+		</header>
 
-			<main id="main">
+		<main id="main">

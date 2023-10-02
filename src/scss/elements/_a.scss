@@ -1,3 +1,15 @@
-a[href]:not([class]) {
-  @include default-link;
+a[href] {
+	color: var(--link-color);
+	text-decoration: underline;
+
+	&:visited {
+		--link-color: var(--link-color-visited);
+	}
+
+	&:hover,
+	&:focus-visible,
+	&:hover:visited,
+	&:focus-visible:visited {
+		--link-color: var(--link-color-hover);
+	}
 }

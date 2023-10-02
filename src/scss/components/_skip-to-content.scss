@@ -1,0 +1,19 @@
+.cmp-skip-to-content {
+	&:not(:focus) {
+		position: absolute;
+		height: 1px;
+		width: 1px;
+		clip-path: inset(50%);
+		overflow: hidden;
+		white-space: nowrap;
+	}
+
+	&:focus {
+		position: absolute;
+		left: 50%;
+		transform: translateX(-50%);
+		padding: 0.5em;
+		background-color: var(--background-color);
+		outline-offset: 0;
+	}
+}

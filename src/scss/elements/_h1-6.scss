@@ -1,23 +1,28 @@
-h1:not([class]) {
-  @include heading-1;
+:is(h1, h2, h3, h4, h5, h6) {
+	margin: 1.5rem 0;
+	line-height: calc(1em + 0.5rem);
 }
 
-h2:not([class]) {
-  @include heading-2;
+h1 {
+	font-size: 3rem;
 }
 
-h3:not([class]) {
-  @include heading-3;
+h2 {
+	font-size: 2rem;
 }
 
-h4:not([class]) {
-  @include heading-4;
+h3 {
+	font-size: 1.5rem;
 }
 
-h5:not([class]) {
-  @include heading-5;
+h4 {
+	font-size: 1.25rem;
 }
 
-h6:not([class]) {
-  @include heading-6;
+h5 {
+	font-size: 1rem;
+}
+
+h6 {
+	font-size: 0.875rem;
 }

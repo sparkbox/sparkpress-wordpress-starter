@@ -1,3 +1,22 @@
 :root {
-  --link-color: #{$color-default-link};
+	// Brand Colors
+	--primary-color: hsl(189deg 50% 22%);
+	--secondary-color: hsl(189deg 52% 37%);
+	--accent-color: hsl(229deg 50% 37%);
+
+	// Black and White
+	--black: hsl(0deg 0% 0%);
+	--white: hsl(0deg 0% 100%);
+
+	// Link colors
+	--link-color: var(--primary-color);
+	--link-color-hover: var(--secondary-color);
+	--link-color-visited: var(--accent-color);
+
+	// Foreground/background colors
+	--text-color: var(--black);
+	--background-color: var(--white);
+
+	color: var(--text-color);
+	background-color: var(--background-color);
 }

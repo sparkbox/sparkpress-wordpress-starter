@@ -1,12 +1,19 @@
 {% if menu %}
-	<ul class="nav-main">
+	<ul class="cmp-main-nav__list">
 		{% for item in menu.items %}
-			<li class="nav-main-item {{ item.classes|join(' ') }}">
-				<a class="cmp-menu__link" href="{{ item.link }}">{{ item.title }}</a>
+			<li class="{{ item.classes|join(' ') }}">
+				<a href="{{ item.link }}">{{ item.title }}</a>
 				{% if item.children %}
-					<ul class="nav-drop">
+					<button id="toggler-{{ item.title|slug }}" class="cmp-main-nav__toggler" aria-expanded="false" aria-controls="submenu-{{ item.title|slug }}">
+						<span class="util-visually-hidden">Toggle Menu</span>
+						<svg viewbox="0 0 24 24" aria-hidden="true" focusable="false">
+							<rect class="vert" height="20" width="4" y="2" x="10"/>
+							<rect height="4" width="20" y="10" x="2"/>
+						</svg>
+					</button>
+					<ul id="submenu-{{ item.title|slug }}" class="cmp-main-nav__submenu" aria-labelledby="toggler-{{ item.title|slug }}" hidden>
 						{% for child in item.children %}
-							<li class="nav-drop-item">
+							<li>
 								<a href="{{ child.link }}">{{ child.title }}</a>
 							</li>
 						{% endfor %}
