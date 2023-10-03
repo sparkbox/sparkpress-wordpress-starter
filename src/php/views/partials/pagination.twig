@@ -1,61 +1,45 @@
 {% if posts.pagination.pages is not empty %}
-	<nav aria-label="Pagination">
-		<ul>
+	<nav aria-label="Pagination" class="cmp-pagination">
+		<ul class="cmp-pagination__list">
 
 			{# First #}
 			{% if posts.pagination.pages|first and posts.pagination.pages|first.current != true %}
-				<li>
-					<a href="{{ posts.pagination.pages|first.link }}">First</a>
-				</li>
-			{% else %}
-				<li>
-					<button disabled>First</button>
+				<li class="cmp-pagination__item">
+					<a href="{{ posts.pagination.pages|first.link }}" aria-label="First Page">First</a>
 				</li>
 			{% endif %}
 
 			{# Previous #}
 			{% if posts.pagination.prev %}
-				<li>
-					<a href="{{ posts.pagination.prev.link }}">Previous</a>
-				</li>
-			{% else %}
-				<li>
-					<button disabled>Previous</button>
+				<li class="cmp-pagination__item">
+					<a href="{{ posts.pagination.prev.link }}" aria-label="Previous Page">Previous</a>
 				</li>
 			{% endif %}
 
 			{# Pages #}
 			{% for page in posts.pagination.pages %}
 				{% if page.link %}
-					<li>
-						<a href="{{ page.link }}" class="{{ page.class }}">{{ page.title }}</a>
+					<li class="cmp-pagination__item">
+						<a href="{{ page.link }}" class="{{ page.class }}" aria-label="Page {{ page.title }}">{{ page.title }}</a>
 					</li>
 				{% else %}
-					<li>
-						<span class="{{ page.class }}">{{ page.title }}</span>
+					<li class="cmp-pagination__item">
+						<span class="{{ page.class }}" {% if page.current %} aria-current="page"{% endif %}>{{ page.title }}</span>
 					</li>
 				{% endif %}
 			{% endfor %}
 
 			{# Next #}
 			{% if posts.pagination.next %}
-				<li>
-					<a href="{{ posts.pagination.next.link }}">Next</a>
-				</li>
-			{% else %}
-				<li>
-					<button disabled>Next</button>
+				<li class="cmp-pagination__item">
+					<a href="{{ posts.pagination.next.link }}" aria-label="Next Page">Next</a>
 				</li>
 			{% endif %}
 
 			{# Last #}
 			{% if posts.pagination.pages|last and posts.pagination.pages|last.current != true %}
-				<li>
-					<a href="{{ posts.pagination.pages|last.link }}">Last</a>
-				</li>
-			{% else %}
-				<li>
-					<button disabled>Last</button>
+				<li class="cmp-pagination__item">
+					<a href="{{ posts.pagination.pages|last.link }}" aria-label="Last Page">Last</a>
 				</li>
 			{% endif %}
 

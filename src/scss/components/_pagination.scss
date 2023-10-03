@@ -1,0 +1,21 @@
+.cmp-pagination {
+  margin-top: 1.5rem;
+
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  &__item {
+    display: inline-block;
+    margin: 1rem;
+
+    & .current {
+      cursor: default;
+    }
+  }
+}
