@@ -34,7 +34,12 @@ if ( ! function_exists( 'sparkpress_theme_setup' ) ) :
 		 */
 		add_theme_support( 'post-thumbnails' );
 
-		register_nav_menus( array( 'primary' => 'Primary' ) );
+		register_nav_menus(
+			array(
+				'primary' => 'Primary',
+				// register additional menus
+			)
+		);
 
 		/*
 		 * Switch default core markup for search form, comment form, and comments
