@@ -12,14 +12,15 @@ function register_custom_taxonomy() {
 
 	$labels = array(
 		'name'          => 'Example Custom Taxonomy',
-		'singular_name' => 'Taxonomy',
-		'menu_name'     => 'Taxonomy',
+		'singular_name' => 'Example Custom Taxonomy',
 	);
 	$args   = array(
+		'description'       => 'An example custom taxonomy.',
 		'labels'            => $labels,
 		'hierarchical'      => false,
 		'public'            => true,
 		'show_ui'           => true,
+		'show_in_rest'      => true,
 		'show_admin_column' => true,
 		'show_in_nav_menus' => true,
 		'show_tagcloud'     => true,
