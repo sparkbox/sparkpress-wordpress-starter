@@ -1,0 +1,8 @@
+.cmp-post-body {
+  display: flex;
+  flex-direction: column;
+  
+  @media (min-width: 50rem) {
+    flex-direction: row;
+  }
+}

@@ -1,0 +1,10 @@
+.cmp-primary-sidebar {
+  background-color: var(--gray-background-color);
+  padding: 1rem;
+  margin-top: 1.5rem;
+  
+  @media (min-width: 50rem) {
+    margin: 0 0 0 3.75rem;
+    width: 18.75rem;
+  }
+}

@@ -8,17 +8,19 @@
 		</div>
 	{% endif %}
 
-	{# content block from child templates #}
-	{% block content %}
-		<div class="obj-width-limiter">
-			Sorry, no content
-		</div>
-	{% endblock %}
-	{% if primary_sidebar %}
-		<aside>
-			{{ primary_sidebar }}
-		</aside>
-	{% endif %}
+	<div class="obj-width-limiter cmp-post-body">
+		{# content block from child templates #}
+		{% block content %}
+			<div class="obj-width-limiter">
+				Sorry, no content
+			</div>
+		{% endblock %}
+		{% if primary_sidebar %}
+			<aside class="obj-width-limiter cmp-primary-sidebar">
+				{{ primary_sidebar }}
+			</aside>
+		{% endif %}
+	</div>
 </article>
 
 {% include 'footer.twig' %}
