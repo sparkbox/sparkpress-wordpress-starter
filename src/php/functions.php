@@ -74,7 +74,6 @@ require get_template_directory() . '/inc/theme-scripts.php';
  */
 function add_to_context( $context ) {
 	$context['menu'] = new \Timber\Menu( 'primary' );
-	$context['footer_sidebar'] = Timber\Timber::get_widgets( 'footer-area' );
 	return $context;
 }
 add_filter( 'timber/context', 'add_to_context' );
