@@ -1,6 +1,17 @@
 <?php
 /**
  * The template for displaying archive pages
+ *
+ * To handle some archive pages differently, create templates with names matching WordPress template hierarchy.
+ *
+ * Author pages: author.php, author-$id.php, author-$nicename.php
+ * Category pages: category.php, category-$id.php, category-$slug.php
+ * Custom post type archive pages: archive-$posttype.php
+ * Taxonomy pages: taxonomy.php, taxonomy-$taxonomy.php, taxonomy-$taxonomy-$term.php
+ * Date archive pages: date.php
+ * Tag pages: tag.php, tag-$id.php, tag-$slug.php
+ *
+ * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  */
 
 $templates = array( 'archive.twig', 'index.twig' );

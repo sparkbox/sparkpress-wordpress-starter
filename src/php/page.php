@@ -3,9 +3,14 @@
  * The template for displaying all pages.
  *
  * This is the template that displays all pages by default.
- * Please note that this is the WordPress construct of pages
- * and that other 'pages' on your WordPress site will use a
+ *
+ * Please note that this is the WordPress construct of pages and that other 'pages' on your WordPress site will use a
  * different template.
+ *
+ * To handle some pages differently, create templates with names matching WordPress template hierarchy.
+ *
+ * Custom Page Templates: $custom.php Default
+ * Page Templates: page-$id.php page-$slug.php
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  */
