@@ -1,0 +1,19 @@
+<header>
+	<div class="obj-width-limiter">
+		<a class="cmp-skip-to-content" href="#main">Skip to content</a>
+		<a class="cmp-skip-to-content" href="#nav">Skip to navigation</a>
+	</div>
+
+	<div id="nav" class="obj-width-limiter">
+		{% block header %}
+			<div class="cmp-main-nav">
+				<div>
+					<a href="{{ site.url }}" class="cmp-main-nav__home-link" rel=" home">{{ site.name }}</a>
+				</div>
+				<nav class="cmp-main-nav__menu" aria-label="Main">
+					{% include "partials/menu.twig" %}
+				</nav>
+			</div>
+		{% endblock %}
+	</div>
+</header>

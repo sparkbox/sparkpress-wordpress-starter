@@ -1,0 +1,43 @@
+<!doctype html>
+<html {{ site.language_attributes }} class="no-js">
+	<head>
+		<meta charset="{{ site.charset }}"/>
+		<meta name="description" content="{{ site.description }}">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="profile" href="https://gmpg.org/xfn/11">
+		{{ function('wp_head') }}
+	</head>
+	<body {{ body_class }}>
+		{{ function('wp_body_open') }}
+
+		{% include 'partials/header.twig' %}
+
+		<main id="main">
+			<article id="post-{{ post.id }}" class="post-type-{{ post.post_type }} {{ function('get_post_class')|join(' ') }}">
+				{% if post.title %}
+					<div class="obj-width-limiter">
+						<h1>{{ post.title }}</h1>
+					</div>
+				{% endif %}
+
+				<div class="obj-width-limiter cmp-post-body">
+					{# content block from child templates #}
+					{% block content %}
+						<div class="obj-width-limiter">
+							Sorry, no content
+						</div>
+					{% endblock %}
+					{% if sidebar_widget %}
+						<aside class="obj-width-limiter cmp-primary-sidebar">
+							{{ sidebar_widget }}
+						</aside>
+					{% endif %}
+				</div>
+			</article>
+		</main>
+
+		{% include 'partials/footer.twig' %}
+
+		{{ function('wp_footer') }}
+	</body>
+</html>

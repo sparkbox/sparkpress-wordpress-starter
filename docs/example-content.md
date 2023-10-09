@@ -25,7 +25,7 @@ There have been a few examples added to the start theme. They're intended to be 
 
 - Files:
   - `src/php/example-page-template.php`
-  - `src/php/views/pages/example-page.twig`
+  - `src/php/views/example-page.twig`
 - [Docs](https://developer.wordpress.org/themes/template-files-section/page-template-files/)
 
 ## Example Sidebar (footer)
