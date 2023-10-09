@@ -1,0 +1,8 @@
+.cmp-primary-sidebar {
+  background-color: var(--gray-background-color);
+  padding: 1rem;
+  
+  @media (min-width: 50rem) {
+    flex-basis: 18.75rem;
+  }
+}

@@ -8,6 +8,9 @@
 	--black: hsl(0deg 0% 0%);
 	--white: hsl(0deg 0% 100%);
 
+	// Gray
+	--gray: hsl(0deg 0% 97%);
+
 	// Link colors
 	--link-color: var(--primary-color);
 	--link-color-hover: var(--secondary-color);
@@ -16,6 +19,7 @@
 	// Foreground/background colors
 	--text-color: var(--black);
 	--background-color: var(--white);
+	--gray-background-color: var(--gray);
 
 	color: var(--text-color);
 	background-color: var(--background-color);
