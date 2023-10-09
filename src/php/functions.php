@@ -73,7 +73,7 @@ require get_template_directory() . '/inc/theme-scripts.php';
  * @return array
  */
 function add_to_context( $context ) {
-	$context['menu'] = new \Timber\Menu( 'primary-menu' );
+	$context['menu'] = new \Timber\Menu( 'primary' );
 	$context['footer_sidebar'] = Timber\Timber::get_widgets( 'footer-area' );
 	return $context;
 }
