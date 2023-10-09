@@ -42,6 +42,10 @@
     "backup-db": "BACKUP=true ./scripts/export-db.sh",
     "import-db": "./scripts/import-db.sh",
     "preimport-db": "npm run backup-db",
+    "generate:page-template": "node ./generators/page-template.js",
+    "generate:post-type": "node ./generators/post-type.js",
+    "generate:shortcode": "node ./generators/shortcode.js",
+    "generate:taxonomy": "node ./generators/taxonomy.js",
     "node-version": "check-node-version --package"
   },
   "engines": {
@@ -75,5 +79,8 @@
     ">0.5%",
     "last 10 versions",
     "Firefox ESR"
-  ]
+  ],
+  "dependencies": {
+    "prompts": "^2.4.2"
+  }
 }

@@ -1,4 +1,0 @@
-Error Handling
-==============
-
-**TBD**

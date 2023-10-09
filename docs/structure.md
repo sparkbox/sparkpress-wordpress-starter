@@ -19,7 +19,11 @@ The `php/` directory holds the PHP template files for the WordPress theme. Other
 - `inc/` - Includes directory, to keep the `functions.php` file clean. Some important files to note are:
   - `shortcodes/*.php` - Add shortcodes for the content editor to use
   - `helpers/*.php` - Add helper functions here, separated by purpose
-  - `theme-scripts.php` - Add CSS and JavaScript files here.
+  - `setup-queries.php` - Specify query variables here so WordPress can read them from HTTP requests.
+  - `theme-scripts.php` - Add JavaScript files here.
+  - `theme-setup.php` - Configure theme settings and supported features here.
+  - `theme-styles.php` - Add CSS files here.
+  - `theme-widgets.php` - Register [widgets][widgets] for admins to utilize and add them to Timber context here.
 - `views/` - [Twig][twig] is used to separate presentation from logic, and all `.twig` components can be found here. Some Twig extensions, notably [HTML Extension][html-extension] and [String Extension][string-extension] have been added to enhance templates with data URIs, class management, text manipulation, and ASCII-safe string transformations.
   - `layouts` - Any twig templates that include the full document structure should go here. That includes the default `base.twig` template and any alternatives, such as for art-directed posts.
   - `partials` - Twig templates for components or pieces of the page to be reused should go here.
@@ -35,3 +39,4 @@ The `php/` directory holds the PHP template files for the WordPress theme. Other
 [html-extension]: https://github.com/twigphp/html-extra
 [string-extension]: https://github.com/twigphp/string-extra
 [underscores]: https://underscores.me/
+[widgets]: https://developer.wordpress.org/themes/functionality/sidebars/
