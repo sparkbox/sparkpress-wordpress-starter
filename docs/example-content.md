@@ -5,14 +5,13 @@ There have been a few examples added to the start theme. They're intended to be 
 ## Example Custom Post Type
 
 - Files:
-  - `php/inc/custom-post-types/example-custom-post-type.php`
-  - `src/php/single-example.php`
+  - `src/php/inc/custom-post-types/example-custom-post-type.php`
 - [Docs](https://wordpress.org/support/article/post-types/#custom-post-types)
 
 ## Example Custom Taxonomy
 
 - Files:
-  - `php/inc/taxonomies/example-custom-taxonomy.php`
+  - `src/php/inc/taxonomies/example-custom-taxonomy.php`
 - [Docs](https://developer.wordpress.org/plugins/taxonomies/working-with-custom-taxonomies/)
 
 ## Example Shortcode:
