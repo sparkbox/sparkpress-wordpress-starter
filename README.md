@@ -186,6 +186,31 @@ Most likely, you want your urls to be more user/SEO friendly, like `example.com/
 
 For other options see the [WordPress docs](https://wordpress.org/documentation/article/customize-permalinks/) for more info.
 
+### Comments
+
+Comments for posts are supported out of the box, but can be turned off for single posts or for any new posts going forward. Comments can be approved, edited, or trashed from the "Comments" menu from the admin dashboard.
+
+#### Turn off Comments on a Single Post
+
+1. From the admin dashboard, navigate to the "Edit Post" page
+1. Access the Post settings menu on the right side of the page, if it is not already open (the settings menu can be opened with the button to the right of the "Update" button)
+1. Scroll down the menu to the option with the heading "Discussion", uncheck "Allow comments" and update the post
+
+#### Turn off Comments on Future Posts
+
+This will uncheck "Allow comments" on individual posts going forward by default, but comments can be enabled for select posts.
+
+1. From the admin dashboard, click on "Discussion" under the "Settings" menu on the left side
+1. Under "Default post settings", uncheck "Allow people to submit comments on new posts"
+1. Scroll to the bottom and hit "Save Changes"
+
+#### Comments for Pages
+By default, comments are turned off for pages, but can be enabled for pages individually:
+
+1. From the admin dashboard, navigate to "Edit Page"
+1. Access the Page settings menu on the right side of the page
+1. Scroll down the menu to the option with the heading "Disucssion", check "Allow comments", and update the page
+
 ### Template Hierarchy
 
 This starter template covers the generic templates needed for things like single post pages, archive (or listing) pages, the 404 page, and the search page, but you can override those using [WordPress' template hierarchy](https://developer.wordpress.org/themes/basics/template-hierarchy/).

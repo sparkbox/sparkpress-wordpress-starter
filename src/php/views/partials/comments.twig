@@ -1,0 +1,18 @@
+{% if function('have_comments') %}
+  <div id="comments" class="{{ html_classes('post-comments', {
+    'show-avatars': should_show_avatars
+  }) }}">
+  <h2>Comments</h2>
+  <ul>
+    {{ function('wp_list_comments') }}
+  </ul>
+  {{ function('comment_form') }}
+  </div>
+  {% if not function('comments_open') %}
+    <p>Comments are closed</p>
+  {% endif %}
+{% else %}
+  {% if function('comments_open') %}
+    {{ function('comment_form') }}
+  {% endif %}
+{% endif %}

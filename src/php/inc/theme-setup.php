@@ -95,3 +95,33 @@ function custom_hide_editor() {
 	}
 }
 add_action( 'admin_init', 'custom_hide_editor' );
+
+/**
+ * Customize the pingbacks and trackbacks option on new posts by default.
+ *
+ * @param mixed  $value   The current option value.
+ * @param string $option The name of the option being filtered.
+ * @param mixed  $default The default value for the option.
+ *
+ * @return mixed The filtered option value. If the provided option is 'default_ping_status',
+ *               this function will set its value to 'closed' (disabling pingbacks and trackbacks),
+ *               and return the updated value. For other options, it returns the original value.
+ */
+function custom_disable_pingbacks_trackbacks_option( $value, $option, $default ) {
+    if ( 'default_ping_status' === $option ) {
+        $value = 'closed';
+    }
+
+    return $value;
+}
+
+add_filter( 'pre_option_default_ping_status', 'custom_disable_pingbacks_trackbacks_option', 10, 3 );
+
+/**
+ * Remove Trackbacks Support for the "post" Post Type.
+ */
+function remove_trackbacks_support() {
+	remove_post_type_support( 'post', 'trackbacks' );
+}
+
+add_action( 'init', 'remove_trackbacks_support' );

@@ -1,7 +1,6 @@
 {% extends "layouts/base.twig" %}
 
 {% block content %}
-
 	<div class="obj-width-limiter">
 		<img
 			src="{{ post.thumbnail.src|resize(960) }}"
@@ -10,6 +9,8 @@
 			{% endif %}
 		/>
 		{{ post.content }}
+		{# Loads comments.php by default #}
+		{{ function('comments_template') }}
 	</div>
 
 {% endblock %}
