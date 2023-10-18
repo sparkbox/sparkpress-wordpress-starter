@@ -1,0 +1,48 @@
+version: 2
+updates:
+  - package-ecosystem: 'npm'
+    directory: '/'
+    schedule:
+      interval: 'monthly'
+    groups:
+      npm-dev-dependencies:
+        dependency-type: 'development'
+        update-types:
+          - 'minor'
+          - 'patch'
+      npm-major-dev-dependencies:
+        dependency-type: 'development'
+        update-types:
+          - 'major'
+      npm-production-dependencies:
+        dependency-type: 'production'
+        update-types:
+          - 'minor'
+          - 'patch'
+      npm-major-production-dependencies:
+        dependency-type: 'production'
+        update-types:
+          - 'major'
+  - package-ecosystem: 'composer'
+    directory: '/'
+    schedule:
+      interval: 'weekly'
+    groups:
+      composer-dev-dependencies:
+        dependency-type: 'development'
+        update-types:
+          - 'minor'
+          - 'patch'
+      composer-major-dev-dependencies:
+        dependency-type: 'development'
+        update-types:
+          - 'major'
+      composer-production-dependencies:
+        dependency-type: 'production'
+        update-types:
+          - 'minor'
+          - 'patch'
+      composer-major-production-dependencies:
+        dependency-type: 'production'
+        update-types:
+          - 'major'
