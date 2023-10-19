@@ -65,3 +65,17 @@ The following files will be created based on your input:
 - `src/php/views/<page-template-name>.twig`
 
 [Page Template documentation](https://developer.wordpress.org/themes/template-files-section/page-template-files/)
+
+## Reusable Pattern
+
+The generator for reusable patterns will prompt you for a name, description, and categories for the pattern, then create a script to register a reusable pattern with metadata based on your inputs and instructions for how to create the markup for the pattern.
+
+```sh
+npm run generate:pattern
+```
+
+The following file will be created based on your input:
+
+- `src/php/patterns/<pattern-name>.php`
+
+[Reusable pattern (a.k.a. Block pattern) documentation](https://developer.wordpress.org/themes/advanced-topics/block-patterns/)

@@ -42,6 +42,7 @@
     "import-db": "./scripts/import-db.sh",
     "preimport-db": "npm run backup-db",
     "generate:page-template": "node ./generators/page-template.js",
+    "generate:pattern": "node ./generators/pattern.js",
     "generate:post-type": "node ./generators/post-type.js",
     "generate:shortcode": "node ./generators/shortcode.js",
     "generate:taxonomy": "node ./generators/taxonomy.js",
