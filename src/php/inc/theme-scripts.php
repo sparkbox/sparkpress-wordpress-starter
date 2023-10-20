@@ -1,6 +1,8 @@
 <?php
 /**
  * Enqueue Scripts
+ *
+ * @package SparkPress
  */
 
 /**

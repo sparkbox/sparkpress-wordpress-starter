@@ -1,6 +1,6 @@
 <?php
 /**
- * SparkPress Enqueue Styles
+ * Enqueue Styles
  *
  * @package SparkPress
  */
