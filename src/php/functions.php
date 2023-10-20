@@ -123,3 +123,18 @@ function filter_password_protected_posts( $query ) {
 	return $query;
 }
 add_filter( 'pre_get_posts', 'filter_password_protected_posts' );
+
+/**
+ * Normalize queries for paginated archive pages to support custom permalink structures.
+ *
+ * @param array $query_string - The incoming query string to be normalized.
+ */
+function normalize_pagination_query_strings( $query_string ) {
+	if ( isset( $query_string['name'] ) && 'page' === $query_string['name'] && isset( $query_string['page'] ) ) {
+		unset( $query_string['name'] );
+		$query_string['paged'] = $query_string['page'];
+	}
+
+	return $query_string;
+}
+add_filter( 'request', 'normalize_pagination_query_strings' );
