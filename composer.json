@@ -27,6 +27,6 @@
     }
   },
   "scripts": {
-    "lint:wpcs": "vendor/squizlabs/php_codesniffer/bin/phpcs --standard=sparkpress-standard.xml --extensions=php ./src/php"
+    "lint:wpcs": "vendor/squizlabs/php_codesniffer/bin/phpcs --standard=phpcs-rules-standard.xml --extensions=php ./src/php"
   }
 }

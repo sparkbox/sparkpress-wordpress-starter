@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<ruleset name="SparkPress">
+<ruleset name="Standard">
     <rule ref="WordPress">
         <exclude name="Generic.WhiteSpace.DisallowSpaceIndent.SpacesUsed" />
         <exclude name="Squiz.Commenting.FileComment.MissingPackageTag" />

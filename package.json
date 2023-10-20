@@ -32,7 +32,7 @@
     "lint:plugins:js": "cd src/plugins/example-blocks && npm run lint:js",
     "lint:plugins:css": "cd src/plugins/example-blocks && npm run lint:css",
     "lint:js": "eslint src/js",
-    "lint:php": "./scripts/run.sh vendor/bin/phpcs --standard=wp-configs/sparkpress-standard.xml --extensions=php src/php -s -n",
+    "lint:php": "./scripts/run.sh vendor/bin/phpcs --standard=wp-configs/phpcs-rules-standard.xml --extensions=php src/php -s -n",
     "lint:scss": "stylelint src/scss/**/*.scss src/scss/*.scss --color --formatter verbose",
     "lint:twig": "./scripts/run.sh vendor/bin/twigcs src/php/views",
     "lint": "run-s lint:* lint:plugins:*",
