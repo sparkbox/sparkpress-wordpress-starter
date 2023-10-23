@@ -69,7 +69,7 @@ jobs:
       - name: Deploy to Pantheon
         run: |
           cd prod
-          git status
+          git status | grep "nothing to commit" && exit 0 || git status
           git add .
           git commit -m "Prod release"
           git push pantheon HEAD:master
