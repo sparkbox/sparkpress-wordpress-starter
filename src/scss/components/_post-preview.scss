@@ -1,0 +1,20 @@
+.post-preview {
+  margin-bottom: 1.5rem;
+  min-height: 9.375rem; // 150px
+
+  @media (min-width: 50rem) {
+    display: flex;
+    column-gap: 1.5rem;
+  }
+
+  &__title {
+    margin: 0 0 1rem;
+  }
+
+  &__featured-image {
+    max-height: 9.375rem; // 150px
+    max-width: 9.375rem; // 150px
+    width: auto;
+    height: auto;
+  }
+}

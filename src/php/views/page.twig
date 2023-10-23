@@ -3,6 +3,12 @@
 {% block content %}
 
 	<div class="obj-width-limiter">
+		<img
+			src="{{ post.thumbnail.src|resize(960) }}"
+			{% if post.thumbnail.alt and post.thumbnail.alt|length > 0 %}
+				alt="{{ post.thumbnail.alt }}"
+			{% endif %}
+		/>
 		{{ post.content }}
 	</div>
 
