@@ -1,0 +1,62 @@
+name: Validation
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  check-commit-message:
+    name: Check Commit Message
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check commit message type
+        uses: gsactions/commit-message-checker@v2
+        with:
+          # Conventional commits only:
+          pattern: '^(feat|fix|docs|style|refactor|test|chore|perf|ci|revert|release)(\([A-Za-z-]+\))?!?: .+'
+          # To allow Merge commits:
+          # pattern: '^(((feat|fix|docs|style|refactor|test|chore|perf|ci|revert|release)(\([A-Za-z-]+\))?!?:)|[Mm]erge.+branch) .+'
+          error: 'Commit messages must begin with a valid commit type.'
+          excludeDescription: 'true'
+          excludeTitle: 'true'
+          checkAllCommitMessages: 'true'
+          accessToken: ${{ secrets.GITHUB_TOKEN }}
+
+  lint:
+    name: Lint & Test
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install PHP dependencies with Composer
+        uses: php-actions/composer@v6
+        with:
+          php_version: '8.1'
+          version: 2.x
+
+      - name: Install npm dependencies
+        run: npm ci
+
+      - name: Install custom plugin npm dependencies
+        run: npm run plugins:install
+
+      - name: Lint
+        run: npm run lint
+        env:
+          CI: true
+
+      - name: Test
+        run: npm run test:ci
