@@ -14,7 +14,7 @@
     "prebuild:prod": "npm run clean",
     "build:dev": "run-p plugins:dev copy:php sass watch js:watch",
     "build:prod": "run-s plugins:build copy js:prod 'sass -- --style compressed'",
-    "serve:dev": "docker compose up --abort-on-container-exit || docker compose down",
+    "serve:dev": "docker compose up || docker compose down",
     "sass": "sass src/scss/base.scss theme/css/base.css",
     "postsass": "postcss theme/css/base.css --use autoprefixer -r",
     "js:watch": "NODE_ENV=development node esbuild.mjs",
