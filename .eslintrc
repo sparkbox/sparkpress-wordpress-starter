@@ -1,27 +1,22 @@
 {
-  "env": {
-    "es6": true,
-    "browser": true,
-    "node": true
-  },
-  "parserOptions": {
-    "sourceType": "module",
-    "ecmaVersion": "latest"
-  },
-  "extends": [
-    "eslint:recommended",
-    "plugin:react/recommended",
-    "plugin:react-hooks/recommended",
-    "prettier"
-  ],
-  "settings": {
-    "react": {
-      "version": "^18.2.0"
-    }
-  },
-  "ignorePatterns": ["src/js/vendor/**/*.js"],
-  "rules": {
-    "react/react-in-jsx-scope": 0,
-    "react/prop-types": 0
-  }
+	"env": {
+		"es6": true,
+		"browser": true,
+		"node": true
+	},
+	"parserOptions": {
+		"sourceType": "module",
+		"ecmaVersion": "latest"
+	},
+	"extends": ["eslint:recommended", "plugin:react/recommended", "plugin:react-hooks/recommended", "prettier"],
+	"settings": {
+		"react": {
+			"version": "^18.2.0"
+		}
+	},
+	"ignorePatterns": ["src/js/vendor/**/*.js", "src/plugins/**/build"],
+	"rules": {
+		"react/react-in-jsx-scope": 0,
+		"react/prop-types": 0
+	}
 }

@@ -41,7 +41,6 @@ This project requires [Docker][docker] and [Node.js][node] for local development
 
 1. Duplicate `.env.example` and rename it `.env`, changing variables [as needed](#setting-local-environment-variables)
 1. Run `npm install`
-1. Run `npm run plugins:install` (this is necessary for the plugin for custom blocks)
 1. Either run `npm start` or run `npm run build:dev` and `npm run serve:dev` in separate terminals
 1. Based on whether you have a database to import or not, do one of the following:
    - Visit `https://localhost:8000/wp-admin` and run through the WordPress setup
@@ -403,27 +402,24 @@ This is a non-comprehensive list of plugins that we have found useful on other p
 
 ## Custom Blocks
 
-We have a plugin for custom blocks called `example-blocks`, which lives in `src/plugins`. For the blocks to be available in WordPress, these steps must be taken:
+We have a plugin for custom blocks called `example-blocks`, which lives in `src/plugins`. For the blocks to be available in WordPress, you must activate the "Example Blocks" plugin from the WordPress admin's plugins page.
 
-1. Run `npm run plugins:install` to install the plugin's npm dependencies
-1. Run `npm start` for local development (this runs the plugin's `npm start` command)
-1. Activate the "Example Blocks" plugin from the WordPress menu
-
-For production builds, running `npm run build:prod` will also work, outputting production bundles for the blocks.
+The plugins can be built with `npm run plugins:dev` or `npm run plugins:build`, but that generally shouldn't be necessary, since those scripts are run as part of the standard `npm start` and `npm run build:prod` scripts.
 
 ### Creating a New Custom Block
 
 Follow these steps to create a new custom block and wire it up with the normal development/build processes:
 
-1. Create a new folder at `src/plugins/example-blocks/blocks/<block-name>`
+1. Create a new folder at `src/plugins/example-blocks/src/<block-name>`
 1. Either copy files from another block or manually create these files:
    - `block.json`: configuration/metadata for the block
-   - `src/index.js`: entry point for the JS bundle
-   - `src/edit.js`: the component used while editing
-   - `src/save.js`: the component rendered on the site
-   - `src/editor.scss`: custom styles for the editor view
-   - `src/style.scss`: custom styles for the block when rendered on the site
-1. Configure the custom block by updating `block.json`, namely the `name`, `title`, `icon`, and `description` fields
+   - `index.js`: entry point for the JS bundle
+   - `edit.js`: the component used while editing
+   - `save.js`: the component rendered on the site
+   - `view.js`: any JS that needs to run when the block is rendered on a non-admin page (optional)
+   - `editor.scss`: custom styles for the editor view
+   - `style.scss`: custom styles for the block when rendered on the site
+1. Configure the custom block by updating `block.json`, namely the `name`, `title`, `icon`, and `description` fields. If you don't need a `view.js` file, delete the `viewScript` key.
 1. Implement the edit function, which will usually be form controls corresponding to attributes that you define in `index.js`
 1. Implement the save function, which will consume the attributes defined in `index.js` and render the block's desired markup
 
@@ -431,6 +427,7 @@ Follow these steps to create a new custom block and wire it up with the normal d
 
 - [Create a Block Tutorial](https://developer.wordpress.org/block-editor/getting-started/create-block/)
 - [Component Reference](https://developer.wordpress.org/block-editor/reference-guides/components/)
+- [@wordpress/scripts Reference](https://developer.wordpress.org/block-editor/reference-guides/packages/packages-scripts/)
 
 ## Deployment
 

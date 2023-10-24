@@ -21,7 +21,7 @@
  * @see https://developer.wordpress.org/reference/functions/register_block_type/
  */
 function create_block_example_blocks_block_init() {
-    $blocks_directory = plugin_dir_path(__FILE__) . '/blocks/';
+    $blocks_directory = plugin_dir_path(__FILE__) . '/build/';
     $block_directories = glob($blocks_directory . '*', GLOB_ONLYDIR);
 
     if ($block_directories && is_array($block_directories)) {

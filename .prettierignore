@@ -36,3 +36,5 @@ theme
 uploads
 vendor
 plugins
+!src/plugins
+src/plugins/**/build

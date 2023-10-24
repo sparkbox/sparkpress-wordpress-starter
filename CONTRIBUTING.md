@@ -11,7 +11,6 @@ Here's a few things you should know before you submit your PR:
 
 - Clone/Fork the repo
 - Install dependencies: `npm install`
-- Install plugin dependencies `npm run plugins:install`
 - Start the development process `npm start`
 - Ensure linters pass: `npm run lint`
 - Ensure tests pass: `npm test`
