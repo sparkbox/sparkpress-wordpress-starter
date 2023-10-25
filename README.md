@@ -53,30 +53,31 @@ This project requires [Docker][docker] and [Node.js][node] for local development
 After generating a new repo from the Sparkpress template, you will need to change the following things to make the project your own:
 
 - [ ] References to "sparkpress", "SparkPress", or "sparkpress-wordpress-starter"
-	- [ ] `composer.json` (organization/project name in `name` field)
-	- [ ] `docker-compose.yml` (web `container_name`)
-	- [ ] `docker-compose.yml` (theme folder volume mapping)
-	- [ ] `docker-compose.yml` (db `container_name`)
-	- [ ] `Dockerfile` (link to repo)
-	- [ ] `Dockerfile` (theme folder name)
-	- [ ] `package.json` (`name` field)
-	- [ ] `package-lock.json` (`name` fields)
-	- [ ] `.github/workflows/deploy.docker.yml` (references to the container registry or delete the file if not using a docker deployment process)
-	- [ ] `.github/workflows/deploy.pantheon.yml` (theme folder names)
-	- [ ] `.github/workflows/release-please.yml` (`package-name` field)
-	- [ ] `scripts/export-db.sh` (db container name)
-	- [ ] `scripts/import-db.sh` (db container names)
-	- [ ] `scripts/run.sh` (container name)
-	- [ ] `src/php/style.css` (theme name plus the other metadata in the file)
-	- [ ] `src/php/inc/theme-scripts.php` (metadata and prefixes for function/script names)
-	- [ ] `src/php/inc/theme-setup.php` (metadata and prefixes for function names)
-	- [ ] `src/php/inc/theme-styles.php` (metadata and prefixes for function names)
-	- [ ] `src/php/inc/theme-widgets.php` (prefixes for function names)
-	- [ ] `wp-configs/wp-config.php` (default theme name)
+  - [ ] `composer.json` (organization/project name in `name` field)
+  - [ ] `docker-compose.yml` (web `container_name`)
+  - [ ] `docker-compose.yml` (theme folder volume mapping)
+  - [ ] `docker-compose.yml` (db `container_name`)
+  - [ ] `Dockerfile` (link to repo)
+  - [ ] `Dockerfile` (theme folder name)
+  - [ ] `package.json` (`name` field)
+  - [ ] `package-lock.json` (`name` fields)
+  - [ ] `.github/workflows/deploy.docker.yml` (references to the container registry or delete the file if not using a docker deployment process)
+  - [ ] `.github/workflows/deploy.pantheon.yml` (theme folder names)
+  - [ ] `.github/workflows/release-please.yml` (`package-name` field)
+  - [ ] `scripts/export-db.sh` (db container name)
+  - [ ] `scripts/import-db.sh` (db container names)
+  - [ ] `scripts/run.sh` (container name)
+  - [ ] `src/php/style.css` (theme name plus the other metadata in the file)
+  - [ ] `src/php/inc/theme-scripts.php` (metadata and prefixes for function/script names)
+  - [ ] `src/php/inc/theme-setup.php` (metadata and prefixes for function names)
+  - [ ] `src/php/inc/theme-styles.php` (metadata and prefixes for function names)
+  - [ ] `src/php/inc/theme-widgets.php` (prefixes for function names)
+  - [ ] `wp-configs/wp-config.php` (default theme name)
 - [ ] `README` updates
-	- [ ] Update main heading and project description
-	- [ ] Delete the Sparkpress Team section with the list of contributors
-	- [ ] Delete this Customization section (once finished with the other steps)
+  - [ ] Update main heading and project description
+  - [ ] Delete the Sparkpress Team section with the list of contributors
+  - [ ] Update the references to the GitHub Container registry in the [Deployment section](#deployment)
+  - [ ] Delete this Customization section (once finished with the other steps)
 
 Beyond that, it's up to you to customize the site based on your project's needs. You can use or discard as much of the boilerplate JS, SCSS, or templates as you want, and you can use [generators](#generators) to scaffold new features to get up and running quickly.
 
@@ -204,6 +205,7 @@ This will uncheck "Allow comments" on individual posts going forward by default,
 1. Scroll to the bottom and hit "Save Changes"
 
 #### Comments for Pages
+
 By default, comments are turned off for pages, but can be enabled for pages individually:
 
 1. From the admin dashboard, navigate to "Edit Page"
@@ -511,6 +513,33 @@ This repo includes a [GitHub workflow for building a docker image](./.github/wor
 
 The image includes all core WordPress files for the version specified for `WP_VERSION` in the `Dockerfile`, as well as the theme and plugin files necessary for the site. The other element required for the site to run is the database, which is excluded, since each environment should have its own database that is specified by environment variables. This allows local developers to test against local data without interfering with production or staging environments.
 
+#### Deployment configuration
+
+Deployment via Docker requires setting the following variables and secrets in Github. See these instructions for creating [variables][gh-variables] and [secrets][gh-secrets].
+
+##### Variables
+
+- `DEPLOY_WITH_DOCKER`: set the value to `true` in order to enable the workflow
+
+#### Accessing the GitHub Container Registry
+
+Before you can pull the docker image, you'll need to authenticate with GitHub's Container Registry. To do that, follow these steps:
+
+1. [Generate a Personal Access Token (classic)][gh-personal-access-token] with at least `read:packages` access
+1. Copy the access token (you won't be able to see it again)
+1. Run `docker login ghcr.io` and use your GitHub username and the access token for username/password
+
+#### Running the Docker Image Locally
+
+The Docker image can be tested locally by connecting it to the local development database. To test the published Docker image locally, follow these steps:
+
+1. Run `docker compose up db` to run the local database container
+1. Run `docker pull ghcr.io/sparkbox/sparkpress:latest` (see [above](#accessing-the-github-container-registry) if you're denied access)
+1. Run `cp .env .docker.test.env` to copy your environment variables to a new file we can test with
+1. Set `MYSQL_HOST=host.docker.internal:3309` in `.docker.test.env` so our container can find the running database
+1. Run `docker run -p 8000:80 --rm -v ./.docker.test.env:/var/www/html/.env -v ./uploads:/var/www/html/wp-content/uploads --name wordpress-web ghcr.io/sparkbox/sparkpress:latest` to start the web container
+1. Visit http://localhost:8000 to see the site running from the image
+
 ### Pantheon
 
 This repo includes a [Github workflow for deployment to Pantheon](./.github/workflows/deploy.pantheon.yml).
@@ -540,7 +569,7 @@ Pantheon maintains its own git remote containing the WordPress core files. To de
 
 #### Deployment configuration
 
-Deployment to Pantheon requires setting the following variables and secrets in Github. See these instructions for creating [variables](https://docs.github.com/en/actions/learn-github-actions/variables#creating-configuration-variables-for-a-repository) and [secrets](https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions#creating-secrets-for-a-repository).
+Deployment to Pantheon requires setting the following variables and secrets in Github. See these instructions for creating [variables][gh-variables] and [secrets][gh-secrets].
 
 ##### Variables
 
@@ -609,3 +638,6 @@ Deployment to Pantheon requires setting the following variables and secrets in G
 [itcss]: https://www.xfive.co/blog/itcss-scalable-maintainable-css-architecture/
 [bem]: http://getbem.com
 [sass]: https://sass-lang.com/
+[gh-variables]: https://docs.github.com/en/actions/learn-github-actions/variables#creating-configuration-variables-for-a-repository
+[gh-secrets]: https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions#creating-secrets-for-a-repository
+[gh-personal-access-token]: https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-personal-access-token-classic
