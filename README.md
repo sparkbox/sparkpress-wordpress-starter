@@ -76,6 +76,7 @@ After generating a new repo from the Sparkpress template, you will need to chang
 - [ ] `README` updates
 	- [ ] Update main heading and project description
 	- [ ] Delete the Sparkpress Team section with the list of contributors
+   - [ ] Update the references to the GitHub Container registry in the [Deployment section](#deployment)
 	- [ ] Delete this Customization section (once finished with the other steps)
 
 Beyond that, it's up to you to customize the site based on your project's needs. You can use or discard as much of the boilerplate JS, SCSS, or templates as you want, and you can use [generators](#generators) to scaffold new features to get up and running quickly.
@@ -441,6 +442,25 @@ This starter template includes a couple of options for deployment workflows, inc
 This repo includes a [GitHub workflow for building a docker image](./.github/workflows/deploy.docker.yml) that gets pushed GitHub's container registry. This image can be deployed to any hosting provider that supports docker containers.
 
 The image includes all core WordPress files for the version specified for `WP_VERSION` in the `Dockerfile`, as well as the theme and plugin files necessary for the site. The other element required for the site to run is the database, which is excluded, since each environment should have its own database that is specified by environment variables. This allows local developers to test against local data without interfering with production or staging environments.
+
+#### Accessing the GitHub Container Registry
+
+Before you can pull the docker image, you'll need to authenticate with GitHub's Container Registry. To do that, follow these steps:
+
+1. [Generate a Personal Access Token (classic)](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-personal-access-token-classic) with at least `read:packages` access
+1. Copy the access token (you won't be able to see it again)
+1. Run `docker login ghcr.io` and use your GitHub username and the access token for username/password
+
+#### Running the Docker Image Locally
+
+To test the published Docker image locally, follow these steps:
+
+1. Run `docker compose up db` to run the local database container so there's a database to connect to
+1. Run `docker pull ghcr.io/sparkbox/sparkpress:latest` (see [above](#accessing-the-github-container-registry) if you're denied access)
+1. Run `cp .env .docker.test.env` to copy your environment variables to a new file we can test with
+1. Set `MYSQL_HOST=host.docker.internal:3309` in `.docker.test.env` so our container can find the running database
+1. Run `docker run -p 8000:80 --rm -v ./.docker.test.env:/var/www/html/.env -v ./uploads:/var/www/html/wp-content/uploads --name wordpress-web ghcr.io/sparkbox/sparkpress:latest`
+1. Visit http://localhost:8000 to see the site running from the image
 
 ### Pantheon
 
