@@ -1,7 +1,9 @@
 {% extends "layouts/base.twig" %}
 
+{% block title %}
+	<h1>Nothing Found</h1>
+{% endblock %}
+
 {% block content %}
-	<div class="obj-width-limiter">
-		{% include 'partials/content-none.twig' %}
-	</div>
+	{% include 'partials/content-none.twig' %}
 {% endblock %}

@@ -1,12 +1,15 @@
 {% extends "layouts/base.twig" %}
 
+{% block title %}
+	<h1>{{ title }}</h1>
+{% endblock %}
+
 {% block content %}
-	<div class="obj-width-limiter">
+	<div>
 		{% if posts.found_posts %}
 
 			{# new block that can be overwritten #}
 			{% block posts_found %}
-				<h1>{{ title }}</h1>
 				{% for post in posts %}
 					{% include 'partials/content-single.twig' with {post: post} %}
 				{% endfor %}

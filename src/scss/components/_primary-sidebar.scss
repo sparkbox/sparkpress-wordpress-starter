@@ -3,6 +3,8 @@
   padding: 1rem;
   
   @media (min-width: 50rem) {
+    margin-inline-start: auto;
     flex-basis: 18.75rem;
+    flex-shrink: 0;
   }
 }

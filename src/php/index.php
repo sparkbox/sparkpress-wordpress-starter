@@ -24,6 +24,8 @@ $context['posts'] = new Timber\PostQuery();
 $templates        = array( 'index.twig' );
 if ( is_home() && ! is_front_page() ) {
 	$context['title'] = single_post_title();
+} elseif ( ! $context['posts']->found_posts ) {
+	$context['title'] = 'Nothing Found';
 } else {
 	$context['title'] = 'Recent Posts';
 }

@@ -14,21 +14,24 @@
 
 		<main id="main">
 			<article id="post-{{ post.id }}" class="post-type-{{ post.post_type }} {{ function('get_post_class')|join(' ') }}">
-				{% if post.title %}
-					<div class="obj-width-limiter">
-						<h1>{{ post.title }}</h1>
-					</div>
-				{% endif %}
 
-				<div class="cmp-post-body">
+				<div class="obj-width-limiter">
+					{% block title %}
+						{% if post.title %}
+							<h1>{{ post.title }}</h1>
+						{% endif %}
+					{% endblock %}
+				</div>
+
+				<div class="cmp-post-body obj-width-limiter">
 					{# content block from child templates #}
 					{% block content %}
-						<div class="obj-width-limiter">
+						<div>
 							Sorry, no content
 						</div>
 					{% endblock %}
 					{% if sidebar_widget %}
-						<aside class="obj-width-limiter cmp-primary-sidebar">
+						<aside class="cmp-primary-sidebar">
 							{{ sidebar_widget }}
 						</aside>
 					{% endif %}

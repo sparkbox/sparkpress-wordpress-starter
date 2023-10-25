@@ -1,7 +1,6 @@
 {% extends "index.twig" %}
 
 {% block posts_found %}
-  <h1>{{ title }}</h1>
   {% for post in posts %}
     {% include 'partials/content-search.twig' with {post: post} %}
   {% endfor %}

@@ -210,6 +210,10 @@ By default, comments are turned off for pages, but can be enabled for pages indi
 1. Access the Page settings menu on the right side of the page
 1. Scroll down the menu to the option with the heading "Disucssion", check "Allow comments", and update the page
 
+### Widgets
+
+A footer widget area and a sidebar widget area (which appears below content on smaller screens) are built into the theme. Widgets can be added to these areas by navigating to Appearance > Widgets from the admin dashboard. Navigating to the widgets admin page will automatically fill the sidebar widget area with default content. Blocks can be added, edited, or removed here. If you wish to deactivate widgets but keep them available for later, widgets can be dragged and dropped into the Inactive widgets area. This is easiest done from the List View, which can be accessed via the button on the top left side of the page.
+
 ### Template Hierarchy
 
 This starter template covers the generic templates needed for things like single post pages, archive (or listing) pages, the 404 page, and the search page, but you can override those using [WordPress' template hierarchy](https://developer.wordpress.org/themes/basics/template-hierarchy/).
