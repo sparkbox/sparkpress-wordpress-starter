@@ -53,31 +53,31 @@ This project requires [Docker][docker] and [Node.js][node] for local development
 After generating a new repo from the Sparkpress template, you will need to change the following things to make the project your own:
 
 - [ ] References to "sparkpress", "SparkPress", or "sparkpress-wordpress-starter"
-	- [ ] `composer.json` (organization/project name in `name` field)
-	- [ ] `docker-compose.yml` (web `container_name`)
-	- [ ] `docker-compose.yml` (theme folder volume mapping)
-	- [ ] `docker-compose.yml` (db `container_name`)
-	- [ ] `Dockerfile` (link to repo)
-	- [ ] `Dockerfile` (theme folder name)
-	- [ ] `package.json` (`name` field)
-	- [ ] `package-lock.json` (`name` fields)
-	- [ ] `.github/workflows/deploy.docker.yml` (references to the container registry or delete the file if not using a docker deployment process)
-	- [ ] `.github/workflows/deploy.pantheon.yml` (theme folder names)
-	- [ ] `.github/workflows/release-please.yml` (`package-name` field)
-	- [ ] `scripts/export-db.sh` (db container name)
-	- [ ] `scripts/import-db.sh` (db container names)
-	- [ ] `scripts/run.sh` (container name)
-	- [ ] `src/php/style.css` (theme name plus the other metadata in the file)
-	- [ ] `src/php/inc/theme-scripts.php` (metadata and prefixes for function/script names)
-	- [ ] `src/php/inc/theme-setup.php` (metadata and prefixes for function names)
-	- [ ] `src/php/inc/theme-styles.php` (metadata and prefixes for function names)
-	- [ ] `src/php/inc/theme-widgets.php` (prefixes for function names)
-	- [ ] `wp-configs/wp-config.php` (default theme name)
+  - [ ] `composer.json` (organization/project name in `name` field)
+  - [ ] `docker-compose.yml` (web `container_name`)
+  - [ ] `docker-compose.yml` (theme folder volume mapping)
+  - [ ] `docker-compose.yml` (db `container_name`)
+  - [ ] `Dockerfile` (link to repo)
+  - [ ] `Dockerfile` (theme folder name)
+  - [ ] `package.json` (`name` field)
+  - [ ] `package-lock.json` (`name` fields)
+  - [ ] `.github/workflows/deploy.docker.yml` (references to the container registry or delete the file if not using a docker deployment process)
+  - [ ] `.github/workflows/deploy.pantheon.yml` (theme folder names)
+  - [ ] `.github/workflows/release-please.yml` (`package-name` field)
+  - [ ] `scripts/export-db.sh` (db container name)
+  - [ ] `scripts/import-db.sh` (db container names)
+  - [ ] `scripts/run.sh` (container name)
+  - [ ] `src/php/style.css` (theme name plus the other metadata in the file)
+  - [ ] `src/php/inc/theme-scripts.php` (metadata and prefixes for function/script names)
+  - [ ] `src/php/inc/theme-setup.php` (metadata and prefixes for function names)
+  - [ ] `src/php/inc/theme-styles.php` (metadata and prefixes for function names)
+  - [ ] `src/php/inc/theme-widgets.php` (prefixes for function names)
+  - [ ] `wp-configs/wp-config.php` (default theme name)
 - [ ] `README` updates
-	- [ ] Update main heading and project description
-	- [ ] Delete the Sparkpress Team section with the list of contributors
-   - [ ] Update the references to the GitHub Container registry in the [Deployment section](#deployment)
-	- [ ] Delete this Customization section (once finished with the other steps)
+  - [ ] Update main heading and project description
+  - [ ] Delete the Sparkpress Team section with the list of contributors
+  - [ ] Update the references to the GitHub Container registry in the [Deployment section](#deployment)
+  - [ ] Delete this Customization section (once finished with the other steps)
 
 Beyond that, it's up to you to customize the site based on your project's needs. You can use or discard as much of the boilerplate JS, SCSS, or templates as you want, and you can use [generators](#generators) to scaffold new features to get up and running quickly.
 
@@ -205,6 +205,7 @@ This will uncheck "Allow comments" on individual posts going forward by default,
 1. Scroll to the bottom and hit "Save Changes"
 
 #### Comments for Pages
+
 By default, comments are turned off for pages, but can be enabled for pages individually:
 
 1. From the admin dashboard, navigate to "Edit Page"
@@ -461,6 +462,51 @@ To test the published Docker image locally, follow these steps:
 1. Set `MYSQL_HOST=host.docker.internal:3309` in `.docker.test.env` so our container can find the running database
 1. Run `docker run -p 8000:80 --rm -v ./.docker.test.env:/var/www/html/.env -v ./uploads:/var/www/html/wp-content/uploads --name wordpress-web ghcr.io/sparkbox/sparkpress:latest`
 1. Visit http://localhost:8000 to see the site running from the image
+
+#### Running the Docker Image on a Server
+
+Using `docker` or `docker compose` from the command line will, by default, interact with the Docker application on the local machine. However, that can be changed to interact with a remote machine by setting a `DOCKER_HOST` environment variable. This requires an `ssh` key to be installed.
+
+```sh
+# replace "username" and "ip-address" with the details for your server
+DOCKER_HOST=ssh://username@ip-address docker ps
+```
+
+To manually deploy the latest Docker image, you can run the following:
+
+```sh
+# pull the latest image
+DOCKER_HOST=ssh://username@ip-address docker compose pull
+
+# restart the containers using the updated image
+DOCKER_HOST=ssh://username@ip-address docker compose up -d
+```
+
+#### Updating the Docker Deployment Workflow
+
+The `deploy.docker.yml` workflow can be updated to deploy to a staging server automatically by adding these steps:
+
+```yml
+- name: Install SSH Key
+  uses: shimataro/ssh-key-action@v2
+  with:
+    key: ${{ secrets.DOCKER_TARGET_ID_RSA }}
+    known_hosts: ${{ secrets.DOCKER_TARGET_KNOWN_HOSTS }}
+
+- name: Deploy latest image
+  run: |
+    docker compose pull
+    docker compose up -d
+  env:
+    DOCKER_HOST: ssh://${{ secrets.DOCKER_TARGET_USER }}@${{ secrets.DOCKER_TARGET_ADDRESS }}
+```
+
+These are the variables you would need to set up in [GitHub secrets](https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions#creating-secrets-for-a-repository) for the new steps to work:
+
+- `DOCKER_TARGET_ID_RSA`: the private SSH key for the server
+- `DOCKER_TARGET_KNOWN_HOSTS`: necessary for resolving the server's address
+- `DOCKER_TARGET_USER`: username for the user that will be used to access the server
+- `DOCKER_TARGET_ADDRESS`: the server's IP address
 
 ### Pantheon
 
