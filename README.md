@@ -444,11 +444,23 @@ This repo includes a [GitHub workflow for building a docker image](./.github/wor
 
 The image includes all core WordPress files for the version specified for `WP_VERSION` in the `Dockerfile`, as well as the theme and plugin files necessary for the site. The other element required for the site to run is the database, which is excluded, since each environment should have its own database that is specified by environment variables. This allows local developers to test against local data without interfering with production or staging environments.
 
+#### Deployment configuration
+
+Deployment via Docker requires setting the following variables and secrets in Github. See these instructions for creating [variables][gh-variables] and [secrets][gh-secrets].
+
+##### Variables
+
+- `DEPLOY_WITH_DOCKER`: set the value to `true` in order to enable the workflow
+
+##### Secrets
+
+- `GH_TOKEN` - a [personal access token][gh-personal-access-token] with write permissions
+
 #### Accessing the GitHub Container Registry
 
 Before you can pull the docker image, you'll need to authenticate with GitHub's Container Registry. To do that, follow these steps:
 
-1. [Generate a Personal Access Token (classic)](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-personal-access-token-classic) with at least `read:packages` access
+1. [Generate a Personal Access Token (classic)][gh-personal-access-token] with at least `read:packages` access
 1. Copy the access token (you won't be able to see it again)
 1. Run `docker login ghcr.io` and use your GitHub username and the access token for username/password
 
@@ -501,7 +513,7 @@ The `deploy.docker.yml` workflow can be updated to deploy to a staging server au
     DOCKER_HOST: ssh://${{ secrets.DOCKER_TARGET_USER }}@${{ secrets.DOCKER_TARGET_ADDRESS }}
 ```
 
-These are the variables you would need to set up in [GitHub secrets](https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions#creating-secrets-for-a-repository) for the new steps to work:
+These are the variables you would need to set up in [GitHub secrets][gh-secrets] for the new steps to work:
 
 - `DOCKER_TARGET_ID_RSA`: the private SSH key for the server
 - `DOCKER_TARGET_KNOWN_HOSTS`: necessary for resolving the server's address
@@ -537,7 +549,7 @@ Pantheon maintains its own git remote containing the WordPress core files. To de
 
 #### Deployment configuration
 
-Deployment to Pantheon requires setting the following variables and secrets in Github. See these instructions for creating [variables](https://docs.github.com/en/actions/learn-github-actions/variables#creating-configuration-variables-for-a-repository) and [secrets](https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions#creating-secrets-for-a-repository).
+Deployment to Pantheon requires setting the following variables and secrets in Github. See these instructions for creating [variables][gh-variables] and [secrets][gh-secrets].
 
 ##### Variables
 
@@ -606,3 +618,6 @@ Deployment to Pantheon requires setting the following variables and secrets in G
 [itcss]: https://www.xfive.co/blog/itcss-scalable-maintainable-css-architecture/
 [bem]: http://getbem.com
 [sass]: https://sass-lang.com/
+[gh-variables]: https://docs.github.com/en/actions/learn-github-actions/variables#creating-configuration-variables-for-a-repository
+[gh-secrets]: https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions#creating-secrets-for-a-repository
+[gh-personal-access-token]: https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-personal-access-token-classic
