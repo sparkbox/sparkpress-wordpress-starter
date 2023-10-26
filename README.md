@@ -350,7 +350,7 @@ The following files will be created based on your input:
 
 [Page Template documentation](https://developer.wordpress.org/themes/template-files-section/page-template-files/)
 
-## Reusable Pattern
+### Reusable Pattern
 
 The generator for reusable patterns will prompt you for a name, description, and categories for the pattern, then create a script to register a reusable pattern with metadata based on your inputs and instructions for how to create the markup for the pattern.
 
@@ -363,6 +363,45 @@ The following file will be created based on your input:
 - `src/php/patterns/<pattern-name>.php`
 
 [Reusable pattern (a.k.a. Block pattern) documentation](https://developer.wordpress.org/themes/advanced-topics/block-patterns/)
+
+### Custom Blocks Plugin
+
+The generator for custom blocks plugins will prompt you for a plugin name and description, WordPress and PHP versions (for compatibility info), and author. It uses this info to scaffold the configuration and readme files for a custom blocks plugin that initially does not have any blocks.
+
+```sh
+npm run generate:custom-blocks-plugin
+```
+
+The following files will be created based on your input:
+
+- `src/plugins/<plugin-name>/src/.gitkeep`
+- `src/plugins/<plugin-name>/<plugin-name>.php`
+- `src/plugins/<plugin-name>/readme.txt`
+
+It will also modify these files to automatically updated the build/development processes and configuration:
+
+- `package.json`
+- `docker-compose.yml`
+
+### Custom Block
+
+The generator for custom blocks will prompt you for the plugin that the block should belong to, a block name and description, and whether the block needs a `view.js` file for client-side JS. Note: this should only be run after a custom blocks plugin has been generated from `npm run generate:custom-blocks-plugin`.
+
+```sh
+npm run generate:custom-block
+```
+
+The following files will be created based on your input:
+
+- `src/plugins/<plugin-name>/src/<block-name>/block.json`
+- `src/plugins/<plugin-name>/src/<block-name>/edit.js`
+- `src/plugins/<plugin-name>/src/<block-name>/editor.scss`
+- `src/plugins/<plugin-name>/src/<block-name>/index.js`
+- `src/plugins/<plugin-name>/src/<block-name>/save.js`
+- `src/plugins/<plugin-name>/src/<block-name>/styles.scss`
+- `src/plugins/<plugin-name>/src/<block-name>/view.js` (optional)
+
+See [custom block structure](#custom-block-structure) for more info on what these files are for.
 
 ## Plugins
 
@@ -402,26 +441,52 @@ This is a non-comprehensive list of plugins that we have found useful on other p
 
 ## Custom Blocks
 
-We have a plugin for custom blocks called `example-blocks`, which lives in `src/plugins`. For the blocks to be available in WordPress, you must activate the "Example Blocks" plugin from the WordPress admin's plugins page.
+We have two [generators](#generators) that can be used in tandem to create the necessary scaffolding for custom blocks. The first is `npm run generate:custom-blocks-plugin`, which should be run first to create the plugin config, readme, directory, and `package.json`/`docker-compose.yml` changes necessary to make the plugin available to WordPress. The second is `npm run generate:custom-block`, which creates the boilerplate files necessary to create a single custom block within the plugin.
 
-The plugins can be built with `npm run plugins:dev` or `npm run plugins:build`, but that generally shouldn't be necessary, since those scripts are run as part of the standard `npm start` and `npm run build:prod` scripts.
+Note: you will need to restart your development process to pick up the changes after adding a custom blocks plugin and/or a custom block.
 
-### Creating a New Custom Block
+Once you have created a custom blocks plugin that has at least one custom block, you should be able to activate it in the WordPress admin page for Plugins.
 
-Follow these steps to create a new custom block and wire it up with the normal development/build processes:
+The custom blocks plugin generator should handle creating the npm scripts for you, but the general format is as follows:
 
-1. Create a new folder at `src/plugins/example-blocks/src/<block-name>`
-1. Either copy files from another block or manually create these files:
-   - `block.json`: configuration/metadata for the block
-   - `index.js`: entry point for the JS bundle
-   - `edit.js`: the component used while editing
-   - `save.js`: the component rendered on the site
-   - `view.js`: any JS that needs to run when the block is rendered on a non-admin page (optional)
-   - `editor.scss`: custom styles for the editor view
-   - `style.scss`: custom styles for the block when rendered on the site
-1. Configure the custom block by updating `block.json`, namely the `name`, `title`, `icon`, and `description` fields. If you don't need a `view.js` file, delete the `viewScript` key.
-1. Implement the edit function, which will usually be form controls corresponding to attributes that you define in `index.js`
+```json
+"plugins:dev": "run-p plugins:dev:* || echo \"Unable to build plugins\"",
+"plugins:build": "run-s plugins:build:* || echo \"Unable to build plugins\"",
+"plugins:dev:<plugin-name>": "wp-scripts start --webpack-src-dir=src/plugins/<plugin-name>/src --output-path=src/plugins/<plugin-name>/build",
+"plugins:build:<plugin-name>": "wp-scripts build --webpack-src-dir=src/plugins/<plugin-name>/src --output-path=src/plugins/<plugin-name>/build"
+```
+
+The `plugins:dev` and `plugins:build` scripts will automatically pick up any `plugins:dev:*` and `plugins:build:*` scripts that get added, minimizing the maintenance overhead from adding more plugins.
+
+Similarly, the `docker-compose.yml` volume mapping should automatically be updated by the generator, but if not, each plugin needs to be mapped to a folder within the container's `/var/www/html/wp-content/plugins/<plugin-name>` folder, like so:
+
+```yml
+services:
+  web:
+    volumes:
+      - ./src/plugins/<plugin-name>:/var/www/html/wp-content/plugins/<plugin-name>
+```
+
+### Custom Block Structure
+
+Each custom block will have most, if not all, of the following files:
+
+- `block.json`: configuration/metadata for the block
+- `edit.js`: the component used while editing
+- `editor.scss`: custom styles for the editor view
+- `index.js`: entry point for the JS bundle
+- `save.js`: the component rendered on the site
+- `style.scss`: custom styles for the block when rendered on the site
+- `view.js`: any JS that needs to run when the block is rendered on a non-admin page (optional)
+
+It's important to note that while `save.js` is written like a React component, it does not have reactivity when rendered on the site. The React component is used to serialize HTML that is sent to the client from the server, so hooks like `useEffect` will not run when the component is rendered. If your component requires JS for its functionality, you need to provide that JS in the `view.js` file.
+
+Once the boilerplate files have been created, follow these steps to build out the custom block to fit your needs.
+
+1. Configure the custom block by [updating `block.json`](https://developer.wordpress.org/block-editor/reference-guides/block-api/block-metadata/). Depending on how you answered prompts from the generator, this may be mostly done. You'll likely want to update the `icon` field with a [dashicon name](https://developer.wordpress.org/resource/dashicons)
+1. Implement the edit function, which will control how the block is rendered/created in the Gutenberg editor
 1. Implement the save function, which will consume the attributes defined in `index.js` and render the block's desired markup
+1. Implement the front-end JS for the component in `view.js` if needed
 
 ### Useful Resources
 
