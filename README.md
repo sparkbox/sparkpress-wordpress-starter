@@ -466,13 +466,13 @@ Before you can pull the docker image, you'll need to authenticate with GitHub's 
 
 #### Running the Docker Image Locally
 
-To test the published Docker image locally, follow these steps:
+The Docker image can be tested locally by connecting it to the local development database. To test the published Docker image locally, follow these steps:
 
-1. Run `docker compose up db` to run the local database container so there's a database to connect to
+1. Run `docker compose up db` to run the local database container
 1. Run `docker pull ghcr.io/sparkbox/sparkpress:latest` (see [above](#accessing-the-github-container-registry) if you're denied access)
 1. Run `cp .env .docker.test.env` to copy your environment variables to a new file we can test with
 1. Set `MYSQL_HOST=host.docker.internal:3309` in `.docker.test.env` so our container can find the running database
-1. Run `docker run -p 8000:80 --rm -v ./.docker.test.env:/var/www/html/.env -v ./uploads:/var/www/html/wp-content/uploads --name wordpress-web ghcr.io/sparkbox/sparkpress:latest`
+1. Run `docker run -p 8000:80 --rm -v ./.docker.test.env:/var/www/html/.env -v ./uploads:/var/www/html/wp-content/uploads --name wordpress-web ghcr.io/sparkbox/sparkpress:latest` to start the web container
 1. Visit http://localhost:8000 to see the site running from the image
 
 #### Running the Docker Image on a Server
