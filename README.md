@@ -108,33 +108,33 @@ This theme uses the following files for linting:
 The preferred mechanism for syncing your environment with others is to use database imports and exports. This repo has a few scripts to make this process as easy as possible. While your containers are running, you can run any of these commands to import, export, or backup a database. Here are the quick commands, with more instructions below.
 
 ```sh
-# import a DB from the `sql` folder
-npm run import-db
+# import a DB from the `sync/sql` folder
+npm run import:db
 
 # export your DB
-npm run export-db
+npm run export:db
 
 # export your DB with a custom name
-npm run export-db validation-data
+npm run export:db validation-data
 
 # backup your DB in case you need to restore it later
-npm run backup-db
+npm run backup:db
 
 # backup your DB with a custom name
-npm run backup-db work-in-progress
+npm run backup:db work-in-progress
 ```
 
 #### Importing Databases
 
-You can import databases from production, a saved backup, or another developer's DB export with the `import-db` script. To use it, put a `*.sql.gz` file in a top-level `sql` folder in the repo and run `npm run import-db`. This will first back up your existing database in case you need to revert back to it, and then it will import the database from the given file, effectively replacing your database with a new one.
+You can import databases from production, a saved backup, or another developer's DB export with the `import:db` script. To use it, put a `*.sql.gz` file in a top-level `sync/sql` folder in the repo and run `npm run import:db`. This will first back up your existing database in case you need to revert back to it, and then it will import the database from the given file, effectively replacing your database with a new one.
 
 #### Exporting Databases
 
-You can export your database for another developer to import or to import to a staging environment by running `npm run export-db`. By default, this will create a timestamped and gzipped file in `sql/exports`, but you can specify a name by running `npm run export-db <your-db-name-here>`. The exported file will still be timestamped, but it will use the name you give it instead of the default prefix.
+You can export your database for another developer to import or to import to a staging environment by running `npm run export:db`. By default, this will create a timestamped and gzipped file in `sync/sql/exports`, but you can specify a name by running `npm run export:db <your-db-name-here>`. The exported file will still be timestamped, but it will use the name you give it instead of the default prefix.
 
 #### Backing Up Databases
 
-This will happen automatically when you import a database, but if you want to manually backup your database, you can run `npm run backup-db`. This functions nearly identically to the `export-db` script, except for using a different prefix and putting the file in `sql/backups`. As with `export-db`, you can specify a name for your DB backup if you want.
+This will happen automatically when you import a database, but if you want to manually backup your database, you can run `npm run backup:db`. This functions nearly identically to the `export:db` script, except for using a different prefix and putting the file in `sync/sql/backups`. As with `export:db`, you can specify a name for your DB backup if you want.
 
 ### Atom
 

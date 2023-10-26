@@ -3,12 +3,12 @@
 export $(grep -v '^#' .env | xargs)
 
 timestamp=$(date -u +%Y-%m-%dT%H-%M-%S_%Z)
-path='sql/exports'
+path='sync/sql/exports'
 prefix='db-export'
 
 if [ $BACKUP ]
 then
-  path='sql/backups'
+  path='sync/sql/backups'
   prefix='db-backup'
 fi
 

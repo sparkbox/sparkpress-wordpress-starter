@@ -49,5 +49,6 @@ plugins/rollbar/
 
 src/plugins/**/build/
 
-# DB imports/exports
+# import and export files for syncing between environments
+sync
 sql
