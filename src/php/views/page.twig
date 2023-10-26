@@ -2,12 +2,14 @@
 
 {% block content %}
 	<div>
-		<img
-			src="{{ post.thumbnail.src|resize(960) }}"
-			{% if post.thumbnail.alt and post.thumbnail.alt|length > 0 %}
-				alt="{{ post.thumbnail.alt }}"
-			{% endif %}
-		/>
+		{% if post.thumbnail %}
+			<img
+				src="{{ post.thumbnail.src|resize(960) }}"
+				{% if post.thumbnail.alt and post.thumbnail.alt|length > 0 %}
+					alt="{{ post.thumbnail.alt }}"
+				{% endif %}
+			/>
+		{% endif %}
 		{{ post.content }}
 		{# Loads comments.php by default #}
 		{{ function('comments_template') }}
