@@ -105,11 +105,17 @@ This theme uses the following files for linting:
 
 ### Syncing Environments
 
-The preferred mechanism for syncing your environment with others is to use database imports and exports. This repo has a few scripts to make this process as easy as possible. While your containers are running, you can run any of these commands to import, export, or backup a database. Here are the quick commands, with more instructions below.
+The preferred mechanism for syncing your environment with others is to use database/uploads imports and exports. This repo has a few scripts to make this process as easy as possible. While your containers are running, you can run any of these commands to import, export, or backup a database or your `uploads` folder. Here are the quick commands, with more instructions below.
 
 ```sh
 # import a DB from the `sync/sql` folder
 npm run import:db
+
+# import images/files into your uploads folder from a zip file in `sync/uploads`
+npm run import:uploads
+
+# run both a DB import and an uploads import at once
+npm run import
 
 # export your DB
 npm run export:db
@@ -117,16 +123,40 @@ npm run export:db
 # export your DB with a custom name
 npm run export:db validation-data
 
+# export your uploads folder as a zip file
+npm run export:uploads
+
+# export your uploads with a custom name
+npm run export:uploads validation-uploads
+
+# run both a DB export and an uploads export at once
+npm run export
+
+# run DB/uploads exports with a custom name
+npm run export validation
+
 # backup your DB in case you need to restore it later
 npm run backup:db
 
 # backup your DB with a custom name
-npm run backup:db work-in-progress
+npm run backup:db work-in-progress-data
+
+# backup your uploads folder in case you need to restore it later
+npm run backup:uploads
+
+# backup your uploads folder with a custom name
+npm run backup:uploads work-in-progress-uploads
+
+# run both a DB backup and an uploads backup at once
+npm run backup
+
+# run DB/uploads backups with a custom name
+npm run export work-in-progress
 ```
 
 #### Importing Databases
 
-You can import databases from production, a saved backup, or another developer's DB export with the `import:db` script. To use it, put a `*.sql.gz` file in a top-level `sync/sql` folder in the repo and run `npm run import:db`. This will first back up your existing database in case you need to revert back to it, and then it will import the database from the given file, effectively replacing your database with a new one.
+You can import databases from production, a saved backup, or another developer's DB export with the `import:db` script. To use it, put a `*.sql.gz` file directly inside of a `sync/sql` folder in the repo and run `npm run import:db`. This will first back up your existing database to `sync/sql/backups` in case you need to revert back to it, and then it will import the database from the given file, effectively replacing your database with a new one. The imported SQL script will then be moved to `sync/sql/previous-imports`.
 
 #### Exporting Databases
 
@@ -135,6 +165,18 @@ You can export your database for another developer to import or to import to a s
 #### Backing Up Databases
 
 This will happen automatically when you import a database, but if you want to manually backup your database, you can run `npm run backup:db`. This functions nearly identically to the `export:db` script, except for using a different prefix and putting the file in `sync/sql/backups`. As with `export:db`, you can specify a name for your DB backup if you want.
+
+#### Importing Uploads
+
+You can import a zipped copy of the `uploads` folder from another environment, saved backup, or another developer's export with the `import:uploads` script. To use it, put a `*.tar.gz` file directly inside of a `sync/uploads` folder in the repo and run `npm run import:uploads`. This will first back up your current `uploads` folder to `sync/uploads/backups`, and then it will replace your `uploads` folder with the contents of the zip file. The imported `.tar.gz` file will then be moved to `sync/uploads/previous-imports`.
+
+#### Exporting Uploads
+
+You can export your `uploads` folder for another developer to import or to import to another environment by running `npm run export:uploads`. By default, this will create a timestamped zip file in `sync/uploads/exports`, but you can specify a name by running `npm run export:uploads <your-descriptive-name-here>`. The exported file will still be timestamped, but it will use the name you give it instead of the default prefix.
+
+#### Backing Up Uploads
+
+This will happen automatically on import, but if you want to manually backup your `uploads` folder, you can run `npm run backup:uploads`. This functions nearly identically to the `export:uploads` script, except for using a different prefix and putting the zip file in `sync/uploads/backups`. As with `export:uploads`, you can specify a name for your backup if you want.
 
 ### Atom
 
