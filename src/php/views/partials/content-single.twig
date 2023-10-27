@@ -5,6 +5,8 @@
 			class="post-preview__featured-image"
 			{% if post.thumbnail.alt and post.thumbnail.alt|length > 0 %}
 				alt="{{ post.thumbnail.alt }}"
+			{% else %}
+				alt=""
 			{% endif %}
 		/>
 	{% endif %}

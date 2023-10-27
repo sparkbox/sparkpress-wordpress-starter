@@ -3,12 +3,21 @@
 {% block content %}
 	<div>
 		{% if post.thumbnail %}
-			<img
-				src="{{ post.thumbnail.src|resize(960) }}"
-				{% if post.thumbnail.alt and post.thumbnail.alt|length > 0 %}
-					alt="{{ post.thumbnail.alt }}"
-				{% endif %}
-			/>
+			{% set largest_image = post.thumbnail.src('large') %}
+			<picture>
+				{% for image_size in post.thumbnail.sizes|sort((a, b) => a.width <=> b.width)|keys %}
+					{% set largest_image = post.thumbnail.src(image_size) %}
+					<source srcset="{{ post.thumbnail.src(image_size) }}" media="(max-width: {{ post.thumbnail.sizes[image_size]['width'] }}px)" >
+				{% endfor %}
+				<img
+					src="{{ largest_image }}"
+					{% if post.thumbnail.alt and post.thumbnail.alt|length > 0 %}
+						alt="{{ post.thumbnail.alt }}"
+					{% else %}
+						alt=""
+					{% endif %}
+				>
+			</picture>
 		{% endif %}
 		{{ post.content }}
 		{# Loads comments.php by default #}
