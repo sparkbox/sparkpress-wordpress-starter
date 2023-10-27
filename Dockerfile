@@ -2,8 +2,7 @@ FROM php:8.1-apache-buster as dev
 
 LABEL org.opencontainers.image.source=https://github.com/sparkbox/sparkpress-wordpress-starter
 
-# When changings, also change in .circleci/config.yml
-ENV WP_VERSION=6.3.1
+ENV WP_VERSION=6.3.2
 
 RUN apt-get update \
       && apt-get install -y libpng-dev libjpeg62-turbo-dev libzip-dev
