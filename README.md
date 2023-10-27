@@ -475,6 +475,51 @@ The Docker image can be tested locally by connecting it to the local development
 1. Run `docker run -p 8000:80 --rm -v ./.docker.test.env:/var/www/html/.env -v ./uploads:/var/www/html/wp-content/uploads --name wordpress-web ghcr.io/sparkbox/sparkpress:latest` to start the web container
 1. Visit http://localhost:8000 to see the site running from the image
 
+#### Running the Docker Image on a Server
+
+Using `docker` or `docker compose` from the command line will, by default, interact with the Docker application on the local machine. However, that can be changed to interact with a remote machine by setting a `DOCKER_HOST` environment variable. This requires an `ssh` key to be installed.
+
+```sh
+# replace "username" and "ip-address" with the details for your server
+DOCKER_HOST=ssh://username@ip-address docker ps
+```
+
+To manually deploy the latest Docker image, you can run the following:
+
+```sh
+# pull the latest image
+DOCKER_HOST=ssh://username@ip-address docker compose pull
+
+# restart the containers using the updated image
+DOCKER_HOST=ssh://username@ip-address docker compose up -d
+```
+
+#### Updating the Docker Deployment Workflow
+
+The `deploy.docker.yml` workflow can be updated to deploy to a staging server automatically by adding these steps:
+
+```yml
+- name: Install SSH Key
+  uses: shimataro/ssh-key-action@v2
+  with:
+    key: ${{ secrets.DOCKER_TARGET_ID_RSA }}
+    known_hosts: ${{ secrets.DOCKER_TARGET_KNOWN_HOSTS }}
+
+- name: Deploy latest image
+  run: |
+    docker compose pull
+    docker compose up -d
+  env:
+    DOCKER_HOST: ssh://${{ secrets.DOCKER_TARGET_USER }}@${{ secrets.DOCKER_TARGET_ADDRESS }}
+```
+
+These are the variables you would need to set up in [GitHub secrets][gh-secrets] for the new steps to work:
+
+- `DOCKER_TARGET_ID_RSA`: the private SSH key for the server
+- `DOCKER_TARGET_KNOWN_HOSTS`: necessary for resolving the server's address
+- `DOCKER_TARGET_USER`: username for the user that will be used to access the server
+- `DOCKER_TARGET_ADDRESS`: the server's IP address
+
 ### Pantheon
 
 This repo includes a [Github workflow for deployment to Pantheon](./.github/workflows/deploy.pantheon.yml).
