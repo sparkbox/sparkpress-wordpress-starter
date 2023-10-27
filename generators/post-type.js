@@ -63,7 +63,7 @@ render_with_password_protection( $timber_post, $templates, $context );
 const getSinglePostTemplate = () => `{% extends "layouts/base.twig" %}
 
 {% block content %}
-  <div class="obj-width-limiter">
+  <div>
     {{ post.content }}
   </div>
 {% endblock %}
@@ -85,7 +85,7 @@ Timber\\Timber::render( $templates, $context );
 const getArchiveTemplate = () => `{% extends "layouts/base.twig" %}
 
 {% block content %}
-	<div class="obj-width-limiter">
+	<div>
 		{% if posts.found_posts %}
 			<h1>{{ title }}</h1>
 			{% for post in posts %}
@@ -186,6 +186,10 @@ const generatePostType = async () => {
 		writeFileSync(archiveTemplatePath, archiveTemplate, 'utf-8');
 		console.log(`Created ${archiveTemplatePath}`);
 	}
+
+	console.log(`
+Note: to get posts from your new custom post type to show up on archive pages, you will need to update enable_custom_posts_in_archives in ./src/php/inc/setup-queries.php.
+	`);
 };
 
 generatePostType();

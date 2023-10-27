@@ -18,7 +18,7 @@ render_with_password_protection( $timber_post, '${baseFileName}.twig', $context 
 const twigTemplate = `{% extends "layouts/base.twig" %}
 
 {% block content %}
-	<div class="obj-width-limiter">
+	<div>
 		{{ post.content }}
 	</div>
 {% endblock %}

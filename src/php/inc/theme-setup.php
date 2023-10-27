@@ -101,13 +101,12 @@ add_action( 'admin_init', 'custom_hide_editor' );
  *
  * @param mixed  $value   The current option value.
  * @param string $option The name of the option being filtered.
- * @param mixed  $default The default value for the option.
  *
  * @return mixed The filtered option value. If the provided option is 'default_ping_status',
  *               this function will set its value to 'closed' (disabling pingbacks and trackbacks),
  *               and return the updated value. For other options, it returns the original value.
  */
-function custom_disable_pingbacks_trackbacks_option( $value, $option, $default ) {
+function custom_disable_pingbacks_trackbacks_option( $value, $option ) {
     if ( 'default_ping_status' === $option ) {
         $value = 'closed';
     }

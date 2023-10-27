@@ -52,7 +52,7 @@ Timber\\Timber::render( $templates, $context );
 const getArchiveTemplate = () => `{% extends "layouts/base.twig" %}
 
 {% block content %}
-	<div class="obj-width-limiter">
+	<div>
 		{% if posts.found_posts %}
 			<h1>{{ title }}</h1>
 			{% for post in posts %}

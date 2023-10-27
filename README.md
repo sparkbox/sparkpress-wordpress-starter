@@ -350,6 +350,8 @@ The following files will be created based on your inputs:
 - `src/php/views/single-<post-type-name>.twig` (optional)
 - `src/php/views/archive-<post-type-name>.twig` (optional)
 
+To allow for posts from your new custom post type to be shown on archive pages, you will also need to update `src/php/inc/setup-queries.php` to look for posts and your custom post types by default.
+
 [Custom Post Types documentation](https://wordpress.org/support/article/post-types/#custom-post-types)
 
 ### Custom Taxonomy
