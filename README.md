@@ -195,11 +195,13 @@ If you use [VS Code][vs-code], create a `settings.json` inside a `.vscode` direc
 
 ```json
 {
-	"phpcs.standard": "wp-configs/phpcs-rules-standard.xml",
+	"phpsab.executablePathCS": "vendor/bin/phpcs",
+	"phpsab.executablePathCBF": "vendor/bin/phpcbf",
+	"phpsab.standard": "wp-configs/phpcs-rules-standard.xml",
 	"twigcs.executablePath": "vendor/bin/twigcs",
 	"editor.tabSize": 2,
 	"[php]": {
-		"editor.tabSize": 4,
+		"editor.tabSize": 2,
 		"editor.insertSpaces": false,
 		"editor.detectIndentation": false
 	}
@@ -208,9 +210,11 @@ If you use [VS Code][vs-code], create a `settings.json` inside a `.vscode` direc
 
 Helpful VS Code Extensions:
 
-- [phpcs][phpcs-vscode]
+- [phpsab][phpsab-vscode]
 - [Twig][twig-vscode]
 - [twigcs][twigcs-vscode]
+
+Note: you will need to have vendor files available on your host machine (not the container they're installed in) for the linters to highlight code while you're working. You can run `npm run map-vendor-files` to make them available at the paths specified in the sample `settings.json` above, and as long as you have PHP installed on your system, they _should_ work. Windows has limited support for PHP, though, so you may want to run VS Code in a container so that PHP will be more easily available (or you can choose to live without real-time error highlighting).
 
 ##### Running VS Code in a Container
 
@@ -753,7 +757,7 @@ Deployment to Pantheon requires setting the following variables and secrets in G
 [node]: https://nodejs.org/en/
 [npm-scripts]: https://docs.npmjs.com/cli/v6/using-npm/scripts
 [php-install]: https://www.php.net/manual/en/install.php
-[phpcs-vscode]: https://marketplace.visualstudio.com/items?itemName=shevaua.phpcs
+[phpsab-vscode]: https://marketplace.visualstudio.com/items?itemName=ValeryanM.vscode-phpsab
 [rollbar]: https://docs.rollbar.com/docs/wordpress
 [sass]: https://sass-lang.com/
 [sb-eslint]: https://github.com/sparkbox/eslint-config-sparkbox
