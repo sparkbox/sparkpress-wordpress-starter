@@ -26,7 +26,9 @@ const getBlockJsonTemplate = ({ pluginSlug, slugName, name, description, hasView
 }
 `;
 
-const getEditJSTemplate = ({ name }) => `/**
+const getEditJSTemplate = ({ name }) => `/** @typedef {import('@wordpress/element').WPElement} WPElement */
+
+/**
  * React hook that is used to mark the block wrapper element.
  * It provides all the necessary props like the class name.
  *
@@ -107,7 +109,9 @@ registerBlockType(metadata.name, {
 });
 `;
 
-const getSaveJSTemplate = ({ name }) => `/**
+const getSaveJSTemplate = ({ name }) => `/** @typedef {import('@wordpress/element').WPElement} WPElement */
+
+/**
  * React hook that is used to mark the block wrapper element.
  * It provides all the necessary props like the class name.
  *

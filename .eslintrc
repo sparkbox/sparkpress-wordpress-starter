@@ -8,7 +8,13 @@
 		"sourceType": "module",
 		"ecmaVersion": "latest"
 	},
-	"extends": ["eslint:recommended", "plugin:react/recommended", "plugin:react-hooks/recommended", "prettier"],
+	"extends": [
+		"eslint:recommended",
+		"plugin:react/recommended",
+		"plugin:react-hooks/recommended",
+		"plugin:@wordpress/eslint-plugin/recommended-with-formatting",
+		"prettier"
+	],
 	"settings": {
 		"react": {
 			"version": "^18.2.0"
