@@ -38,7 +38,9 @@ Out of the box, this template provides a minimal WordPress theme with basic supp
 
 ## Quickstart
 
-This project requires [Docker][docker] and [Node.js][node] for local development. You may also find it useful to install [Composer][composer] for linting in your editor, but it isn't strictly necessary. To run the project for the first time, do the following:
+This project requires [Docker][docker] and [Node.js][node] for local development. For a better editing experience for PHP and Twig files, it's useful to have [PHP installed][php-install] on your system as well. If you are on Windows and use VS Code, you may find it helpful to [run VS Code in a container][vs-code-container] so that you can more easily work with PHP (see more details in the [Local Development Setup section](#running-vs-code-in-a-container)).
+
+To run the project for the first time, do the following:
 
 1. Duplicate `.env.example` and rename it `.env`, changing variables [as needed](#setting-local-environment-variables)
 1. Run `npm install`
@@ -84,6 +86,10 @@ Beyond that, it's up to you to customize the site based on your project's needs.
 
 ## Local Development Setup
 
+### npm scripts
+
+This project defines most scripts for development tasks as [npm scripts][npm-scripts], which are defined in the `scripts` field in `package.json`. If you're developing on Windows, you may need to run `npm config set script-shell "C:\\Program Files\\git\\bin\\bash.exe"` for some scripts to work.
+
 ### Setting Local Environment Variables
 
 For the local environment we are using a `.env` to define the username, passwords, and the database name used in the Docker container.
@@ -97,7 +103,7 @@ For the local environment we are using a `.env` to define the username, password
 
 ### Linting
 
-This theme uses the following files for linting:
+This theme uses the following tools for linting:
 
 - ESLint for JS files with recommended rules for vanilla JS and React
 - Stylelint for SCSS files with standard CSS and SCSS rules
@@ -185,11 +191,12 @@ If you use Atom, go to Preferences > Packages. Open the `language-php` Core Pack
 
 #### VS Code
 
-If you use Microsoft VS Code, create a `settings.json` inside a `.vscode` directory at the root of the project. Include this in your setting (it will help make developing with PHP_Codesniffer much easier):
+If you use [VS Code][vs-code], create a `settings.json` inside a `.vscode` directory at the root of the project. Include this in your setting (it will help make developing with PHP_Codesniffer and twigcs much easier):
 
 ```json
 {
 	"phpcs.standard": "wp-configs/phpcs-rules-standard.xml",
+	"twigcs.executablePath": "vendor/bin/twigcs",
 	"editor.tabSize": 2,
 	"[php]": {
 		"editor.tabSize": 4,
@@ -201,8 +208,63 @@ If you use Microsoft VS Code, create a `settings.json` inside a `.vscode` direct
 
 Helpful VS Code Extensions:
 
-- [phpcs][phpcs_vscode]
-- [Twig][twig_vscode]
+- [phpcs][phpcs-vscode]
+- [Twig][twig-vscode]
+- [twigcs][twigcs-vscode]
+
+##### Running VS Code in a Container
+
+The [Dev Containers extension][dev-containers-vscode] allows you to run VS Code inside a container, giving you access to a consistent environment that you can configure to include the dependencies you need. For this project, we recommend an Ubuntu container with the same PHP version as in the [Dockerfile](./Dockerfile), the LTS version of Node.js, and Docker (docker-in-docker).
+
+After installing the Dev Containers extension, you can manually create the container through the extension's UI, or you can add a configuration file at `.devcontainer/devcontainer.json`, like so:
+
+```json
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/ubuntu
+{
+	"name": "Ubuntu",
+	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+	"image": "mcr.microsoft.com/devcontainers/base:jammy",
+	"features": {
+		"ghcr.io/devcontainers/features/node:1": {
+			"nodeGypDependencies": true,
+			"version": "lts",
+			"nvmVersion": "latest"
+		},
+		"ghcr.io/shyim/devcontainers-features/php:0": {
+			"installComposer": true,
+			"version": "8.1"
+		},
+		"ghcr.io/devcontainers/features/docker-in-docker:2": {
+			"moby": true,
+			"azureDnsAutoDetection": true,
+			"installDockerBuildx": true,
+			"version": "latest",
+			"dockerDashComposeVersion": "v2"
+		}
+	},
+	"customizations": {
+		"vscode": {
+			"extensions": ["shevaua.phpcs", "whatwedo.twig", "cerzat43.twigcs"]
+		}
+	}
+
+	// Features to add to the dev container. More info: https://containers.dev/features.
+	// "features": {},
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
+
+	// Use 'postCreateCommand' to run commands after the container is created.
+	// "postCreateCommand": "uname -a",
+
+	// Configure tool-specific properties.
+	// "customizations": {},
+
+	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+	// "remoteUser": "root"
+}
+```
 
 ## WordPress
 
@@ -673,30 +735,36 @@ Deployment to Pantheon requires setting the following variables and secrets in G
 
 <!-- Links: -->
 
-[docker]: https://www.docker.com
-[composer]: https://getcomposer.org/download/
-[node]: https://nodejs.org/en/
-[twig_vscode]: https://marketplace.visualstudio.com/items?itemName=whatwedo.twig
-[phpcs_vscode]: https://marketplace.visualstudio.com/items?itemName=shevaua.phpcs
+[advanced-custom-fields]: https://www.advancedcustomfields.com/
 [babel]: https://babeljs.io
+[bem]: http://getbem.com
+[bemit]: https://csswizardry.com/2015/08/bemit-taking-the-bem-naming-convention-a-step-further/
+[composer]: https://getcomposer.org/download/
+[contact-form-7]: https://contactform7.com/
+[dev-containers-vscode]: https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers
+[docker]: https://www.docker.com
+[gh-personal-access-token]: https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-personal-access-token-classic
+[gh-secrets]: https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions#creating-secrets-for-a-repository
+[gh-variables]: https://docs.github.com/en/actions/learn-github-actions/variables#creating-configuration-variables-for-a-repository
+[google-site-kit]: https://sitekit.withgoogle.com/
+[html-extension]: https://github.com/twigphp/html-extra
+[itcss]: https://www.xfive.co/blog/itcss-scalable-maintainable-css-architecture/
+[metabox]: https://metabox.io/
+[node]: https://nodejs.org/en/
+[npm-scripts]: https://docs.npmjs.com/cli/v6/using-npm/scripts
+[php-install]: https://www.php.net/manual/en/install.php
+[phpcs-vscode]: https://marketplace.visualstudio.com/items?itemName=shevaua.phpcs
+[rollbar]: https://docs.rollbar.com/docs/wordpress
+[sass]: https://sass-lang.com/
 [sb-eslint]: https://github.com/sparkbox/eslint-config-sparkbox
 [sb-stylelint]: https://github.com/sparkbox/stylelint-config-sparkbox
-[wpcs]: https://github.com/WordPress/WordPress-Coding-Standards
-[bemit]: https://csswizardry.com/2015/08/bemit-taking-the-bem-naming-convention-a-step-further/
-[twig]: https://twig.symfony.com/
-[timber]: https://timber.github.io/docs/
-[html-extension]: https://github.com/twigphp/html-extra
 [string-extension]: https://github.com/twigphp/string-extra
+[timber]: https://timber.github.io/docs/
+[twig-vscode]: https://marketplace.visualstudio.com/items?itemName=whatwedo.twig
+[twig]: https://twig.symfony.com/
+[twigcs-vscode]: https://marketplace.visualstudio.com/items?itemName=cerzat43.twigcs
+[vs-code-container]: https://code.visualstudio.com/docs/devcontainers/tutorial
+[vs-code]: https://code.visualstudio.com/
 [widgets]: https://developer.wordpress.org/themes/functionality/sidebars/
-[metabox]: https://metabox.io/
-[advanced-custom-fields]: https://www.advancedcustomfields.com/
+[wpcs]: https://github.com/WordPress/WordPress-Coding-Standards
 [yoast-seo]: https://wordpress.org/plugins/wordpress-seo/
-[google-site-kit]: https://sitekit.withgoogle.com/
-[contact-form-7]: https://contactform7.com/
-[rollbar]: https://docs.rollbar.com/docs/wordpress
-[itcss]: https://www.xfive.co/blog/itcss-scalable-maintainable-css-architecture/
-[bem]: http://getbem.com
-[sass]: https://sass-lang.com/
-[gh-variables]: https://docs.github.com/en/actions/learn-github-actions/variables#creating-configuration-variables-for-a-repository
-[gh-secrets]: https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions#creating-secrets-for-a-repository
-[gh-personal-access-token]: https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-personal-access-token-classic
