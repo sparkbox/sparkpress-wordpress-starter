@@ -188,7 +188,7 @@ If you use Atom, go to Preferences > Packages. Open the `language-php` Core Pack
 
 #### VS Code
 
-If you use [VS Code][vs-code], you can create a `settings.json` file inside a `.vscode` directory at the root of the project to change how PHP or other languages are treated by the editor. Include this in your settings to help make developing with PHP_Codesniffer and twigcs much easier:
+If you use [VS Code][vs-code], you can create a `settings.json` file inside a `.vscode` directory at the root of the project to change how PHP or other languages are treated by the editor.
 
 ```json
 {
