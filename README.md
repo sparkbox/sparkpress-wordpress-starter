@@ -280,6 +280,8 @@ After installing the Dev Containers extension, you can manually create the conta
 }
 ```
 
+Note: after restarting in the containerized VS Code, you will need to run `npm ci` and `docker compose build` again. You may also need to delete the `theme` and `plugins` folders so that the build process can recreate them with the right file permissions for the container.
+
 ## WordPress
 
 ### Upgrading WordPress
