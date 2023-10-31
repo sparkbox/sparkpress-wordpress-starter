@@ -259,7 +259,7 @@ After installing the Dev Containers extension, you can manually create the conta
 	},
 	"customizations": {
 		"vscode": {
-			"extensions": ["shevaua.phpcs", "whatwedo.twig", "cerzat43.twigcs"]
+			"extensions": ["ValeryanM.vscode-phpsab", "whatwedo.twig", "cerzat43.twigcs"]
 		}
 	}
 
