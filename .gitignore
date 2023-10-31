@@ -2,7 +2,6 @@
 .DS_Store
 *.code-workspace
 .vscode
-.devcontainer
 .nova
 .gitallowed
 
