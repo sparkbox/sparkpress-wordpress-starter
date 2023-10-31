@@ -69,7 +69,6 @@ After generating a new repo from the Sparkpress template, you will need to chang
   - [ ] `.github/workflows/release-please.yml` (`package-name` field)
   - [ ] `scripts/export-db.sh` (db container name)
   - [ ] `scripts/import-db.sh` (db container names)
-  - [ ] `scripts/run.sh` (container name)
   - [ ] `src/php/style.css` (theme name plus the other metadata in the file)
   - [ ] `src/php/inc/theme-scripts.php` (metadata and prefixes for function/script names)
   - [ ] `src/php/inc/theme-setup.php` (metadata and prefixes for function names)
@@ -88,7 +87,7 @@ Beyond that, it's up to you to customize the site based on your project's needs.
 
 ### npm scripts
 
-This project defines most scripts for development tasks as [npm scripts][npm-scripts], which are defined in the `scripts` field in `package.json`. If you're developing on Windows, you may need to run `npm config set script-shell "C:\\Program Files\\git\\bin\\bash.exe"` for some scripts to work.
+This project uses [npm scripts][npm-scripts] for most development tasks, and they are defined in the `scripts` field in `package.json`. If you're developing on Windows, you may need to run `npm config set script-shell "C:\\Program Files\\git\\bin\\bash.exe"` for some scripts to work.
 
 ### Setting Local Environment Variables
 
@@ -105,7 +104,7 @@ For the local environment we are using a `.env` to define the username, password
 
 This theme uses the following tools for linting:
 
-- ESLint for JS files with recommended rules for vanilla JS and React
+- ESLint for JS files with recommended rules for vanilla JS, React, and WordPress
 - Stylelint for SCSS files with standard CSS and SCSS rules
 - PHP_Codesniffer for PHP Files with rules from `wp-configs/phpcs-rules-standard.xml` which extends the WordPress Coding Standards.
 - Twig_Codesniffer with default rules
@@ -191,7 +190,28 @@ If you use Atom, go to Preferences > Packages. Open the `language-php` Core Pack
 
 #### VS Code
 
-If you use [VS Code][vs-code], create a `settings.json` inside a `.vscode` directory at the root of the project. Include this in your setting (it will help make developing with PHP_Codesniffer and twigcs much easier):
+If you use [VS Code][vs-code], you can create a `settings.json` file inside a `.vscode` directory at the root of the project to change how PHP or other languages are treated by the editor. Include this in your settings to help make developing with PHP_Codesniffer and twigcs much easier:
+
+```json
+{
+	"editor.tabSize": 2,
+	"[php]": {
+		"editor.tabSize": 4,
+		"editor.insertSpaces": false,
+		"editor.detectIndentation": false
+	}
+}
+```
+
+##### Helpful VS Code Extensions
+
+We recommend these extensions to make working with PHP and Twig easier.
+
+- [PHP Sniffer & Beautifier][phpsab-vscode]
+- [Twig][twig-vscode]
+- [twigcs][twigcs-vscode]
+
+Note: you will need to have vendor files available on your host machine (not the container they're installed in) for the linters to highlight code while you're working. You can run `npm run map-vendor-files` to make them available at the paths specified in the example `settings.json` below, and as long as you have PHP installed on your system, they _should_ work. Windows has limited support for PHP, though, so you may want to run VS Code in a container so that PHP will be more easily available (or you can choose to live without real-time error highlighting).
 
 ```json
 {
@@ -201,20 +221,12 @@ If you use [VS Code][vs-code], create a `settings.json` inside a `.vscode` direc
 	"twigcs.executablePath": "vendor/bin/twigcs",
 	"editor.tabSize": 2,
 	"[php]": {
-		"editor.tabSize": 2,
+		"editor.tabSize": 4,
 		"editor.insertSpaces": false,
 		"editor.detectIndentation": false
 	}
 }
 ```
-
-Helpful VS Code Extensions:
-
-- [phpsab][phpsab-vscode]
-- [Twig][twig-vscode]
-- [twigcs][twigcs-vscode]
-
-Note: you will need to have vendor files available on your host machine (not the container they're installed in) for the linters to highlight code while you're working. You can run `npm run map-vendor-files` to make them available at the paths specified in the sample `settings.json` above, and as long as you have PHP installed on your system, they _should_ work. Windows has limited support for PHP, though, so you may want to run VS Code in a container so that PHP will be more easily available (or you can choose to live without real-time error highlighting).
 
 ##### Running VS Code in a Container
 
