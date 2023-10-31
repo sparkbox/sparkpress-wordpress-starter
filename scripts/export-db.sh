@@ -23,7 +23,7 @@ fi
 mkdir -p $path
 
 # generate SQL dump
-docker exec -i sparkpress_db mysqldump --user=root --password=$MYSQL_ROOT_PASSWORD $MYSQL_DATABASE > $path/$prefix-raw.sql
+docker compose exec -i db mysqldump --user=root --password=$MYSQL_ROOT_PASSWORD $MYSQL_DATABASE > $path/$prefix-raw.sql
 
 # replace localhost URLs with target environment URL
 sed "s/http:\/\/localhost:8000/$SITE_URL/g" $path/$prefix-raw.sql > $filename

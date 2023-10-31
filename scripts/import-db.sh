@@ -17,9 +17,9 @@ gunzip sync/sql/db-import-raw.sql.gz
 sed "s/$SITE_URL/http:\/\/localhost:8000/g" sync/sql/db-import-raw.sql > sync/sql/db-import.sql
 
 # drop existing database, create a new one, and load it up with data
-docker exec -i sparkpress_db mysql --user=$MYSQL_USER --password=$MYSQL_PASSWORD -e "drop database if exists $MYSQL_DATABASE"
-docker exec -i sparkpress_db mysql --user=$MYSQL_USER --password=$MYSQL_PASSWORD -e "create database $MYSQL_DATABASE"
-docker exec -i sparkpress_db mysql --user=$MYSQL_USER --password=$MYSQL_PASSWORD $MYSQL_DATABASE < sync/sql/db-import.sql
+docker compose exec -i db mysql --user=$MYSQL_USER --password=$MYSQL_PASSWORD -e "drop database if exists $MYSQL_DATABASE"
+docker compose exec -i db mysql --user=$MYSQL_USER --password=$MYSQL_PASSWORD -e "create database $MYSQL_DATABASE"
+docker compose exec -iT db mysql --user=$MYSQL_USER --password=$MYSQL_PASSWORD $MYSQL_DATABASE < sync/sql/db-import.sql
 
 # clean up files that aren't useful after import
 rm sync/sql/db-import*

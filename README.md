@@ -67,8 +67,6 @@ After generating a new repo from the Sparkpress template, you will need to chang
   - [ ] `.github/workflows/deploy.docker.yml` (references to the container registry or delete the file if not using a docker deployment process)
   - [ ] `.github/workflows/deploy.pantheon.yml` (theme folder names)
   - [ ] `.github/workflows/release-please.yml` (`package-name` field)
-  - [ ] `scripts/export-db.sh` (db container name)
-  - [ ] `scripts/import-db.sh` (db container names)
   - [ ] `src/php/style.css` (theme name plus the other metadata in the file)
   - [ ] `src/php/inc/theme-scripts.php` (metadata and prefixes for function/script names)
   - [ ] `src/php/inc/theme-setup.php` (metadata and prefixes for function names)
