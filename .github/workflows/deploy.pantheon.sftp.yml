@@ -3,6 +3,7 @@ name: Deploy to Pantheon (SFTP)
 on:
   push:
     branches: [main]
+  pull_request:
   workflow_dispatch:
 
 jobs:
@@ -35,18 +36,10 @@ jobs:
       - name: Build theme
         run: npm run build:prod
 
-      - name: Install SSH key
-        uses: shimataro/ssh-key-action@v2
+      - name: Install Terminus
+        uses: pantheon-systems/terminus-github-actions@1.1.0
         with:
-          key: ${{ secrets.PANTHEON_ID_RSA }}
-          known_hosts: ${{ secrets.KNOWN_HOSTS }}
+          pantheon-machine-token: ${{ secrets.PANTHEON_MACHINE_TOKEN }}
 
-      - name: Add SSH Key
-        run: |
-          eval `ssh-agent`
-          ssh-add ~/.ssh/id_rsa
-
-      - name: Deploy to Pantheon via SFTP
-        if: ${{ vars.DEPLOY_TO_PANTHEON_SFTP }}
-        run: |
-          echo "This is a test"
+      - name: List sites
+        run: terminus site:list
