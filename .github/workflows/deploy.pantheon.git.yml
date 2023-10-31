@@ -1,4 +1,4 @@
-name: Deploy to Pantheon
+name: Deploy to Pantheon (Git)
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
 
 jobs:
   deploy:
-    if: ${{ vars.DEPLOY_TO_PANTHEON_GIT || vars.DEPLOY_TO_PANTHEON_SFTP }}
+    if: ${{ vars.DEPLOY_TO_PANTHEON_GIT }}
     runs-on: ubuntu-latest
 
     strategy:
@@ -46,9 +46,7 @@ jobs:
           eval `ssh-agent`
           ssh-add ~/.ssh/id_rsa
 
-      # Git-specific deployment steps
       - name: Checkout Pantheon remote
-        if: ${{ vars.DEPLOY_TO_PANTHEON_GIT }}
         run: |
           git config --global user.email "${{ secrets.PRODUCTION_USER_EMAIL }}"
           git config --global user.name "${{ secrets.PRODUCTION_USER_NAME }}"
@@ -57,7 +55,6 @@ jobs:
           git worktree add --track -b prod prod pantheon/master
 
       - name: Copy build artifacts
-        if: ${{ vars.DEPLOY_TO_PANTHEON_GIT }}
         run: |
           rm -rf prod/vendor prod/wp-content/plugins prod/wp-content/themes/sparkpress
           cp -r vendor prod
@@ -66,17 +63,10 @@ jobs:
           mkdir -p wp-content/plugins
           cp -r wp-content/plugins prod/wp-content/plugins
 
-      - name: Deploy to Pantheon via Git
-        if: ${{ vars.DEPLOY_TO_PANTHEON_GIT }}
+      - name: Deploy to Pantheon
         run: |
           cd prod
           git status | grep "nothing to commit" && exit 0 || git status
           git add .
           git commit -m "Prod release"
           git push pantheon HEAD:master
-
-      # SFTP-specific deployment steps
-      - name: Deploy to Pantheon via SFTP
-        if: ${{ vars.DEPLOY_TO_PANTHEON_SFTP }}
-        run: |
-          echo "This is a test"
