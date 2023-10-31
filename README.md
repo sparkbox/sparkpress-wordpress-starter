@@ -38,7 +38,7 @@ Out of the box, this template provides a minimal WordPress theme with basic supp
 
 ## Quickstart
 
-This project requires [Docker][docker] and [Node.js][node] for local development. For a better editing experience for PHP and Twig files, it's useful to have [PHP installed][php-install] on your system as well. If you are on Windows and use VS Code, you may find it helpful to [run VS Code in a container][vs-code-container] so that you can more easily work with PHP (see more details in the [Local Development Setup section](#running-vs-code-in-a-container)).
+This project requires [Docker][docker] and [Node.js][node] for local development. For a better editing experience for PHP and Twig files, it's useful to have [PHP installed][php-install] on your system as well, but it isn't required.
 
 To run the project for the first time, do the following:
 
@@ -205,11 +205,11 @@ If you use [VS Code][vs-code], you can create a `settings.json` file inside a `.
 
 We recommend these extensions to make working with PHP and Twig easier.
 
-- [PHP Sniffer & Beautifier][phpsab-vscode]
+- [PHP Sniffer & Beautifier][phpsab-vscode] (may not work on Windows)
 - [Twig][twig-vscode]
-- [twigcs][twigcs-vscode]
+- [twigcs][twigcs-vscode] (may not work on Windows)
 
-Note: you will need to have vendor files available on your host machine (not the container they're installed in) for the linters to highlight code while you're working. You can run `npm run map-vendor-files` to make them available at the paths specified in the example `settings.json` below, and as long as you have PHP installed on your system, they _should_ work. Windows has limited support for PHP, though, so you may want to run VS Code in a container so that PHP will be more easily available (or you can choose to live without real-time error highlighting).
+Note: you will need to have vendor files available on your host machine (not the container they're installed in) for the linters to highlight code while you're working. You can run `npm run map-vendor-files` to make them available at the paths specified in the example `settings.json` below, and as long as you have PHP installed on your system, they _should_ work. Windows has limited support for PHP, though, so you may not be able to get real-time error highlighting on PHP/Twig files.
 
 ```json
 {
@@ -225,62 +225,6 @@ Note: you will need to have vendor files available on your host machine (not the
 	}
 }
 ```
-
-##### Running VS Code in a Container
-
-The [Dev Containers extension][dev-containers-vscode] allows you to run VS Code inside a container, giving you access to a consistent environment that you can configure to include the dependencies you need. For this project, we recommend an Ubuntu container with the same PHP version as in the [Dockerfile](./Dockerfile), the LTS version of Node.js, and Docker (docker-in-docker).
-
-After installing the Dev Containers extension, you can manually create the container through the extension's UI, or you can add a configuration file at `.devcontainer/devcontainer.json`, like so:
-
-```json
-// For format details, see https://aka.ms/devcontainer.json. For config options, see the
-// README at: https://github.com/devcontainers/templates/tree/main/src/ubuntu
-{
-	"name": "Ubuntu",
-	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-	"image": "mcr.microsoft.com/devcontainers/base:jammy",
-	"features": {
-		"ghcr.io/devcontainers/features/node:1": {
-			"nodeGypDependencies": true,
-			"version": "lts",
-			"nvmVersion": "latest"
-		},
-		"ghcr.io/shyim/devcontainers-features/php:0": {
-			"installComposer": true,
-			"version": "8.1"
-		},
-		"ghcr.io/devcontainers/features/docker-in-docker:2": {
-			"moby": true,
-			"azureDnsAutoDetection": true,
-			"installDockerBuildx": true,
-			"version": "latest",
-			"dockerDashComposeVersion": "v2"
-		}
-	},
-	"customizations": {
-		"vscode": {
-			"extensions": ["ValeryanM.vscode-phpsab", "whatwedo.twig", "cerzat43.twigcs"]
-		}
-	}
-
-	// Features to add to the dev container. More info: https://containers.dev/features.
-	// "features": {},
-
-	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	// "forwardPorts": [],
-
-	// Use 'postCreateCommand' to run commands after the container is created.
-	// "postCreateCommand": "uname -a",
-
-	// Configure tool-specific properties.
-	// "customizations": {},
-
-	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
-	// "remoteUser": "root"
-}
-```
-
-Note: after restarting in the containerized VS Code, you will need to run `npm ci` and `docker compose build` again. You may also need to delete the `theme` and `plugins` folders so that the build process can recreate them with the right file permissions for the container.
 
 ## WordPress
 
@@ -752,12 +696,8 @@ Deployment to Pantheon requires setting the following variables and secrets in G
 <!-- Links: -->
 
 [advanced-custom-fields]: https://www.advancedcustomfields.com/
-[babel]: https://babeljs.io
-[bem]: http://getbem.com
 [bemit]: https://csswizardry.com/2015/08/bemit-taking-the-bem-naming-convention-a-step-further/
-[composer]: https://getcomposer.org/download/
 [contact-form-7]: https://contactform7.com/
-[dev-containers-vscode]: https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers
 [docker]: https://www.docker.com
 [gh-personal-access-token]: https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-personal-access-token-classic
 [gh-secrets]: https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions#creating-secrets-for-a-repository
@@ -772,14 +712,11 @@ Deployment to Pantheon requires setting the following variables and secrets in G
 [phpsab-vscode]: https://marketplace.visualstudio.com/items?itemName=ValeryanM.vscode-phpsab
 [rollbar]: https://docs.rollbar.com/docs/wordpress
 [sass]: https://sass-lang.com/
-[sb-eslint]: https://github.com/sparkbox/eslint-config-sparkbox
-[sb-stylelint]: https://github.com/sparkbox/stylelint-config-sparkbox
 [string-extension]: https://github.com/twigphp/string-extra
 [timber]: https://timber.github.io/docs/
 [twig-vscode]: https://marketplace.visualstudio.com/items?itemName=whatwedo.twig
 [twig]: https://twig.symfony.com/
 [twigcs-vscode]: https://marketplace.visualstudio.com/items?itemName=cerzat43.twigcs
-[vs-code-container]: https://code.visualstudio.com/docs/devcontainers/tutorial
 [vs-code]: https://code.visualstudio.com/
 [widgets]: https://developer.wordpress.org/themes/functionality/sidebars/
 [wpcs]: https://github.com/WordPress/WordPress-Coding-Standards
