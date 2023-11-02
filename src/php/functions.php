@@ -61,6 +61,13 @@ foreach ( glob( get_template_directory() . '/inc/taxonomies/*.php' ) as $filenam
 }
 
 /**
+ * Custom Meta Boxes
+ */
+foreach ( glob( get_template_directory() . '/inc/meta-boxes/*.php' ) as $filename ) {
+	require_once $filename;
+}
+
+/**
  * Enqueue scripts and styles.
  */
 require get_template_directory() . '/inc/theme-styles.php';

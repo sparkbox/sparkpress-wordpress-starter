@@ -44,6 +44,7 @@
     "preimport:uploads": "npm run backup:uploads",
     "generate:custom-block": "node ./generators/custom-block.js",
     "generate:custom-blocks-plugin": "node ./generators/custom-blocks-plugin.js",
+    "generate:meta-box": "node ./generators/meta-box.js",
     "generate:page-template": "node ./generators/page-template.js",
     "generate:pattern": "node ./generators/pattern.js",
     "generate:post-type": "node ./generators/post-type.js",
