@@ -23,19 +23,19 @@ Out of the box, this template provides a minimal WordPress theme with basic supp
 
 ## Table of Contents
 
-| Developer Documentation                             |
-| --------------------------------------------------- |
-| [Quickstart](#quickstart)                           |
-| [Customization](#customization)                     |
-| [Local Development Setup](#local-development-setup) |
-| [WordPress](#wordpress)                             |
-| [Project Structure](#project-structure)             |
-| [Generators](#generators)                           |
-| [Plugins](#plugins)                                 |
-| [Custom Blocks](#custom-blocks)                     |
-| [Deployment](#deployment)                           |
-| [How to Contribute](./CONTRIBUTING.md)              |
-| [Code of Conduct](./CODE_OF_CONDUCT.md)             |
+| Developer Documentation                                   |
+| --------------------------------------------------------- |
+| [Quickstart](#quickstart)                                 |
+| [Customization](#customization)                           |
+| [Local Development Setup](#local-development-setup)       |
+| [WordPress](#wordpress)                                   |
+| [Project Structure](#project-structure)                   |
+| [Plugins](#plugins)                                       |
+| [Generators](#generators)                                 |
+| [Implementing Custom Blocks](#implementing-custom-blocks) |
+| [Deployment](#deployment)                                 |
+| [How to Contribute](./CONTRIBUTING.md)                    |
+| [Code of Conduct](./CODE_OF_CONDUCT.md)                   |
 
 ## Quickstart
 
@@ -352,6 +352,42 @@ The `php/` directory holds the PHP template files for the WordPress theme. Other
   - `partials` - Twig templates for components or pieces of the page to be reused should go here.
   - `shortcodes` - Twig templates for shortcodes should go here.
 
+## Plugins
+
+### Installing Plugins
+
+Install plugins via `composer` by running `npm run php:run composer require wpackagist-plugin/<plugin-name>:<version-number-or-range>`. For example:
+
+```sh
+# install a specific version/range for advanced-custom-fields
+npm run php:run composer require wpackagist-plugin/advanced-custom-fields:^6.1
+
+# or just install the latest version, letting composer resolve the range
+npm run php:run composer require wpackagist-plugin/advanced-custom-fields
+```
+
+Running this command will update `composer.json` and `composer.lock`, but you will need to rebuild (`docker compose build`) and restart your container (`npm start` or `npm run serve:dev`) to see the new plugin reflected in the WordPress admin.
+
+### Updating Plugins
+
+You can run `composer require` as above to update existing plugins, or you can do the following.
+
+1. Update the version number in the "require" list in `composer.json`.
+1. Run `npm run php:run composer update` to update `composer.lock`.
+
+Again, you'll need to rebuild and restart your container to see the changes reflected in WordPress.
+
+### Recommended Plugins
+
+This is a non-comprehensive list of plugins that we have found useful on other projects.
+
+- [Metabox][metabox]
+- [Advanced Custom Fields][advanced-custom-fields]
+- [Yoast SEO][yoast-seo]
+- [Google Site Kit][google-site-kit]
+- [Contact Form 7][contact-form-7]
+- [Rollbar][rollbar]
+
 ## Generators
 
 We have a handful of generators to make it easier to add new custom post types, taxonomies, shortcodes, and page templates. If none of the generators give you what you need, you can try using https://generatewp.com/ to get more relevant code snippets.
@@ -489,45 +525,9 @@ The following file will be created based on your input:
 
 [Meta Box documentation](https://developer.wordpress.org/plugins/metadata/custom-meta-boxes/)
 
-## Plugins
+## Implementing Custom Blocks
 
-### Installing Plugins
-
-Install plugins via `composer` by running `npm run php:run composer require wpackagist-plugin/<plugin-name>:<version-number-or-range>`. For example:
-
-```sh
-# install a specific version/range for advanced-custom-fields
-npm run php:run composer require wpackagist-plugin/advanced-custom-fields:^6.1
-
-# or just install the latest version, letting composer resolve the range
-npm run php:run composer require wpackagist-plugin/advanced-custom-fields
-```
-
-Running this command will update `composer.json` and `composer.lock`, but you will need to rebuild (`docker compose build`) and restart your container (`npm start` or `npm run serve:dev`) to see the new plugin reflected in the WordPress admin.
-
-### Updating Plugins
-
-You can run `composer require` as above to update existing plugins, or you can do the following.
-
-1. Update the version number in the "require" list in `composer.json`.
-1. Run `npm run php:run composer update` to update `composer.lock`.
-
-Again, you'll need to rebuild and restart your container to see the changes reflected in WordPress.
-
-### Recommended Plugins
-
-This is a non-comprehensive list of plugins that we have found useful on other projects.
-
-- [Metabox][metabox]
-- [Advanced Custom Fields][advanced-custom-fields]
-- [Yoast SEO][yoast-seo]
-- [Google Site Kit][google-site-kit]
-- [Contact Form 7][contact-form-7]
-- [Rollbar][rollbar]
-
-## Custom Blocks
-
-We have two [generators](#generators) that can be used in tandem to create the necessary scaffolding for custom blocks. The first is `npm run generate:custom-blocks-plugin`, which should be run first to create the plugin config, readme, directory, and `package.json`/`docker-compose.yml` changes necessary to make the plugin available to WordPress. The second is `npm run generate:custom-block`, which creates the boilerplate files necessary to create a single custom block within the plugin.
+To implement custom blocks, begin by using the two [generators](#generators) in tandem to create the necessary scaffolding for custom blocks. The first is `npm run generate:custom-blocks-plugin`, which should be run first to create the plugin config, readme, directory, and `package.json`/`docker-compose.yml` changes necessary to make the plugin available to WordPress. The second is `npm run generate:custom-block`, which creates the boilerplate files necessary to create a single custom block within the plugin.
 
 Note: you will need to restart your development process to pick up the changes after adding a custom blocks plugin and/or a custom block.
 
