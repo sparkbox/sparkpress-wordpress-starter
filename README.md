@@ -8,15 +8,16 @@ Out of the box, this template provides a minimal WordPress theme with basic supp
 - Support for SCSS with an ITCSS structure already in place
 - Support for bundling JS with `esbuild` and testing JS with `vitest`
 - Support for [Twig][twig] templates using [Timber][timber]
-- Database import and export scripts to make syncing between environments simple and fast
+- Database/uploads import and export scripts to make syncing between environments simple and fast
 - Generator scripts to speed up the process of adding:
   - Page templates
   - Custom post types
   - Shortcodes
   - Custom taxonomies
   - Reusable patterns
+  - Custom blocks plugins
+  - Custom blocks
   - Meta boxes
-- Sample custom blocks which you can reference to create your own custom blocks
 - Code style rules that are enforced by language-specific linters
 - GitHub Action workflows for code quality, release management, and deployment processes
 
@@ -39,6 +40,8 @@ Out of the box, this template provides a minimal WordPress theme with basic supp
 ## Quickstart
 
 This project requires [Docker][docker] and [Node.js][node] for local development. For a better editing experience for PHP and Twig files, it's useful to have [PHP installed][php-install] on your system as well, but it isn't required.
+
+If you're using Windows, it's best to use Git Bash (included when you install [Git](https://git-scm.com/downloads)) for command line operations for compatibility. If using [VS Code][vs-code], you can [set Git Bash as your default terminal](https://code.visualstudio.com/docs/sourcecontrol/intro-to-git#_git-bash-on-windows).
 
 To run the project for the first time, do the following:
 
@@ -89,7 +92,7 @@ This project uses [npm scripts][npm-scripts] for most development tasks, and the
 
 ### Setting Local Environment Variables
 
-For the local environment we are using a `.env` to define the username, passwords, and the database name used in the Docker container.
+For the local environment we are using a `.env` file to define the username, passwords, and the database name used in the Docker container.
 
 - `MYSQL_USER` is the username WordPress will use to access the database
 - `MYSQL_PASSWORD` is the password for `MYSQL_USER`
@@ -182,11 +185,7 @@ You can export your `uploads` folder for another developer to import or to impor
 
 This will happen automatically on import, but if you want to manually backup your `uploads` folder, you can run `npm run backup:uploads`. This functions nearly identically to the `export:uploads` script, except for using a different prefix and putting the zip file in `sync/uploads/backups`. As with `export:uploads`, you can specify a name for your backup if you want.
 
-### Atom
-
-If you use Atom, go to Preferences > Packages. Open the `language-php` Core Package settings. Go to the Tab Type setting and set the drop down option to `hard`.
-
-#### VS Code
+### VS Code
 
 If you use [VS Code][vs-code], you can create a `settings.json` file inside a `.vscode` directory at the root of the project to change how PHP or other languages are treated by the editor.
 
@@ -201,7 +200,7 @@ If you use [VS Code][vs-code], you can create a `settings.json` file inside a `.
 }
 ```
 
-##### Helpful VS Code Extensions
+#### Helpful VS Code Extensions
 
 We recommend these extensions to make working with PHP and Twig easier.
 
@@ -237,7 +236,7 @@ Whenever a new version of WordPress is released, follow this process to update t
    1. Change `WP_VERSION` in `Dockerfile` to the latest version
    1. Submit a PR with the update
    1. If your hosting provider manages the WordPress version, update it through their mechanism for staging, test, and/or production enviroments
-1. If the update made breaking changes, create a bug card and _do not_ push any changes
+1. If the update made breaking changes, create a bug card/issue and _do not_ push any changes
 
 ### Permalink Settings
 
@@ -590,7 +589,7 @@ This starter template includes a couple of options for deployment workflows, inc
 
 ### Docker deployment workflow
 
-This repo includes a [GitHub workflow for building a docker image](./.github/workflows/deploy.docker.yml) that gets pushed GitHub's container registry. This image can be deployed to any hosting provider that supports docker containers.
+This repo includes a [GitHub workflow for building a docker image](./.github/workflows/deploy.docker.yml) that gets pushed to GitHub's container registry. This image can be deployed to any hosting provider that supports docker containers.
 
 The image includes all core WordPress files for the version specified for `WP_VERSION` in the `Dockerfile`, as well as the theme and plugin files necessary for the site. The other element required for the site to run is the database, which is excluded, since each environment should have its own database that is specified by environment variables. This allows local developers to test against local data without interfering with production or staging environments.
 
