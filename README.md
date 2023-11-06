@@ -15,6 +15,7 @@ Out of the box, this template provides a minimal WordPress theme with basic supp
   - Shortcodes
   - Custom taxonomies
   - Reusable patterns
+  - Meta boxes
 - Sample custom blocks which you can reference to create your own custom blocks
 - Code style rules that are enforced by language-specific linters
 - GitHub Action workflows for code quality, release management, and deployment processes
@@ -452,6 +453,20 @@ The following files will be created based on your input:
 - `src/plugins/<plugin-name>/src/<block-name>/view.js` (optional)
 
 See [custom block structure](#custom-block-structure) for more info on what these files are for.
+
+### Meta Box
+
+The generator for meta boxes will prompt you for a meta box name, a label for an input, which post type(s) the meta box should be enabled for, and where the box should be positioned based on context and priority. The generator only adds a single text input field for demonstration purposes. Different input types and advanced use cases will require developers to implement them. It may be better to use a plugin like [Advanced Custom Fields][advanced-custom-fields] for some situations, especially when a WordPress admin should be able to manage the fields without devloper help.
+
+```sh
+npm run generate:meta-box
+```
+
+The following file will be created based on your input:
+
+- `src/php/inc/meta-boxes/class-<meta-box-name>.php`
+
+[Meta Box documentation](https://developer.wordpress.org/plugins/metadata/custom-meta-boxes/)
 
 ## Plugins
 
