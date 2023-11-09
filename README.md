@@ -8,37 +8,42 @@ Out of the box, this template provides a minimal WordPress theme with basic supp
 - Support for SCSS with an ITCSS structure already in place
 - Support for bundling JS with `esbuild` and testing JS with `vitest`
 - Support for [Twig][twig] templates using [Timber][timber]
-- Database import and export scripts to make syncing between environments simple and fast
+- Database/uploads import and export scripts to make syncing between environments simple and fast
 - Generator scripts to speed up the process of adding:
   - Page templates
   - Custom post types
   - Shortcodes
   - Custom taxonomies
   - Reusable patterns
+  - Custom blocks plugins
+  - Custom blocks
   - Meta boxes
-- Sample custom blocks which you can reference to create your own custom blocks
 - Code style rules that are enforced by language-specific linters
 - GitHub Action workflows for code quality, release management, and deployment processes
 
 ## Table of Contents
 
-| Developer Documentation                             |
-| --------------------------------------------------- |
-| [Quickstart](#quickstart)                           |
-| [Customization](#customization)                     |
-| [Local Development Setup](#local-development-setup) |
-| [WordPress](#wordpress)                             |
-| [Project Structure](#project-structure)             |
-| [Generators](#generators)                           |
-| [Plugins](#plugins)                                 |
-| [Custom Blocks](#custom-blocks)                     |
-| [Deployment](#deployment)                           |
-| [How to Contribute](./CONTRIBUTING.md)              |
-| [Code of Conduct](./CODE_OF_CONDUCT.md)             |
+| Developer Documentation                                   |
+| --------------------------------------------------------- |
+| [Quickstart](#quickstart)                                 |
+| [Customization](#customization)                           |
+| [Local Development Setup](#local-development-setup)       |
+| [WordPress](#wordpress)                                   |
+| [Project Structure](#project-structure)                   |
+| [Plugins](#plugins)                                       |
+| [Generators](#generators)                                 |
+| [Implementing Custom Blocks](#implementing-custom-blocks) |
+| [Deployment](#deployment)                                 |
+| [How to Contribute](./CONTRIBUTING.md)                    |
+| [Code of Conduct](./CODE_OF_CONDUCT.md)                   |
 
 ## Quickstart
 
-This project requires [Docker][docker] and [Node.js][node] for local development. You may also find it useful to install [Composer][composer] for linting in your editor, but it isn't strictly necessary. To run the project for the first time, do the following:
+This project requires [Docker][docker] and [Node.js][node] for local development. For a better editing experience for PHP and Twig files, it's useful to have [PHP installed][php-install] on your system as well, but it isn't required.
+
+If you're using Windows, it's best to use Git Bash (included when you install [Git](https://git-scm.com/downloads)) for command line operations for compatibility. If using [VS Code][vs-code], you can [set Git Bash as your default terminal](https://code.visualstudio.com/docs/sourcecontrol/intro-to-git#_git-bash-on-windows).
+
+To run the project for the first time, do the following:
 
 1. Duplicate `.env.example` and rename it `.env`, changing variables [as needed](#setting-local-environment-variables)
 1. Run `npm install`
@@ -65,9 +70,6 @@ After generating a new repo from the Sparkpress template, you will need to chang
   - [ ] `.github/workflows/deploy.docker.yml` (references to the container registry or delete the file if not using a docker deployment process)
   - [ ] `.github/workflows/deploy.pantheon.yml` (theme folder names)
   - [ ] `.github/workflows/release-please.yml` (`package-name` field)
-  - [ ] `scripts/export-db.sh` (db container name)
-  - [ ] `scripts/import-db.sh` (db container names)
-  - [ ] `scripts/run.sh` (container name)
   - [ ] `src/php/style.css` (theme name plus the other metadata in the file)
   - [ ] `src/php/inc/theme-scripts.php` (metadata and prefixes for function/script names)
   - [ ] `src/php/inc/theme-setup.php` (metadata and prefixes for function names)
@@ -84,9 +86,13 @@ Beyond that, it's up to you to customize the site based on your project's needs.
 
 ## Local Development Setup
 
+### npm scripts
+
+This project uses [npm scripts][npm-scripts] for most development tasks, and they are defined in the `scripts` field in `package.json`. If you're developing on Windows, you may need to run `npm config set script-shell "C:\\Program Files\\git\\bin\\bash.exe"` for some scripts to work.
+
 ### Setting Local Environment Variables
 
-For the local environment we are using a `.env` to define the username, passwords, and the database name used in the Docker container.
+For the local environment we are using a `.env` file to define the username, passwords, and the database name used in the Docker container.
 
 - `MYSQL_USER` is the username WordPress will use to access the database
 - `MYSQL_PASSWORD` is the password for `MYSQL_USER`
@@ -97,9 +103,9 @@ For the local environment we are using a `.env` to define the username, password
 
 ### Linting
 
-This theme uses the following files for linting:
+This theme uses the following tools for linting:
 
-- ESLint for JS files with recommended rules for vanilla JS and React
+- ESLint for JS files with recommended rules for vanilla JS, React, and WordPress
 - Stylelint for SCSS files with standard CSS and SCSS rules
 - PHP_Codesniffer for PHP Files with rules from `wp-configs/phpcs-rules-standard.xml` which extends the WordPress Coding Standards.
 - Twig_Codesniffer with default rules
@@ -179,17 +185,12 @@ You can export your `uploads` folder for another developer to import or to impor
 
 This will happen automatically on import, but if you want to manually backup your `uploads` folder, you can run `npm run backup:uploads`. This functions nearly identically to the `export:uploads` script, except for using a different prefix and putting the zip file in `sync/uploads/backups`. As with `export:uploads`, you can specify a name for your backup if you want.
 
-### Atom
+### VS Code
 
-If you use Atom, go to Preferences > Packages. Open the `language-php` Core Package settings. Go to the Tab Type setting and set the drop down option to `hard`.
-
-#### VS Code
-
-If you use Microsoft VS Code, create a `settings.json` inside a `.vscode` directory at the root of the project. Include this in your setting (it will help make developing with PHP_Codesniffer much easier):
+If you use [VS Code][vs-code], you can create a `settings.json` file inside a `.vscode` directory at the root of the project to change how PHP or other languages are treated by the editor.
 
 ```json
 {
-	"phpcs.standard": "wp-configs/phpcs-rules-standard.xml",
 	"editor.tabSize": 2,
 	"[php]": {
 		"editor.tabSize": 4,
@@ -199,10 +200,30 @@ If you use Microsoft VS Code, create a `settings.json` inside a `.vscode` direct
 }
 ```
 
-Helpful VS Code Extensions:
+#### Helpful VS Code Extensions
 
-- [phpcs][phpcs_vscode]
-- [Twig][twig_vscode]
+We recommend these extensions to make working with PHP and Twig easier.
+
+- [PHP Sniffer & Beautifier][phpsab-vscode] (may not work on Windows)
+- [Twig][twig-vscode]
+- [twigcs][twigcs-vscode] (may not work on Windows)
+
+Note: you will need to have vendor files available on your host machine (not the container they're installed in) for the linters to highlight code while you're working. You can run `npm run map-vendor-files` to make them available at the paths specified in the example `settings.json` below, and as long as you have PHP installed on your system, they _should_ work. Windows has limited support for PHP, though, so you may not be able to get real-time error highlighting on PHP/Twig files.
+
+```json
+{
+	"phpsab.executablePathCS": "vendor/bin/phpcs",
+	"phpsab.executablePathCBF": "vendor/bin/phpcbf",
+	"phpsab.standard": "wp-configs/phpcs-rules-standard.xml",
+	"twigcs.executablePath": "vendor/bin/twigcs",
+	"editor.tabSize": 2,
+	"[php]": {
+		"editor.tabSize": 4,
+		"editor.insertSpaces": false,
+		"editor.detectIndentation": false
+	}
+}
+```
 
 ## WordPress
 
@@ -215,7 +236,7 @@ Whenever a new version of WordPress is released, follow this process to update t
    1. Change `WP_VERSION` in `Dockerfile` to the latest version
    1. Submit a PR with the update
    1. If your hosting provider manages the WordPress version, update it through their mechanism for staging, test, and/or production enviroments
-1. If the update made breaking changes, create a bug card and _do not_ push any changes
+1. If the update made breaking changes, create a bug card/issue and _do not_ push any changes
 
 ### Permalink Settings
 
@@ -330,6 +351,42 @@ The `php/` directory holds the PHP template files for the WordPress theme. Other
   - `layouts` - Any twig templates that include the full document structure should go here. That includes the default `base.twig` template and any alternatives, such as for art-directed posts.
   - `partials` - Twig templates for components or pieces of the page to be reused should go here.
   - `shortcodes` - Twig templates for shortcodes should go here.
+
+## Plugins
+
+### Installing Plugins
+
+Install plugins via `composer` by running `npm run php:run composer require wpackagist-plugin/<plugin-name>:<version-number-or-range>`. For example:
+
+```sh
+# install a specific version/range for advanced-custom-fields
+npm run php:run composer require wpackagist-plugin/advanced-custom-fields:^6.1
+
+# or just install the latest version, letting composer resolve the range
+npm run php:run composer require wpackagist-plugin/advanced-custom-fields
+```
+
+Running this command will update `composer.json` and `composer.lock`, but you will need to rebuild (`docker compose build`) and restart your container (`npm start` or `npm run serve:dev`) to see the new plugin reflected in the WordPress admin.
+
+### Updating Plugins
+
+You can run `composer require` as above to update existing plugins, or you can do the following.
+
+1. Update the version number in the "require" list in `composer.json`.
+1. Run `npm run php:run composer update` to update `composer.lock`.
+
+Again, you'll need to rebuild and restart your container to see the changes reflected in WordPress.
+
+### Recommended Plugins
+
+This is a non-comprehensive list of plugins that we have found useful on other projects.
+
+- [Metabox][metabox]
+- [Advanced Custom Fields][advanced-custom-fields]
+- [Yoast SEO][yoast-seo]
+- [Google Site Kit][google-site-kit]
+- [Contact Form 7][contact-form-7]
+- [Rollbar][rollbar]
 
 ## Generators
 
@@ -468,45 +525,9 @@ The following file will be created based on your input:
 
 [Meta Box documentation](https://developer.wordpress.org/plugins/metadata/custom-meta-boxes/)
 
-## Plugins
+## Implementing Custom Blocks
 
-### Installing Plugins
-
-Install plugins via `composer` by running `npm run php:run composer require wpackagist-plugin/<plugin-name>:<version-number-or-range>`. For example:
-
-```sh
-# install a specific version/range for advanced-custom-fields
-npm run php:run composer require wpackagist-plugin/advanced-custom-fields:^6.1
-
-# or just install the latest version, letting composer resolve the range
-npm run php:run composer require wpackagist-plugin/advanced-custom-fields
-```
-
-Running this command will update `composer.json` and `composer.lock`, but you will need to rebuild (`docker compose build`) and restart your container (`npm start` or `npm run serve:dev`) to see the new plugin reflected in the WordPress admin.
-
-### Updating Plugins
-
-You can run `composer require` as above to update existing plugins, or you can do the following.
-
-1. Update the version number in the "require" list in `composer.json`.
-1. Run `npm run php:run composer update` to update `composer.lock`.
-
-Again, you'll need to rebuild and restart your container to see the changes reflected in WordPress.
-
-### Recommended Plugins
-
-This is a non-comprehensive list of plugins that we have found useful on other projects.
-
-- [Metabox][metabox]
-- [Advanced Custom Fields][advanced-custom-fields]
-- [Yoast SEO][yoast-seo]
-- [Google Site Kit][google-site-kit]
-- [Contact Form 7][contact-form-7]
-- [Rollbar][rollbar]
-
-## Custom Blocks
-
-We have two [generators](#generators) that can be used in tandem to create the necessary scaffolding for custom blocks. The first is `npm run generate:custom-blocks-plugin`, which should be run first to create the plugin config, readme, directory, and `package.json`/`docker-compose.yml` changes necessary to make the plugin available to WordPress. The second is `npm run generate:custom-block`, which creates the boilerplate files necessary to create a single custom block within the plugin.
+To implement custom blocks, begin by using the two [generators](#generators) in tandem to create the necessary scaffolding for custom blocks. The first is `npm run generate:custom-blocks-plugin`, which should be run first to create the plugin config, readme, directory, and `package.json`/`docker-compose.yml` changes necessary to make the plugin available to WordPress. The second is `npm run generate:custom-block`, which creates the boilerplate files necessary to create a single custom block within the plugin.
 
 Note: you will need to restart your development process to pick up the changes after adding a custom blocks plugin and/or a custom block.
 
@@ -568,7 +589,7 @@ This starter template includes a couple of options for deployment workflows, inc
 
 ### Docker deployment workflow
 
-This repo includes a [GitHub workflow for building a docker image](./.github/workflows/deploy.docker.yml) that gets pushed GitHub's container registry. This image can be deployed to any hosting provider that supports docker containers.
+This repo includes a [GitHub workflow for building a docker image](./.github/workflows/deploy.docker.yml) that gets pushed to GitHub's container registry. This image can be deployed to any hosting provider that supports docker containers.
 
 The image includes all core WordPress files for the version specified for `WP_VERSION` in the `Dockerfile`, as well as the theme and plugin files necessary for the site. The other element required for the site to run is the database, which is excluded, since each environment should have its own database that is specified by environment variables. This allows local developers to test against local data without interfering with production or staging environments.
 
@@ -673,30 +694,29 @@ Deployment to Pantheon requires setting the following variables and secrets in G
 
 <!-- Links: -->
 
-[docker]: https://www.docker.com
-[composer]: https://getcomposer.org/download/
-[node]: https://nodejs.org/en/
-[twig_vscode]: https://marketplace.visualstudio.com/items?itemName=whatwedo.twig
-[phpcs_vscode]: https://marketplace.visualstudio.com/items?itemName=shevaua.phpcs
-[babel]: https://babeljs.io
-[sb-eslint]: https://github.com/sparkbox/eslint-config-sparkbox
-[sb-stylelint]: https://github.com/sparkbox/stylelint-config-sparkbox
-[wpcs]: https://github.com/WordPress/WordPress-Coding-Standards
-[bemit]: https://csswizardry.com/2015/08/bemit-taking-the-bem-naming-convention-a-step-further/
-[twig]: https://twig.symfony.com/
-[timber]: https://timber.github.io/docs/
-[html-extension]: https://github.com/twigphp/html-extra
-[string-extension]: https://github.com/twigphp/string-extra
-[widgets]: https://developer.wordpress.org/themes/functionality/sidebars/
-[metabox]: https://metabox.io/
 [advanced-custom-fields]: https://www.advancedcustomfields.com/
-[yoast-seo]: https://wordpress.org/plugins/wordpress-seo/
-[google-site-kit]: https://sitekit.withgoogle.com/
+[bemit]: https://csswizardry.com/2015/08/bemit-taking-the-bem-naming-convention-a-step-further/
 [contact-form-7]: https://contactform7.com/
-[rollbar]: https://docs.rollbar.com/docs/wordpress
-[itcss]: https://www.xfive.co/blog/itcss-scalable-maintainable-css-architecture/
-[bem]: http://getbem.com
-[sass]: https://sass-lang.com/
-[gh-variables]: https://docs.github.com/en/actions/learn-github-actions/variables#creating-configuration-variables-for-a-repository
-[gh-secrets]: https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions#creating-secrets-for-a-repository
+[docker]: https://www.docker.com
 [gh-personal-access-token]: https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-personal-access-token-classic
+[gh-secrets]: https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions#creating-secrets-for-a-repository
+[gh-variables]: https://docs.github.com/en/actions/learn-github-actions/variables#creating-configuration-variables-for-a-repository
+[google-site-kit]: https://sitekit.withgoogle.com/
+[html-extension]: https://github.com/twigphp/html-extra
+[itcss]: https://www.xfive.co/blog/itcss-scalable-maintainable-css-architecture/
+[metabox]: https://metabox.io/
+[node]: https://nodejs.org/en/
+[npm-scripts]: https://docs.npmjs.com/cli/v6/using-npm/scripts
+[php-install]: https://www.php.net/manual/en/install.php
+[phpsab-vscode]: https://marketplace.visualstudio.com/items?itemName=ValeryanM.vscode-phpsab
+[rollbar]: https://docs.rollbar.com/docs/wordpress
+[sass]: https://sass-lang.com/
+[string-extension]: https://github.com/twigphp/string-extra
+[timber]: https://timber.github.io/docs/
+[twig-vscode]: https://marketplace.visualstudio.com/items?itemName=whatwedo.twig
+[twig]: https://twig.symfony.com/
+[twigcs-vscode]: https://marketplace.visualstudio.com/items?itemName=cerzat43.twigcs
+[vs-code]: https://code.visualstudio.com/
+[widgets]: https://developer.wordpress.org/themes/functionality/sidebars/
+[wpcs]: https://github.com/WordPress/WordPress-Coding-Standards
+[yoast-seo]: https://wordpress.org/plugins/wordpress-seo/

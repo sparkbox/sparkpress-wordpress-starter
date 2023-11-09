@@ -18,6 +18,10 @@ services:
       - ./wp-configs/php.ini:/var/www/html/php.ini
       - ./.env:/var/www/html/.env
       - ./wp-configs/.htaccess:/var/www/html/.htaccess
+      - ./wp-configs/phpcs-rules-standard.xml:/var/www/html/wp-configs/phpcs-rules-standard.xml
+      - ./src:/var/www/html/src
+      - ./composer.json:/var/www/html/composer.json
+      - ./composer.lock:/var/www/html/composer.lock
   db:
     image: mysql:8.1
     container_name: sparkpress_db
