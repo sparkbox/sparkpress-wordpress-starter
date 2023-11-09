@@ -1,0 +1,12 @@
+version: '3.7'
+
+services:
+  web:
+    image: ghcr.io/sparkbox/sparkpress:latest
+    container_name: sparkpress
+    ports:
+      - '8000:80'
+    volumes:
+      - ./uploads:/var/www/html/wp-content/uploads
+      - ./.env:/var/www/html/.env
+
