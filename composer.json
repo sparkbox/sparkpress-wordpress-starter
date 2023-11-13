@@ -5,7 +5,7 @@
   "require": {
     "php": "^8.1",
     "vlucas/phpdotenv": "^5.5",
-    "timber/timber": "^1.22",
+    "timber/timber": "^1.22 || ^2.0",
     "twig/string-extra": "^3.7",
     "twig/html-extra": "^3.7"
   },
