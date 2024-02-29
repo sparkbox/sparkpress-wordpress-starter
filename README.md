@@ -1,6 +1,6 @@
 # SparkPress WordPress Starter
 
-This is a starter to fast-track WordPress websites. It provides a way to skip many of the steps required when setting up a WordPress installation. [Create a new repository from this template](./generate).
+This is a starter to fast-track WordPress websites. It provides a way to skip many of the steps required when setting up a WordPress installation. [Create a new repository from this template](https://github.com/new?template_name=sparkpress-wordpress-starter&template_owner=sparkbox).
 
 Out of the box, this template provides a minimal WordPress theme with basic support for core WordPress features with some boilerplate templates, JS, and CSS that can easily be removed or replaced as needed. Key features of this repo include:
 
@@ -44,7 +44,7 @@ This project requires [Docker][docker] and [Node.js][node] for local development
 1. Run `npm install`
 1. Either run `npm start` or run `npm run build:dev` and `npm run serve:dev` in separate terminals
 1. Based on whether you have a database to import or not, do one of the following:
-   - Visit `https://localhost:8000/wp-admin` and run through the WordPress setup
+   - Visit `http://localhost:8000/wp-admin` and run through the WordPress setup
    - Follow the instructions for [importing a DB](#importing-databases)
 1. Go to `http://localhost:8000` to ensure the home page loads
 1. Use `Ctrl+C` to stop any processes running in the terminal when you are done working or need to restart a process to pick up changes
