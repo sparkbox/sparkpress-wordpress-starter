@@ -42,6 +42,7 @@ This project requires [Docker][docker] and [Node.js][node] for local development
 
 1. Duplicate `.env.example` and rename it `.env`, changing variables [as needed](#setting-local-environment-variables)
 1. Run `npm install`
+1. Make sure Docker is running 
 1. Either run `npm start` or run `npm run build:dev` and `npm run serve:dev` in separate terminals
 1. Based on whether you have a database to import or not, do one of the following:
    - Visit `https://localhost:8000/wp-admin` and run through the WordPress setup
