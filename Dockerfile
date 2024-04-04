@@ -14,6 +14,7 @@ RUN docker-php-ext-install gd mysqli pdo_mysql zip
 RUN a2enmod rewrite headers xml2enc proxy proxy_fcgi
 
 COPY ./composer.json /var/www/html/composer.json
+COPY ./composer.lock /var/www/html/composer.lock
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
 RUN composer install
 
@@ -36,6 +37,7 @@ RUN find /var/www/ -type f -exec chmod 644 {} \;
 
 # make the linters executable so we can run them from containers
 RUN chmod +x vendor/bin/phpcs
+RUN chmod +x vendor/bin/phpcbf
 RUN chmod +x vendor/bin/twigcs
 
 FROM dev as prod

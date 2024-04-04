@@ -16,7 +16,6 @@ Here's a few things you should know before you submit your PR:
 - Ensure tests pass: `npm test`
 - Make changes and then make sure the linters and tests still pass
 - Push your branch/fork and [submit a PR][pr]
-- Assign a [sparkboxer][contributors] to review your PR
 
 ## Commit Style
 
@@ -44,5 +43,4 @@ feature: add new linting rule for ...
 
 [issues]: ./issues
 [pr]: ./compare
-[contributors]: ./graphs/contributors
 [conventional commits]: https://www.conventionalcommits.org/en/v1.0.0/

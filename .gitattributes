@@ -1,0 +1,22 @@
+# https://www.git-scm.com/docs/gitattributes
+
+# Set default behavior to automatically normalize line endings.
+* text=auto
+
+# Force bash scripts to always use LF line endings so that if a repo is accessed
+# in Unix via a file share from Windows, the scripts will work.
+*.sh text eol=lf
+
+# Set specific extensions manually as binary.
+# https://www.git-scm.com/docs/gitattributes#_marking_files_as_binary
+*.data -diff
+
+# Configure non-standard file extensions. Set as text to allow for line ending
+# conversion to LF, diff type for Git, and syntax highlighting language for GitHub.
+# https://github.com/github-linguist/linguist/blob/master/docs/overrides.md
+*.module text diff=php linguist-language=php
+*.rs.example text diff=rust linguist-language=rust
+
+# Windows-specific extensions that require CRLF line endings
+*.{cmd,[cC][mM][dD]} text eol=crlf
+*.{bat,[bB][aA][tT]} text eol=crlf

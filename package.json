@@ -30,6 +30,7 @@
     "lint:scss": "stylelint \"src/**/*.scss\" --color --formatter verbose",
     "lint:twig": "./scripts/run.sh vendor/bin/twigcs src/php/views",
     "lint": "run-s lint:*",
+    "map-vendor-files": "mkdir -p vendor && docker compose cp web:/var/www/html/vendor .",
     "php:run": "./scripts/run.sh",
     "export": "run-s \"export:* {1}\" --",
     "backup": "run-s \"backup:* {1}\" --",

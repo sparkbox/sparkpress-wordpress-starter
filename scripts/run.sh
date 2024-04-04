@@ -12,5 +12,6 @@ if [ "$CI" == "true" ]; then
   exec "$@"
 else
   # Run the command inside the Docker container
-  docker run --rm -v .:/tmp -w=/tmp sparkpress-wordpress-starter-web "$@"
+  # use exec if the container's already running, or spin up a temporary container to run it
+  docker compose exec -it web "$@" || docker compose run --rm --no-deps --remove-orphans web "$@"
 fi
