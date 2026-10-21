@@ -19,7 +19,7 @@ const getDefaultPHPVersion = () => {
 	const workflowPath = join(__dirname, '../Dockerfile');
 	const workflow = readFileSync(workflowPath, { encoding: 'utf-8' });
 
-	const phpVersion = getFirstGroup(/php_version:\s'(.*)'/gm, workflow, '8.1');
+	const phpVersion = getFirstGroup(/FROM php:(\d+\.\d+)/gm, workflow, '8.2');
 
 	return phpVersion;
 };
