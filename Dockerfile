@@ -1,4 +1,4 @@
-FROM php:8.1-apache-buster as dev
+FROM php:8.2.35-apache-bookworm as dev
 
 LABEL org.opencontainers.image.source=https://github.com/sparkbox/sparkpress-wordpress-starter
 
@@ -13,9 +13,9 @@ RUN docker-php-ext-install gd mysqli pdo_mysql zip
 # These apache modules are required and not enabled by default in this image
 RUN a2enmod rewrite headers xml2enc proxy proxy_fcgi
 
-COPY ./composer.json /var/www/html/composer.json
+COPY ./composer.json ./composer.lock /var/www/html/
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
-RUN composer install
+RUN composer install --no-interaction
 
 # Get WordPress Files
 RUN cd /tmp \

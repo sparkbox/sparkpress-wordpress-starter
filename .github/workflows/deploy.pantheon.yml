@@ -29,7 +29,7 @@ jobs:
       - name: Install PHP dependencies with Composer
         uses: php-actions/composer@v6
         with:
-          php_version: '8.1'
+          php_version: '8.2'
           version: 2.x
 
       - name: Build theme
